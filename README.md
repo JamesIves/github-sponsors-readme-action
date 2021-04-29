@@ -1,0 +1,1 @@
+# github-sponsors-readme-action
