@@ -1,0 +1,13 @@
+name: 'Sponsors Action'
+description: 'TODO'
+author: 'James Ives <iam@jamesiv.es>'
+runs:
+  using: 'node12'
+  main: 'lib/main.js'
+branding:
+  icon: 'truck'
+  color: 'purple'
+inputs:
+  template:
+    description: 'TODO:'
+    required: false
