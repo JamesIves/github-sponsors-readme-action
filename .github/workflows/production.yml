@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - 'releases/v*'
+      - 'releases/beta'
     tags-ignore:
       - '*.*'
 
