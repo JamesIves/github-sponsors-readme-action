@@ -29,7 +29,12 @@ export const action = {
     ? getInput('marker')
     : 'sponsors',
   file: getInput('file'),
-  fallback: !isNullOrUndefined(getInput('fallback')) ? getInput('fallback') : ``
+  fallback: !isNullOrUndefined(getInput('fallback'))
+    ? getInput('fallback')
+    : ``,
+  organization: !isNullOrUndefined(getInput('organization'))
+    ? getInput('organization').toLowerCase() === 'true'
+    : false
 }
 
 /** Describes the response from the GitHub GraphQL query. */

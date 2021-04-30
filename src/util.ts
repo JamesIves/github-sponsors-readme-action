@@ -19,7 +19,7 @@ const hasRequiredParameters = <K extends keyof RequiredActionParameters>(
 export const checkParameters = (action: ActionInterface): void => {
   if (!hasRequiredParameters(action, ['token'])) {
     throw new Error(
-      'No deployment token wasprovided. You must provide the action with a Personal Access Token scoped to user:read.'
+      'No deployment token was provided. You must provide the action with a Personal Access Token scoped to user:read.'
     )
   }
 

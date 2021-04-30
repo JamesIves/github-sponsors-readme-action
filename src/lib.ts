@@ -18,9 +18,14 @@ export default async function run(
 
   try {
     info(`
-    Sponsorship Action TODO: 💖
-    
-    📣 Maintained by James Ives (https://jamesiv.es)`)
+    GitHub Sponsors Readme Action 🚀
+
+    🚀 Getting Started Guide:
+    ❓ Discussions / Q&A: https://github.com/JamesIves/github-sponsors-readme-action/discussions
+    🔧 Report a Bug: https://github.com/JamesIves/github-sponsors-readme-action/issues
+
+    📣 Maintained by James Ives: https://jamesiv.es
+    💖 Support: https://github.com/sponsors/JamesIves`)
 
     info('Checking configuration and initializing… 🚚')
     checkParameters(settings)

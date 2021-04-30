@@ -11,11 +11,16 @@ import {render} from 'mustache'
 import {suppressSensitiveInformation} from './util'
 import {info} from '@actions/core'
 
+/** Fetches  */
 export async function getSponsors(
   action: ActionInterface
 ): Promise<GitHubResponse> {
   try {
-    info('Fetching data from the GitHub API… 🚚')
+    info(
+      `Fetching data from the GitHub API as ${
+        action.organization ? 'Organization' : 'User'
+      }… ⚽`
+    )
 
     const query = `query { 
       viewer {
@@ -27,11 +32,24 @@ export async function getSponsors(
           }
           nodes {
             sponsorEntity {
+              ${
+                action.organization
+                  ? `
+              ... on Organization {
+                name
+                login
+                url
+              }
+              `
+                  : `
               ... on User {
                 name
                 login
                 url
               }
+            `
+              }
+
             }
             createdAt
             privacyLevel
@@ -72,7 +90,7 @@ export function generateTemplate(
 ): string {
   let template = ``
 
-  info('Generating template… 🚚')
+  info('Generating template… ✨')
 
   const {
     sponsorshipsAsMaintainer
@@ -98,7 +116,7 @@ export async function generateFile(
   action: ActionInterface
 ): Promise<void> {
   try {
-    info(`Generating updated ${action.file}… 🚚`)
+    info(`Generating updated ${action.file} file… 📁`)
 
     const regex = new RegExp(
       `(<!-- ${action.marker} -->)[\\s\\S]*?(<!-- ${action.marker} -->)`,
