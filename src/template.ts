@@ -101,11 +101,7 @@ export async function generateFile(
     info(`Generating updated ${action.file}… 🚚`)
 
     const regex = new RegExp(
-      '/(<!-- ' +
-        action.marker +
-        ' -->)[sS]*?(<!-- ' +
-        action.marker +
-        ' -->)/',
+      `(<!-- ${action.marker} -->)[\s\\\S]*?(<!-- ${action.marker} -->)`,
       'g'
     )
     let data = await promises.readFile(action.file, 'utf8')
