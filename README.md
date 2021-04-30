@@ -26,7 +26,7 @@ jobs:
       - name: Generate Sponsors 💖
         uses: JamesIves/github-sponsors-readme-action@releases/beta
         with:
-          token: ${{ secrets.SPONSOR_TOKEN }}
+          token: ${{ secrets.PAT }}
           file: 'README.md'
 
       - name: Deploy to GitHub Pages 🚀
@@ -85,7 +85,7 @@ The action will export a step output as `sponsorship-status` that you can use in
 
 ---
 
-### Modifying the Template
+### Modifying the Template 🔧
 
 You can modify the template that gets generated in your file by using the `template` input. This input allows you to leverage mustache templating to modify what is displayed. The following values are available:
 
@@ -114,7 +114,7 @@ jobs:
       - name: Generate Sponsors 💖
         uses: JamesIves/github-sponsors-readme-action@releases/beta
         with:
-          token: ${{ secrets.SPONSOR_TOKEN }}
+          token: ${{ secrets.PAT }}
           file: 'README.md'
           template: '* [{{{ name }}}]({{{ url }}}) - {{{ login }}}'
 
@@ -128,7 +128,9 @@ jobs:
 </p>
 </details>
 
-### Displaying by Tier
+---
+
+### Seperating by Sponsorship Tier ✨
 
 If you'd like to highlight certain users who contribute to a specific sponsorship tier you can do so using a combination of the `sponsorship-threshold` and `marker` inputs. The `sponsorship-threshold` equals their dollar contribution in cents.
 
@@ -151,7 +153,7 @@ jobs:
       - name: Generate Sponsors 💖
         uses: JamesIves/github-sponsors-readme-action@releases/beta
         with:
-          token: ${{ secrets.SPONSOR_TOKEN }}
+          token: ${{ secrets.PAT }}
           file: 'README.md'
           sponsorship-threshold: 1000
           marker: 'silver'
@@ -159,7 +161,7 @@ jobs:
       - name: Generate Sponsors 💖
         uses: JamesIves/github-sponsors-readme-action@releases/beta
         with:
-          token: ${{ secrets.SPONSOR_TOKEN }}
+          token: ${{ secrets.PAT }}
           file: 'README.md'
           sponsorship-threshold: 5000
           marker: 'gold'
