@@ -1,5 +1,5 @@
 name: 'GitHub Sponsors Readme Action'
-description: 'This GitHub Action will automatically add your GitHub Sponsors to your README. It can be configured in multiple ways allowing you to display and breakdown sponsors by price tiers, and has templating so you can display your sponsors how you would like.'
+description: 'This GitHub Action will automatically add your GitHub Sponsors to your README.'
 author: 'James Ives <iam@jamesiv.es>'
 runs:
   using: 'node12'
