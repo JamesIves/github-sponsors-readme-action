@@ -10,7 +10,7 @@
 </h1>
 
 <p align="center">
-  This project is currently in beta, for information on what is outstanding please [click here](https://github.com/JamesIves/github-sponsors-readme-action/issues/1). If you have any suggestions [please open a discussion thread](https://github.com/JamesIves/github-sponsors-readme-action/discussions).
+  This project is currently in beta, for information on what is outstanding please <a href="https://github.com/JamesIves/github-sponsors-readme-action/issues/1">click here</a>. If you have any suggestions <a href="https://github.com/JamesIves/github-sponsors-readme-action/discussions">please open a discussion thread</a>.
 </p>
 
 <p align="center">
