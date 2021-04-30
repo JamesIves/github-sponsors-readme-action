@@ -10,6 +10,10 @@
 </h1>
 
 <p align="center">
+  This project is currently in beta.
+</p>
+
+<p align="center">
   This <a href="https://github.com/features/actions">GitHub Action</a> will automatically add your GitHub Sponsors to your README. It can be configured in multiple ways allowing you to display and breakdown sponsors by price tiers, and has templating so you can display your sponsors how you'd like.
 </p>
 
