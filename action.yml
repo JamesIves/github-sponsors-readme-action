@@ -1,13 +1,41 @@
-name: 'Sponsors Action'
-description: 'TODO'
+name: 'GitHub Sponsors Readme Action'
+description: 'This GitHub Action will automatically add your GitHub Sponsors to your README. It can be configured in multiple ways allowing you to display and breakdown sponsors by price tiers, and has templating so you can display your sponsors how you'd like.'
 author: 'James Ives <iam@jamesiv.es>'
 runs:
   using: 'node12'
   main: 'lib/main.js'
 branding:
-  icon: 'truck'
-  color: 'purple'
+  icon: 'heart'
+  color: 'red'
 inputs:
-  template:
-    description: 'TODO:'
+  token:
+    description: >
+      You must provide the action with a Personal Access Token (PAT) with either the user:read or org:read permission scope and store it in the secrets / with menu as a secret. 
+      This should be generated from the account or organization that recieves sponsorship.
+
+      [Learn more about creating and using encrypted secrets here.](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets)
+    required: true
+
+  file:
+    description: This should point to the file that you're generating, for example README.md or path/to/CREDITS.md
+    required: true
+
+  organization:
+    description: If you're displaying sponsorship information as an organization you should toggle this option to true. You also need to provide the action with an org:read scoped PAT.
     required: false
+
+  sponsorship-threshold: 
+    description: By default the action will display all of your sponsors. Using this input you can set the minimum sponsorship threshold. For example setting this to 500 will only display sponsors who give of $5 USD and more.
+    required: false
+
+  marker: 
+    description: This allows you to modify the marker comment that is placed in your file. By default this is set to sponsors - <!-- sponsors --> <!-- sponsors -->, if you set this to gold for example you can place <!-- gold --> <!-- gold --> in your file.
+    required: false
+
+  template:
+    description: Allows you to modify the default template. Please refer to the `template` section of this README for more information.
+    required: false
+
+outputs:
+  sponsorship-statu:
+    description: 'The status of the action that indicates if the run failed or passed. Possible outputs include: success|failed'

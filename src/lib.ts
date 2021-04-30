@@ -20,7 +20,7 @@ export default async function run(
     info(`
     GitHub Sponsors Readme Action 💖
 
-    🚀 Getting Started Guide:
+    🚀 Getting Started Guide: https://github.com/JamesIves/github-sponsors-readme-action
     ❓ Discussions / Q&A: https://github.com/JamesIves/github-sponsors-readme-action/discussions
     🔧 Report a Bug: https://github.com/JamesIves/github-sponsors-readme-action/issues
 

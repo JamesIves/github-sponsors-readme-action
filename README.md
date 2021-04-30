@@ -1,3 +1,10 @@
+
+<p align="center">
+  <a href="https://github.com/marketplace/actions/fetch-api-data">
+    <img width="150px" src="./.github/assets/icon.png">
+  </a>
+</p>
+
 <h1 align="center">
   GitHub Sponsors Readme Action 💖
 </h1>
@@ -70,7 +77,7 @@ The following options must be configured.
 | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------ | -------- |
 | `organization`          | If you're displaying sponsorship information as an organization you should toggle this option to `true`. You also need to provide the action with an `org:read` scoped PAT.                                                                | `with` | **No**   |
 | `sponsorship-threshold` | By default the action will display all of your sponsors. Using this input you can set the minimum sponsorship threshold. For example setting this to `500` will only display sponsors who give of `$5 USD` and more.                       | `with` | **No**   |
-| `marker`                | This allows you to modify the marker comment that is placed in your file. By default this is set to `<!-- sponsors --> <!-- sponsors -->`, if you set this to `gold` for example you can place `<!-- gold --> <!-- gold -->` in your file. | `with` | **No**   |
+| `marker`                | This allows you to modify the marker comment that is placed in your file. By default this is set to sponsors - `<!-- sponsors --> <!-- sponsors -->`, if you set this to `gold` for example you can place `<!-- gold --> <!-- gold -->` in your file. | `with` | **No**   |
 | `fallback`              | Allows you to specify a fallback if you have no sponsors. By default nothing is displayed.                                                                                                                                                 | `with` | **No**   |
 | `template`              | Allows you to modify the default template. Please refer to the `template` section of this README for more information.                                                                                                                     | `with` | **No**   |
 
