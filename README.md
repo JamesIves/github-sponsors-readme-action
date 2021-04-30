@@ -126,6 +126,7 @@ jobs:
 ```
 
 </p>
+</details>
 
 ### Displaying by Tier
 
