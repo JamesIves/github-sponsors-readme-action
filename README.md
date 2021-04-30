@@ -3,29 +3,6 @@
 </h1>
 
 <p align="center">
-  <a href="https://github.com/JamesIves/github-pages-deploy-action/actions">
-    <img src="https://github.com/JamesIves/github-pages-deploy-action/workflows/unit-tests/badge.svg" alt="Unit test status badge">
-  </a>
-  
-  <a href="https://github.com/JamesIves/github-pages-deploy-action/actions">
-    <img src="https://github.com/JamesIves/github-pages-deploy-action/workflows/integration-tests/badge.svg" alt="Integration test status badge">
-  </a>
-  
-  <a href="https://codecov.io/gh/JamesIves/github-pages-deploy-action/branch/dev">
-    <img src="https://codecov.io/gh/JamesIves/github-pages-deploy-action/branch/dev/graph/badge.svg" alt="Code coverage status badge">
-  </a>
-  
-  <a href="https://github.com/JamesIves/github-pages-deploy-action/releases">
-    <img src="https://img.shields.io/github/v/release/JamesIves/github-pages-deploy-action.svg?logo=github" alt="Release version badge">
-  </a>
-  
-  <a href="https://github.com/marketplace/actions/deploy-to-github-pages">
-    <img src="https://img.shields.io/badge/action-marketplace-blue.svg?logo=github&color=orange" alt="Github marketplace badge">
-  </a>
-</p>
-
-<p align="center">
-
   This <a href="https://github.com/features/actions">GitHub Action</a> will automatically add your GitHub Sponsors to your README. It can be configured in multiple ways allowing you to display and breakdown sponsors by price tiers, and has templating so you can display your sponsors how you'd like.
 </p>
 
