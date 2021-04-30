@@ -14,6 +14,8 @@ export interface ActionInterface {
   marker: string
   /** If the user has no sponsors, we can replace it with a fallback. */
   fallback: string
+  /** Fetches organization level sponsors if true. */
+  organization: boolean
 }
 
 // Required action data that gets initialized when running within the GitHub Actions environment.
@@ -29,12 +31,10 @@ export const action = {
     ? getInput('marker')
     : 'sponsors',
   file: getInput('file'),
-  fallback: !isNullOrUndefined(getInput('fallback'))
-    ? getInput('fallback')
-    : ``,
+  fallback: !isNullOrUndefined(getInput('fallback')) ? getInput('fallback') : ``,
   organization: !isNullOrUndefined(getInput('organization'))
-    ? getInput('organization').toLowerCase() === 'true'
-    : false
+  ? getInput('organization').toLowerCase() === 'true'
+  : false,
 }
 
 /** Describes the response from the GitHub GraphQL query. */

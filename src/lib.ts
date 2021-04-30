@@ -18,7 +18,7 @@ export default async function run(
 
   try {
     info(`
-    GitHub Sponsors Readme Action 🚀
+    GitHub Sponsors Readme Action 💖
 
     🚀 Getting Started Guide:
     ❓ Discussions / Q&A: https://github.com/JamesIves/github-sponsors-readme-action/discussions
