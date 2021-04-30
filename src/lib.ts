@@ -1,6 +1,7 @@
-import {info, setFailed} from '@actions/core'
-import {action, ActionInterface} from './constants'
-import {retrieveData} from './fetch'
+import {info, setFailed, setOutput} from '@actions/core'
+import {ActionInterface, Status} from './constants'
+import {generateFile, getSponsors} from './template'
+import {checkParameters} from './util'
 
 /** Initializes and runs the action.
  *
@@ -9,34 +10,35 @@ import {retrieveData} from './fetch'
 export default async function run(
   configuration: ActionInterface
 ): Promise<void> {
-  let errorState = false
+  let status: Status = Status.RUNNING
 
-  const settings = {
-    ...action,
+  const settings: ActionInterface = {
     ...configuration
   }
 
   try {
     info(`
-    Sponsorship Action TODO: 📦 🚚
+    Sponsorship Action TODO: 💖
     
     📣 Maintained by James Ives (https://jamesiv.es)`)
 
     info('Checking configuration and initializing… 🚚')
+    checkParameters(settings)
 
-    const data = await retrieveData()
-
-    console.log(settings, data)
+    const response = await getSponsors(settings)
+    await generateFile(response, settings)
   } catch (error) {
-    errorState = true
+    status = Status.FAILED
     setFailed(error.message)
   } finally {
     info(
       `${
-        errorState
-          ? 'There was an error fetching the data. ❌'
-          : 'The data was succesfully retrieved and saved! ✅ 🚚'
+        status === Status.FAILED
+          ? 'There was an error generating sponsors. ❌'
+          : 'The data was succesfully retrieved and saved! ✅ 💖'
       }`
     )
+
+    setOutput('sponsorship-status', status)
   }
 }
