@@ -5,7 +5,7 @@ labels:
   - bug
 ---
 
-<!-- Please check the Q&A before posting an issue: https://github.com/JamesIves/github-pages-deploy-action/discussions?discussions_q=category%3AQ%26A -->
+<!-- Please check the Q&A before posting an issue: https://github.com/JamesIves/github-sponsors-readme-action/discussions/categories/q-a -->
 
 ## Describe the bug
 
