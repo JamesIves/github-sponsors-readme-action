@@ -125,6 +125,19 @@ jobs:
           folder: '.'
 ```
 
+```md
+# Awesome Project
+
+Go you!
+
+## Sponsors
+
+These are our really cool sponsors!
+
+<!-- sponsors -->
+<!-- sponsors -->
+```
+
 </p>
 </details>
 
