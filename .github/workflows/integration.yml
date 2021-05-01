@@ -45,4 +45,3 @@ jobs:
           minimum: 1000
           marker: 'gold'
           fallback: 'No sponsors at this level'
-```
