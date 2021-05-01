@@ -19,16 +19,8 @@ const hasRequiredParameters = <K extends keyof RequiredActionParameters>(
 export const checkParameters = (action: ActionInterface): void => {
   if (!hasRequiredParameters(action, ['token'])) {
     throw new Error(
-      'No deployment token was provided. You must provide the action with a Personal Access Token scoped to user:read.'
+      'No deployment token was provided. You must provide the action with a Personal Access Token scoped to user:read or org:read.'
     )
-  }
-
-  if (!hasRequiredParameters(action, ['file'])) {
-    throw new Error('File is required.')
-  }
-
-  if (!hasRequiredParameters(action, ['marker'])) {
-    throw new Error('Marker is required.')
   }
 }
 
@@ -43,9 +35,9 @@ export const suppressSensitiveInformation = (
 ): string => {
   let value = str
 
-  const orderedByLength = ([action.token].filter(Boolean) as string[]).sort(
-    (a, b) => b.length - a.length
-  )
+  const orderedByLength = ([action.token, action.token].filter(
+    Boolean
+  ) as string[]).sort((a, b) => b.length - a.length)
 
   for (const find of orderedByLength) {
     value = replaceAll(value, find, '***')

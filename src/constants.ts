@@ -3,7 +3,7 @@ import {isNullOrUndefined} from './util'
 
 export interface ActionInterface {
   /** Deployment token. */
-  token: string | null
+  token?: string
   /** The template to use. */
   template: string
   /** The file to replace the content in. */
@@ -35,7 +35,7 @@ export const action = {
   marker: !isNullOrUndefined(getInput('marker'))
     ? getInput('marker')
     : 'sponsors',
-  file: getInput('file'),
+  file: !isNullOrUndefined(getInput('file')) ? getInput('file') : 'README.md',
   fallback: !isNullOrUndefined(getInput('fallback'))
     ? getInput('fallback')
     : ``,
@@ -75,10 +75,7 @@ export interface GitHubResponse {
 }
 
 /** Types for the required action parameters. */
-export type RequiredActionParameters = Pick<
-  ActionInterface,
-  'token' | 'file' | 'marker'
->
+export type RequiredActionParameters = Pick<ActionInterface, 'token'>
 
 export enum PrivacyLevel {
   PUBLIC = 'PUBLIC',
