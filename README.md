@@ -10,6 +10,24 @@
 </h1>
 
 <p align="center">
+  <a href="https://github.com/JamesIves/github-sponsors-readme-action/actions">
+    <img src="https://github.com/JamesIves/github-sponsors-readme-action/workflows/unit-tests/badge.svg" alt="Unit test status badge">
+  </a>
+  
+  <a href="https://github.com/JamesIves/github-sponsors-readme-action/actions">
+    <img src="https://github.com/JamesIves/github-sponsors-readme-action/workflows/integration-tests/badge.svg" alt="Integration test status badge">
+  </a>
+  
+  <a href="https://codecov.io/gh/JamesIves/github-sponsors-readme-action/branch/dev">
+    <img src="https://codecov.io/gh/JamesIves/github-sponsors-readme-action/branch/dev/graph/badge.svg" alt="Code coverage status badge">
+  </a>
+  
+  <a href="https://github.com/JamesIves/github-sponsors-readme-action/releases">
+    <img src="https://img.shields.io/github/v/release/JamesIves/github-sponsors-readme-action.svg?logo=github" alt="Release version badge">
+  </a>
+</p>
+
+<p align="center">
   This project is currently in beta and is subject to change, for information on what is outstanding please <a href="https://github.com/JamesIves/github-sponsors-readme-action/issues/1">click here</a>. If you have any suggestions <a href="https://github.com/JamesIves/github-sponsors-readme-action/discussions">please open a discussion thread</a>.
 </p>
 
