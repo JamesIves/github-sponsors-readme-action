@@ -25,13 +25,13 @@ jobs:
         uses: JamesIves/github-sponsors-readme-action@releases/beta
         with:
           token: ${{ secrets.PAT }}
-          file: '.github/README.md'
+          file: '.github/TEST.md'
 
       - name: Generate Sponsors 💖
         uses: JamesIves/github-sponsors-readme-action@releases/beta
         with:
           token: ${{ secrets.PAT }}
-          file: '.github/README.md'
+          file: '.github/TEST.md'
           minimum: 500
           maximum: 999
           marker: 'silver'
@@ -41,7 +41,7 @@ jobs:
         uses: JamesIves/github-sponsors-readme-action@releases/beta
         with:
           token: ${{ secrets.PAT }}
-          file: '.github/README.md'
+          file: '.github/TEST.md'
           minimum: 1000
           marker: 'gold'
           fallback: 'No sponsors at this level'
