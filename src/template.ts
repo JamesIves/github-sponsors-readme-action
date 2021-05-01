@@ -98,20 +98,26 @@ export function generateTemplate(
 
   /* Appends the template, the API call returns all users regardless of if they are hidden or not.
   In an effort to respect a users decisison to be anoymous we filter these users out. */
-  let filteredSponsors = sponsorshipsAsMaintainer.nodes
-    .filter(
-      (user: Sponsor) =>
-        user.privacyLevel !== PrivacyLevel.PRIVATE &&
-        user.tier.monthlyPriceInCents >= action.minimum
+  let filteredSponsors = sponsorshipsAsMaintainer.nodes.filter(
+    (user: Sponsor) =>
+      user.privacyLevel !== PrivacyLevel.PRIVATE &&
+      user.tier.monthlyPriceInCents >= action.minimum
+  )
+
+  if (action.maximum > 0) {
+    filteredSponsors = filteredSponsors.filter(
+      (user: Sponsor) => user.tier.monthlyPriceInCents <= action.maximum
     )
-    
-    if (action.maximum > 0) {
-      filteredSponsors = filteredSponsors.filter((user: Sponsor) => user.tier.monthlyPriceInCents <= action.maximum)
-    }
-    
-    filteredSponsors.map(({sponsorEntity}) => {
-      template = template += render(action.template, sponsorEntity)
-    })
+  }
+
+  /** If there are no valid sponsors then we return the provided fallback. */
+  if (!filteredSponsors.length) {
+    return action.fallback
+  }
+
+  filteredSponsors.map(({sponsorEntity}) => {
+    template = template += render(action.template, sponsorEntity)
+  })
 
   return template
 }
@@ -123,6 +129,7 @@ export async function generateFile(
   try {
     info(`Generating updated ${action.file} file… 📁`)
 
+    /** Replaces the content within the comments and re appends/prepends the comments to the replace for follow-up workflow runs. */
     const regex = new RegExp(
       `(<!-- ${action.marker} -->)[\\s\\S]*?(<!-- ${action.marker} -->)`,
       'g'
