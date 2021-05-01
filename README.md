@@ -10,11 +10,11 @@
 </h1>
 
 <p align="center">
-  This project is currently in beta, for information on what is outstanding please [click here](https://github.com/JamesIves/github-sponsors-readme-action/issues/1). If you have any suggestions [please open a discussion thread](https://github.com/JamesIves/github-sponsors-readme-action/discussions).
+  This project is currently in beta and is subject to change, for information on what is outstanding please <a href="https://github.com/JamesIves/github-sponsors-readme-action/issues/1">click here</a>. If you have any suggestions <a href="https://github.com/JamesIves/github-sponsors-readme-action/discussions">please open a discussion thread</a>.
 </p>
 
 <p align="center">
-  This <a href="https://github.com/features/actions">GitHub Action</a> will automatically add your GitHub Sponsors to your README. It can be configured in multiple ways allowing you to display and breakdown sponsors by price tiers, and has templating so you can display your sponsors how you'd like.
+  This <a href="https://github.com/features/actions">GitHub Action</a> will automatically add your GitHub Sponsors to your README. It can be configured in multiple ways allowing you to display and breakdown sponsors by price tiers, and has templating support so you can display your sponsors how you'd like.
 </p>
 
 ## Getting Started ✈️
