@@ -19,7 +19,7 @@
 
 ## Getting Started ✈️
 
-You can include the action in your workflow to trigger on any event that [GitHub Actions supports](https://help.github.com/en/articles/events-that-trigger-workflows). You'll need to provide the action with a Personal Access Token (PAT) scoped to `user:read` (or `org:read` depending on your needs), and the file to parse.
+You can include the action in your workflow to trigger on any event that [GitHub Actions supports](https://help.github.com/en/articles/events-that-trigger-workflows). You'll need to provide the action with a **Personal Access Token (PAT)** scoped to `user:read` (or `org:read` depending on your needs), and the file to parse.
 
 ```yml
 name: Generate Sponsors README
