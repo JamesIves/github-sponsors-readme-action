@@ -22,13 +22,13 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Generate Sponsors 💖
-        uses: JamesIves/github-sponsors-readme-action@releases/beta
+        uses: JamesIves/github-sponsors-readme-action@releases/v1
         with:
           token: ${{ secrets.PAT }}
           file: '.github/TEST.md'
 
       - name: Generate Sponsors 💖
-        uses: JamesIves/github-sponsors-readme-action@releases/beta
+        uses: JamesIves/github-sponsors-readme-action@releases/v1
         with:
           token: ${{ secrets.PAT }}
           file: '.github/TEST.md'
@@ -38,7 +38,7 @@ jobs:
           fallback: 'No sponsors at this level'
 
       - name: Generate Sponsors 💖
-        uses: JamesIves/github-sponsors-readme-action@releases/beta
+        uses: JamesIves/github-sponsors-readme-action@releases/v1
         with:
           token: ${{ secrets.PAT }}
           file: '.github/TEST.md'
