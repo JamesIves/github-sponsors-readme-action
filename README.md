@@ -80,7 +80,8 @@ The following options must be configured.
 | Key                     | Value Information                                                                                                                                                                                                                          | Type   | Required |
 | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------ | -------- |
 | `organization`          | If you're displaying sponsorship information as an organization you should toggle this option to `true`. You also need to provide the action with an `org:read` scoped PAT.                                                                | `with` | **No**   |
-| `sponsorship-threshold` | By default the action will display all of your sponsors. Using this input you can set the minimum sponsorship threshold. For example setting this to `500` will only display sponsors who give of `$5 USD` and more.                       | `with` | **No**   |
+| `minimum` | Using this input you can set the minimum sponsorship threshold. For example setting this to `500` will only display sponsors who give of `$5 USD` and more. By default the action will display all of your sponsors.                       | `with` | **No**   |
+| `maximum` | Using this input you can set the minimum sponsorship threshold. For example setting this to `500` will only display sponsors who give of `$5 USD` and less. By default the action will display all of your sponsors.                       | `with` | **No**   |
 | `marker`                | This allows you to modify the marker comment that is placed in your file. By default this is set to sponsors - `<!-- sponsors --> <!-- sponsors -->`, if you set this to `gold` for example you can place `<!-- gold --> <!-- gold -->` in your file. | `with` | **No**   |
 | `fallback`              | Allows you to specify a fallback if you have no sponsors. By default nothing is displayed.                                                                                                                                                 | `with` | **No**   |
 | `template`              | Allows you to modify the default template. Please refer to the `template` section of this README for more information.                                                                                                                     | `with` | **No**   |
@@ -156,7 +157,7 @@ These are our really cool sponsors!
 
 ### Seperating by Sponsorship Tier ✨
 
-If you'd like to highlight certain users who contribute to a specific sponsorship tier you can do so using a combination of the `sponsorship-threshold` and `marker` inputs. The `sponsorship-threshold` equals their dollar contribution in cents.
+If you'd like to highlight certain users who contribute to a specific sponsorship tier you can do so using a combination of the `minimum`, `maximum` and `marker` inputs. The `minimum / maximum` inputs equal their dollar contribution in cents.
 
 <details><summary>You can view a full example of this here.</summary>
 <p>
@@ -179,7 +180,8 @@ jobs:
         with:
           token: ${{ secrets.PAT }}
           file: 'README.md'
-          sponsorship-threshold: 1000
+          minimum: 500
+          maximum: 999
           marker: 'silver'
 
       - name: Generate Sponsors 💖
@@ -187,7 +189,7 @@ jobs:
         with:
           token: ${{ secrets.PAT }}
           file: 'README.md'
-          sponsorship-threshold: 5000
+          minimum: 1000
           marker: 'gold'
 
       - name: Deploy to GitHub Pages 🚀

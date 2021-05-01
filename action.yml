@@ -24,8 +24,12 @@ inputs:
     description: If you're displaying sponsorship information as an organization you should toggle this option to true. You also need to provide the action with an org:read scoped PAT.
     required: false
 
-  sponsorship-threshold: 
-    description: By default the action will display all of your sponsors. Using this input you can set the minimum sponsorship threshold. For example setting this to 500 will only display sponsors who give of $5 USD and more.
+  minimum: 
+    description: Using this input you can set the minimum sponsorship threshold. For example setting this to 500 will only display sponsors who give of $5 USD and more. By default the action will display all of your sponsors. 
+    required: false
+
+  maximum: 
+    description: For example setting this to 1000 will only display sponsors who give of $10 USD and less. By default the action will display all of your sponsors. 
     required: false
 
   marker: 

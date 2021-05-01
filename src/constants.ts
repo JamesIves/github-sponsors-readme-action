@@ -9,7 +9,9 @@ export interface ActionInterface {
   /** The file to replace the content in. */
   file: string
   /** The minimum amount sponsored to be included. */
-  sponsorshipThreshold: number
+  minimum: number
+  /** The maximum amount sponsored to be included. */
+  maximum: number
   /** The marker at which the content should be included within. */
   marker: string
   /** If the user has no sponsors, we can replace it with a fallback. */
@@ -24,8 +26,11 @@ export const action = {
   template: !isNullOrUndefined(getInput('template'))
     ? getInput('template')
     : `<a href="https://github.com/{{{ login }}}"><img src="https://github.com/{{{ login }}}.png" width="60px" alt="" /></a>`,
-  sponsorshipThreshold: !isNullOrUndefined(getInput('sponsorship-threshold'))
-    ? parseInt(getInput('sponsorship-threshold'))
+  minimum: !isNullOrUndefined(getInput('minimum'))
+    ? parseInt(getInput('minimum'))
+    : 0,
+  maximum: !isNullOrUndefined(getInput('maximum'))
+    ? parseInt(getInput('maximum'))
     : 0,
   marker: !isNullOrUndefined(getInput('marker'))
     ? getInput('marker')
@@ -84,6 +89,5 @@ export enum PrivacyLevel {
 export enum Status {
   SUCCESS = 'success',
   FAILED = 'failed',
-  SKIPPED = 'skipped',
   RUNNING = 'running'
 }

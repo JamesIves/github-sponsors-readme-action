@@ -98,13 +98,18 @@ export function generateTemplate(
 
   /* Appends the template, the API call returns all users regardless of if they are hidden or not.
   In an effort to respect a users decisison to be anoymous we filter these users out. */
-  sponsorshipsAsMaintainer.nodes
+  let filteredSponsors = sponsorshipsAsMaintainer.nodes
     .filter(
       (user: Sponsor) =>
         user.privacyLevel !== PrivacyLevel.PRIVATE &&
-        user.tier.monthlyPriceInCents >= action.sponsorshipThreshold
+        user.tier.monthlyPriceInCents >= action.minimum
     )
-    .map(({sponsorEntity}) => {
+    
+    if (action.maximum > 0) {
+      filteredSponsors = filteredSponsors.filter((user: Sponsor) => user.tier.monthlyPriceInCents <= action.maximum)
+    }
+    
+    filteredSponsors.map(({sponsorEntity}) => {
       template = template += render(action.template, sponsorEntity)
     })
 
