@@ -65,7 +65,7 @@ jobs:
           folder: '.'
 ```
 
-You'll also need to the following `<!-- sponsors --> <!-- sponsors -->` in your `.md` file so the action knows where to place the data.
+You'll also need to the following `<!-- sponsors -->There are no sponsors in this tier<!-- sponsors -->` in your `.md` file so the action knows where to place the data.
 
 ```md
 # Awesome Project
@@ -76,8 +76,7 @@ Go you!
 
 These are our really cool sponsors!
 
-<!-- sponsors -->
-<!-- sponsors -->
+<!-- sponsors -->There are no sponsors in this tier<!-- sponsors -->
 ```
 
 ## Configuration 📁
@@ -100,7 +99,7 @@ The following options must be configured.
 | `organization`          | If you're displaying sponsorship information as an organization you should toggle this option to `true`. You also need to provide the action with an `org:read` scoped PAT.                                                                | `with` | **No**   |
 | `minimum` | Using this input you can set the minimum sponsorship threshold. For example setting this to `500` will only display sponsors who give of `$5 USD` and more. By default the action will display all of your sponsors.                       | `with` | **No**   |
 | `maximum` | Using this input you can set the minimum sponsorship threshold. For example setting this to `500` will only display sponsors who give of `$5 USD` and less. By default the action will display all of your sponsors.                       | `with` | **No**   |
-| `marker`                | This allows you to modify the marker comment that is placed in your file. By default this is set to sponsors - `<!-- sponsors --> <!-- sponsors -->`, if you set this to `gold` for example you can place `<!-- gold --> <!-- gold -->` in your file. | `with` | **No**   |
+| `marker`                | This allows you to modify the marker comment that is placed in your file. By default this is set to sponsors - `<!-- sponsors -->There are no sponsors in this tier<!-- sponsors -->`, if you set this to `gold` for example you can place `<!-- gold --> <!-- gold -->` in your file. | `with` | **No**   |
 | `fallback`              | Allows you to specify a fallback if you have no sponsors. By default nothing is displayed.                                                                                                                                                 | `with` | **No**   |
 | `template`              | Allows you to modify the default template. Please refer to the `template` section of this README for more information.                                                                                                                     | `with` | **No**   |
 
@@ -166,8 +165,7 @@ Go you!
 
 These are our really cool sponsors!
 
-<!-- sponsors -->
-<!-- sponsors -->
+<!-- sponsors -->There are no sponsors in this tier<!-- sponsors -->
 ```
 
 </p>
