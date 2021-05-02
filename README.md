@@ -6,7 +6,7 @@
 </p>
 
 <h1 align="center">
-  GitHub Sponsors Readme Action 💖
+  ✨ GitHub Sponsors Readme Action ✨
 </h1>
 
 <p align="center">
