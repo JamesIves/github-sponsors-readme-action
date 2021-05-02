@@ -88,3 +88,7 @@ export enum Status {
   FAILED = 'failed',
   RUNNING = 'running'
 }
+
+export enum Urls {
+  GITHUB_API = 'https://api.github.com'
+}

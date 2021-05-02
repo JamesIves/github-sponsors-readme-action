@@ -5,7 +5,8 @@ import {
   GitHubResponse,
   PrivacyLevel,
   Sponsor,
-  SponsorshipsAsMaintainer
+  SponsorshipsAsMaintainer,
+  Urls
 } from './constants'
 import {render} from 'mustache'
 import {suppressSensitiveInformation} from './util'
@@ -61,7 +62,7 @@ export async function getSponsors(
       }
     }`
 
-    const data = await fetch('https://api.github.com/graphql', {
+    const data = await fetch(`${Urls.GITHUB_API}/graphql`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${action.token}`,

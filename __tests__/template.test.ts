@@ -1,11 +1,14 @@
-import {GitHubResponse, PrivacyLevel} from '../src/constants'
-import {generateFile, generateTemplate} from '../src/template'
+import {GitHubResponse, PrivacyLevel, Urls} from '../src/constants'
+import {generateFile, generateTemplate, getSponsors} from '../src/template'
 import {promises} from 'fs'
-import { info } from '@actions/core'
+import {info} from '@actions/core'
+import nock from 'nock'
+
+jest.setTimeout(60000)
 
 jest.mock('@actions/core', () => ({
   info: jest.fn(),
-  getInput: jest.fn(),
+  getInput: jest.fn()
 }))
 
 describe('template', () => {
@@ -474,6 +477,80 @@ describe('template', () => {
       } catch (error) {
         expect(error.message).toBe(
           'There was an error generating the updated file: Mocked throw ❌'
+        )
+      }
+    })
+  })
+
+  describe('getSponsors', () => {
+    it('should return some data as user', async () => {
+      const action = {
+        token: '123',
+        file: 'readme.md',
+        template:
+          '<a href="https://github.com/{{{ login }}}"><img src="https://github.com/{{{ login }}}.png" width="60px" alt="" /></a>',
+        minimum: 6000,
+        maximum: 10000,
+        marker: 'sponsors',
+        organization: false,
+        fallback: 'There are no sponsors in this tier'
+      }
+
+      nock(Urls.GITHUB_API).post('/graphql').reply(200, {
+        data: '12345'
+      })
+
+      const data = await getSponsors(action)
+
+      expect(data).toEqual({data: '12345'})
+    })
+
+    it('should return some data as organization', async () => {
+      const action = {
+        token: '123',
+        file: 'readme.md',
+        template:
+          '<a href="https://github.com/{{{ login }}}"><img src="https://github.com/{{{ login }}}.png" width="60px" alt="" /></a>',
+        minimum: 6000,
+        maximum: 10000,
+        marker: 'sponsors',
+        organization: true,
+        fallback: 'There are no sponsors in this tier'
+      }
+
+      nock(Urls.GITHUB_API).post('/graphql').reply(200, {
+        data: '12345'
+      })
+
+      const data = await getSponsors(action)
+
+      expect(data).toEqual({data: '12345'})
+    })
+
+
+    it('should error if the response is not ok and suppress sensitive information', async () => {
+      // TODO: This is not throwing when it's supposed to.
+      nock(Urls.GITHUB_API).post('/graphql').reply(404, {
+        a: 123
+      })
+
+      const action = {
+        token: '123',
+        file: 'readme.md',
+        template:
+          '<a href="https://github.com/{{{ login }}}"><img src="https://github.com/{{{ login }}}.png" width="60px" alt="" /></a>',
+        minimum: 6000,
+        maximum: 10000,
+        marker: 'sponsors',
+        organization: true,
+        fallback: 'There are no sponsors in this tier'
+      }
+
+      try {
+        await getSponsors(action)
+      } catch (error) {
+        expect(error.message).toBe(
+          'There was an error with the GitHub API request: Error: {"a":1}'
         )
       }
     })
