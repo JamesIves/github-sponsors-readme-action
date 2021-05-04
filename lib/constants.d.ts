@@ -63,7 +63,8 @@ export declare enum PrivacyLevel {
 export declare enum Status {
     SUCCESS = "success",
     FAILED = "failed",
-    RUNNING = "running"
+    RUNNING = "running",
+    SKIPPED = "skipped"
 }
 export declare enum Urls {
     GITHUB_API = "https://api.github.com"
