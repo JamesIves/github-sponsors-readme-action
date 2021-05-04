@@ -30,7 +30,7 @@
   This <a href="https://github.com/features/actions">GitHub Action</a> will automatically add your <a href="https://github.com/sponsors">GitHub Sponsors</a> to your README. It can be configured in multiple ways allowing you to display and breakdown your sponsors by price tier with fallbacks. It also includes templating support so you can display your sponsors how you'd like.
 </p>
 
-<!-- real sponsors -->
+<!-- real-sponsors -->
 <!-- real-sponsors -->
 
 ## Getting Started ✈️
