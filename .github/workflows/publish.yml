@@ -31,7 +31,7 @@ jobs:
 
       - run: yarn install --frozen-lockfile
       - run: yarn build
-      - run: npm version ${{ github.event.inputs.version }} -m "Release ${{ github.event.inputs.version }} 📣"
+      - run: npm version ${{ github.event.inputs.version }} -m "Release ${{ github.event.inputs.version }} 📣" --allow-same-version
       - run: git push
 
       # Publish to npm
