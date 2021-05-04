@@ -30,6 +30,9 @@
   This <a href="https://github.com/features/actions">GitHub Action</a> will automatically add your <a href="https://github.com/sponsors">GitHub Sponsors</a> to your README. It can be configured in multiple ways allowing you to display and breakdown your sponsors by price tier with fallbacks. It also includes templating support so you can display your sponsors how you'd like.
 </p>
 
+<!-- real sponsors -->
+<!-- real-sponsors -->
+
 ## Getting Started ✈️
 
 You can include the action in your workflow to trigger on any event that [GitHub Actions supports](https://help.github.com/en/articles/events-that-trigger-workflows). You'll need to provide the action with a **Personal Access Token (PAT)** scoped to `user:read` (or `org:read` depending on your needs), and the file to parse.
