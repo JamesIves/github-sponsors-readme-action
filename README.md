@@ -27,11 +27,7 @@
 </p>
 
 <p align="center">
-  This project is currently in beta and is subject to change, for information on what is outstanding please <a href="https://github.com/JamesIves/github-sponsors-readme-action/issues/1">click here</a>. If you have any suggestions <a href="https://github.com/JamesIves/github-sponsors-readme-action/discussions">please open a discussion thread</a>.
-</p>
-
-<p align="center">
-  This <a href="https://github.com/features/actions">GitHub Action</a> will automatically add your GitHub Sponsors to your README. It can be configured in multiple ways allowing you to display and breakdown sponsors by price tiers, and has templating support so you can display your sponsors how you'd like.
+  This <a href="https://github.com/features/actions">GitHub Action</a> will automatically add your [GitHub Sponsors](https://github.com/sponsors) to your README. It can be configured in multiple ways allowing you to display and breakdown sponsors by price tiers, and has templating support so you can display your sponsors how you'd like.
 </p>
 
 ## Getting Started ✈️
@@ -75,7 +71,7 @@ Go you!
 
 These are our really cool sponsors!
 
-<!-- sponsors -->There are no sponsors in this tier<!-- sponsors -->
+<!-- sponsors --><!-- sponsors -->
 ```
 
 ## Configuration 📁
@@ -98,7 +94,7 @@ The following options must be configured.
 | `organization` | If you're displaying sponsorship information as an organization you should toggle this option to `true`. You also need to provide the action with an `org:read` scoped PAT.                                                                                                            | `with` | **No**   |
 | `minimum`      | Using this input you can set the minimum sponsorship threshold. For example setting this to `500` will only display sponsors who give of `$5 USD` and more. By default the action will display all of your sponsors.                                                                   | `with` | **No**   |
 | `maximum`      | Using this input you can set the minimum sponsorship threshold. For example setting this to `500` will only display sponsors who give of `$5 USD` and less. By default the action will display all of your sponsors.                                                                   | `with` | **No**   |
-| `marker`       | This allows you to modify the marker comment that is placed in your file. By default this is set to sponsors - `<!-- sponsors -->There are no sponsors in this tier<!-- sponsors -->`, if you set this to `gold` for example you can place `<!-- gold --> <!-- gold -->` in your file. | `with` | **No**   |
+| `marker`       | This allows you to modify the marker comment that is placed in your file. By default this is set to sponsors - `<!-- sponsors --> <!-- sponsors -->`, if you set this to `gold` for example you can place `<!-- gold --> <!-- gold -->` in your file. | `with` | **No**   |
 | `fallback`     | Allows you to specify a fallback if you have no sponsors. By default nothing is displayed.                                                                                                                                                                                             | `with` | **No**   |
 | `template`     | Allows you to modify the default template. Please refer to the `template` section of this README for more information.                                                                                                                                                                 | `with` | **No**   |
 
