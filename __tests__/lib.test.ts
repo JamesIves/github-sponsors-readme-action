@@ -88,7 +88,7 @@ describe('lib', () => {
   it('should run through the commands and enter a skipped state', async () => {
     const action = {
       token: '123',
-      file: 'README.test.md',
+      file: 'SPONSORS.test.md',
       template:
         '<a href="https://github.com/{{{ login }}}"><img src="https://github.com/{{{ login }}}.png" width="60px" alt="" /></a>',
       minimum: 0,
