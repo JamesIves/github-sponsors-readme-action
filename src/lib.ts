@@ -31,7 +31,7 @@ export default async function run(
     checkParameters(settings)
 
     const response = await getSponsors(settings)
-    await generateFile(response, settings)
+    status = await generateFile(response, settings)
   } catch (error) {
     status = Status.FAILED
     setFailed(error.message)
@@ -40,7 +40,9 @@ export default async function run(
       `${
         status === Status.FAILED
           ? 'There was an error generating sponsors. ❌'
-          : 'The data was succesfully retrieved and saved! ✅ 💖'
+          : status === Status.SUCCESS
+          ? 'The data was succesfully retrieved and saved! ✅ 💖'
+          : `Unable to locate ${settings.marker} flags in ${settings.file}. Please verify your you have placed <!-- ${settings.marker} --> <!-- ${settings.marker} --> correctly in your markdown file.`
       }`
     )
 

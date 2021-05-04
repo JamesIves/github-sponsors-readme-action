@@ -30,6 +30,12 @@
   This <a href="https://github.com/features/actions">GitHub Action</a> will automatically add your <a href="https://github.com/sponsors">GitHub Sponsors</a> to your README. It can be configured in multiple ways allowing you to display and breakdown your sponsors by price tier with fallbacks. It also includes templating support so you can display your sponsors how you'd like.
 </p>
 
+<p align="center"><a href="https://github.com/sponsors/JamesIves">Made possible by the following</a>:</p>
+
+<p align="center">
+<!-- real-sponsors --><a href="https://github.com/Chooksta69"><img src="https://github.com/Chooksta69.png" width="40px" alt="" /></a><!-- real-sponsors -->
+</p>
+
 ## Getting Started ✈️
 
 You can include the action in your workflow to trigger on any event that [GitHub Actions supports](https://help.github.com/en/articles/events-that-trigger-workflows). You'll need to provide the action with a **Personal Access Token (PAT)** scoped to `user:read` (or `org:read` depending on your needs), and the file to parse.
@@ -74,10 +80,9 @@ These are our really cool sponsors!
 <!-- sponsors --><!-- sponsors -->
 ```
 
-
 #### Install as a Node Module 📦
 
-If you'd like to use the functionality provided by this action in your own action you can install it using [yarn](https://yarnpkg.com/) or [npm](https://www.npmjs.com/get-npm) by running the following commands. It's available on both the [npm](https://www.npmjs.com/package/@jamesives/github-sponsors-readme-action) and [GitHub registry](https://github.com/JamesIves/github-sponsors-readme-action/packages/229982). 
+If you'd like to use the functionality provided by this action in your own action you can install it using [yarn](https://yarnpkg.com/) or [npm](https://www.npmjs.com/get-npm) by running the following commands. It's available on both the [npm](https://www.npmjs.com/package/@jamesives/github-sponsors-readme-action) and [GitHub registry](https://github.com/JamesIves/github-sponsors-readme-action/packages/229982).
 
 ```
 yarn add @jamesives/github-sponsors-readme-action
@@ -90,7 +95,7 @@ npm install @jamesives/github-sponsors-readme-action
 It can then be imported into your project like so.
 
 ```javascript
-import run from "@jamesives/github-sponsors-readme-action";
+import run from '@jamesives/github-sponsors-readme-action'
 
 run(configuration)
 ```
@@ -112,14 +117,14 @@ The following options must be configured.
 
 #### Optional Choices
 
-| Key            | Value Information                                                                                                                                                                                                                                                                      | Type   | Required |
-| -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | -------- |
-| `organization` | If you're displaying sponsorship information as an organization you should toggle this option to `true`. You also need to provide the action with an `org:read` scoped PAT.                                                                                                            | `with` | **No**   |
-| `minimum`      | Using this input you can set the minimum sponsorship threshold. For example setting this to `500` will only display sponsors who give of `$5 USD` and more. By default the action will display all of your sponsors.                                                                   | `with` | **No**   |
-| `maximum`      | Using this input you can set the minimum sponsorship threshold. For example setting this to `500` will only display sponsors who give of `$5 USD` and less. By default the action will display all of your sponsors.                                                                   | `with` | **No**   |
+| Key            | Value Information                                                                                                                                                                                                                                     | Type   | Required |
+| -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | -------- |
+| `organization` | If you're displaying sponsorship information as an organization you should toggle this option to `true`. You also need to provide the action with an `org:read` scoped PAT.                                                                           | `with` | **No**   |
+| `minimum`      | Using this input you can set the minimum sponsorship threshold. For example setting this to `500` will only display sponsors who give of `$5 USD` and more. By default the action will display all of your sponsors.                                  | `with` | **No**   |
+| `maximum`      | Using this input you can set the minimum sponsorship threshold. For example setting this to `500` will only display sponsors who give of `$5 USD` and less. By default the action will display all of your sponsors.                                  | `with` | **No**   |
 | `marker`       | This allows you to modify the marker comment that is placed in your file. By default this is set to sponsors - `<!-- sponsors --> <!-- sponsors -->`, if you set this to `gold` for example you can place `<!-- gold --> <!-- gold -->` in your file. | `with` | **No**   |
-| `fallback`     | Allows you to specify a fallback if you have no sponsors. By default nothing is displayed.                                                                                                                                                                                             | `with` | **No**   |
-| `template`     | Allows you to modify the default template. Please refer to the `template` section of this README for more information.                                                                                                                                                                 | `with` | **No**   |
+| `fallback`     | Allows you to specify a fallback if you have no sponsors. By default nothing is displayed.                                                                                                                                                            | `with` | **No**   |
+| `template`     | Allows you to modify the default template. Please refer to the `template` section of this README for more information.                                                                                                                                | `with` | **No**   |
 
 #### Deployment Status
 
@@ -129,6 +134,8 @@ The action will export a step output as `sponsorship-status` that you can use in
 | --------- | ------------------------------------------------------------------------------------------------------- |
 | `success` | The `success` status indicates that the action was able to successfully generate the README.            |
 | `failed`  | The `failed` status indicates that the action encountered an error while trying to generate the README. |
+| `skipped` | The `skipped` status indicates that the action could not locate the markers in your .md file.           |
+| `running` | The `running` status indicates that the action is actively working.                                     |
 
 ---
 

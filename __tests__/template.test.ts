@@ -1,4 +1,4 @@
-import {GitHubResponse, PrivacyLevel, Urls} from '../src/constants'
+import {GitHubResponse, PrivacyLevel, Status, Urls} from '../src/constants'
 import {generateFile, generateTemplate, getSponsors} from '../src/template'
 import {promises} from 'fs'
 import {info} from '@actions/core'
@@ -413,7 +413,68 @@ describe('template', () => {
         'Generated README file for testing <!-- sponsors --><!-- sponsors --> - do not commit'
       )
 
-      expect(await generateFile(response, action)).toBe(undefined)
+      expect(await generateFile(response, action)).toBe(Status.SUCCESS)
+    })
+
+    it('should go into a skipped state if there is no marker found in the template', async () => {
+      const response: GitHubResponse = {
+        data: {
+          viewer: {
+            sponsorshipsAsMaintainer: {
+              totalCount: 2,
+              pageInfo: {
+                endCursor: 'MQ'
+              },
+              nodes: [
+                {
+                  createdAt: '123',
+                  privacyLevel: PrivacyLevel.PUBLIC,
+                  tier: {
+                    monthlyPriceInCents: 12000
+                  },
+                  sponsorEntity: {
+                    name: 'James Ives',
+                    login: 'JamesIves',
+                    url: 'https://github.com/JamesIves'
+                  }
+                },
+                {
+                  createdAt: '123',
+                  privacyLevel: PrivacyLevel.PUBLIC,
+                  tier: {
+                    monthlyPriceInCents: 12000
+                  },
+                  sponsorEntity: {
+                    name: 'Montezuma Ives',
+                    login: 'MontezumaIves',
+                    url: 'https://github.com/MontezumaIves'
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+
+      const action = {
+        token: '123',
+        file: 'README.test.md',
+        template:
+          '<a href="https://github.com/{{{ login }}}"><img src="https://github.com/{{{ login }}}.png" width="60px" alt="" /></a>',
+        minimum: 6000,
+        maximum: 10000,
+        marker: 'sponsors',
+        organization: false,
+        fallback: 'There are no sponsors in this tier'
+      }
+
+      // Purposely write incorrect data
+      await promises.writeFile(
+        'README.test.md',
+        'Generated README file for testing <!-- sponsorrrr --><!-- sponsors --> - do not commit'
+      )
+
+      expect(await generateFile(response, action)).toBe(Status.SKIPPED)
     })
 
     it('should catch when a function throws an error', async () => {

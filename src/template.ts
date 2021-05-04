@@ -6,6 +6,7 @@ import {
   PrivacyLevel,
   Sponsor,
   SponsorshipsAsMaintainer,
+  Status,
   Urls
 } from './constants'
 import {render} from 'mustache'
@@ -126,7 +127,7 @@ export function generateTemplate(
 export async function generateFile(
   response: GitHubResponse,
   action: ActionInterface
-): Promise<void> {
+): Promise<Status> {
   try {
     info(`Generating updated ${action.file} file… 📁`)
 
@@ -137,9 +138,15 @@ export async function generateFile(
     )
     let data = await promises.readFile(action.file, 'utf8')
 
+    if (!regex.test(data)) {
+      return Status.SKIPPED
+    }
+
     data = data.replace(regex, `$1${generateTemplate(response, action)}$2`)
 
     await promises.writeFile(action.file, data)
+
+    return Status.SUCCESS
   } catch (error) {
     throw new Error(
       `There was an error generating the updated file: ${suppressSensitiveInformation(
