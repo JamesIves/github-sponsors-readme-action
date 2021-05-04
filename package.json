@@ -15,12 +15,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/JamesIves/fetch-api-data-action.git"
+    "url": "git+https://github.com/JamesIves/github-sponsors-readme-action.git"
   },
   "bugs": {
-    "url": "https://github.com/JamesIves/fetch-api-data-action/issues"
+    "url": "https://github.com/JamesIves/github-sponsors-readme-action/issues"
   },
-  "homepage": "https://github.com/JamesIves/fetch-api-data-action",
+  "homepage": "https://github.com/JamesIves/github-sponsors-readme-action",
   "keywords": [
     "github-sponsors",
     "sponsors",
