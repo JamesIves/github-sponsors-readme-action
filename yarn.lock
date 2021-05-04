@@ -3303,10 +3303,10 @@ nice-try@^1.0.4:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/nice-try/-/nice-try-1.0.5.tgz#a3378a7696ce7d223e88fc9b764bd7ef1089e366"
 
-nock@13.0.0:
-  version "13.0.0"
-  resolved "https://registry.yarnpkg.com/nock/-/nock-13.0.0.tgz#e07276d558245386a2872cebf4d5570583c0d225"
-  integrity sha512-FiW8t91Je5yG5MVT1r+go1Z9bX3rCYIEjenUYeZrEl2v8aTWdIX336itrmQaKUO8Ske5Z7RHR7OIzr/9p0Ujjg==
+nock@13.0.11:
+  version "13.0.11"
+  resolved "https://registry.yarnpkg.com/nock/-/nock-13.0.11.tgz#ba733252e720897ca50033205c39db0c7470f331"
+  integrity sha512-sKZltNkkWblkqqPAsjYW0bm3s9DcHRPiMOyKO/PkfJ+ANHZ2+LA2PLe22r4lLrKgXaiSaDQwW3qGsJFtIpQIeQ==
   dependencies:
     debug "^4.1.0"
     json-stringify-safe "^5.0.1"
