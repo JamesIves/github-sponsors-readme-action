@@ -64,7 +64,7 @@ jobs:
           folder: '.'
 ```
 
-You'll also need to the following `<!-- sponsors -->There are no sponsors in this tier<!-- sponsors -->` in your `.md` file so the action knows where to place the data.
+You'll also need to the following `<!-- sponsors --><!-- sponsors -->` in your `.md` file so the action knows where to place the data.
 
 ```md
 # Awesome Project
@@ -164,7 +164,7 @@ Go you!
 
 These are our really cool sponsors!
 
-<!-- sponsors -->There are no sponsors in this tier<!-- sponsors -->
+<!-- sponsors --><!-- sponsors -->
 ```
 
 </p>

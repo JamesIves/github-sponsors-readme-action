@@ -80,7 +80,7 @@ describe('lib', () => {
 
   it('should throw an error if no token is provided', async () => {
     const action = {
-      file: 'readme.md',
+      file: 'README.test.md',
       template:
         '<a href="https://github.com/{{{ login }}}"><img src="https://github.com/{{{ login }}}.png" width="60px" alt="" /></a>',
       minimum: 0,

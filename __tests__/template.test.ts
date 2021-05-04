@@ -55,7 +55,7 @@ describe('template', () => {
 
       const action = {
         token: '123',
-        file: 'readme.md',
+        file: 'README.test.md',
         template:
           '<a href="https://github.com/{{{ login }}}"><img src="https://github.com/{{{ login }}}.png" width="60px" alt="" /></a>',
         minimum: 0,
@@ -112,7 +112,7 @@ describe('template', () => {
 
       const action = {
         token: '123',
-        file: 'readme.md',
+        file: 'README.test.md',
         template:
           '<a href="https://github.com/{{{ login }}}"><img src="https://github.com/{{{ login }}}.png" width="60px" alt="" /></a>',
         minimum: 0,
@@ -169,7 +169,7 @@ describe('template', () => {
 
       const action = {
         token: '123',
-        file: 'readme.md',
+        file: 'README.test.md',
         template:
           '<a href="https://github.com/{{{ login }}}"><img src="https://github.com/{{{ login }}}.png" width="60px" alt="" /></a>',
         minimum: 6000,
@@ -226,7 +226,7 @@ describe('template', () => {
 
       const action = {
         token: '123',
-        file: 'readme.md',
+        file: 'README.test.md',
         template:
           '<a href="https://github.com/{{{ login }}}"><img src="https://github.com/{{{ login }}}.png" width="60px" alt="" /></a>',
         minimum: 0,
@@ -283,7 +283,7 @@ describe('template', () => {
 
       const action = {
         token: '123',
-        file: 'readme.md',
+        file: 'README.test.md',
         template:
           '<a href="https://github.com/{{{ login }}}"><img src="https://github.com/{{{ login }}}.png" width="60px" alt="" /></a>',
         minimum: 6000,
@@ -340,7 +340,7 @@ describe('template', () => {
 
       const action = {
         token: '123',
-        file: 'readme.md',
+        file: 'README.test.md',
         template:
           '<a href="https://github.com/{{{ login }}}"><img src="https://github.com/{{{ login }}}.png" width="60px" alt="" /></a>',
         minimum: 6000,
@@ -397,7 +397,7 @@ describe('template', () => {
 
       const action = {
         token: '123',
-        file: 'readme.md',
+        file: 'README.test.md',
         template:
           '<a href="https://github.com/{{{ login }}}"><img src="https://github.com/{{{ login }}}.png" width="60px" alt="" /></a>',
         minimum: 6000,
@@ -462,7 +462,7 @@ describe('template', () => {
 
       const action = {
         token: '123',
-        file: 'readme.md',
+        file: 'README.test.md',
         template:
           '<a href="https://github.com/{{{ login }}}"><img src="https://github.com/{{{ login }}}.png" width="60px" alt="" /></a>',
         minimum: 6000,
@@ -486,7 +486,7 @@ describe('template', () => {
     it('should return some data as user', async () => {
       const action = {
         token: '123',
-        file: 'readme.md',
+        file: 'README.test.md',
         template:
           '<a href="https://github.com/{{{ login }}}"><img src="https://github.com/{{{ login }}}.png" width="60px" alt="" /></a>',
         minimum: 6000,
@@ -508,7 +508,7 @@ describe('template', () => {
     it('should return some data as organization', async () => {
       const action = {
         token: '123',
-        file: 'readme.md',
+        file: 'README.test.md',
         template:
           '<a href="https://github.com/{{{ login }}}"><img src="https://github.com/{{{ login }}}.png" width="60px" alt="" /></a>',
         minimum: 6000,
@@ -534,7 +534,7 @@ describe('template', () => {
 
       const action = {
         token: '123',
-        file: 'readme.md',
+        file: 'README.test.md',
         template:
           '<a href="https://github.com/{{{ login }}}"><img src="https://github.com/{{{ login }}}.png" width="60px" alt="" /></a>',
         minimum: 6000,

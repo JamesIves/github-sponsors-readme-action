@@ -30,7 +30,7 @@ describe('util', () => {
   describe('hasRequiredParameters', () => {
     it('should fail if there is no provided Access Token', () => {
       const action = {
-        file: 'readme.md',
+        file: 'README.test.md',
         template: '* {{{ url }}}',
         minimum: 0,
         maximum: 0,
@@ -51,7 +51,7 @@ describe('util', () => {
     it('should not fail if it has all of the parameters', () => {
       const action = {
         token: 'montezuma',
-        file: 'readme.md',
+        file: 'README.test.md',
         template: '* {{{ url }}}',
         minimum: 0,
         maximum: 0,
@@ -69,7 +69,7 @@ describe('util', () => {
     it('should replace any sensitive information with ***', async () => {
       const action = {
         token: 'insanelyimportanttokendonotsteal',
-        file: 'readme.md',
+        file: 'README.test.md',
         template: '* {{{ url }}}',
         minimum: 0,
         maximum: 0,
