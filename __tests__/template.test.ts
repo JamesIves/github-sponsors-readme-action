@@ -416,7 +416,6 @@ describe('template', () => {
       expect(await generateFile(response, action)).toBe(Status.SUCCESS)
     })
 
-
     it('should go into a skipped state if there is no marker found in the template', async () => {
       const response: GitHubResponse = {
         data: {
