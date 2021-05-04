@@ -86,7 +86,8 @@ export enum PrivacyLevel {
 export enum Status {
   SUCCESS = 'success',
   FAILED = 'failed',
-  RUNNING = 'running'
+  RUNNING = 'running',
+  SKIPPED = 'skipped'
 }
 
 export enum Urls {

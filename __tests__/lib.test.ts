@@ -1,5 +1,6 @@
 import {setFailed} from '@actions/core'
 import nock from 'nock'
+import {promises} from 'fs'
 import {GitHubResponse, PrivacyLevel, Urls} from '../src/constants'
 import run from '../src/lib'
 import '../src/main'
@@ -62,7 +63,29 @@ describe('lib', () => {
 
   afterEach(nock.cleanAll)
 
-  it('should run through the commands', async () => {
+  it('should run through the commands and enter a success state', async () => {
+    const action = {
+      token: '123',
+      file: 'README.test.md',
+      template:
+        '<a href="https://github.com/{{{ login }}}"><img src="https://github.com/{{{ login }}}.png" width="60px" alt="" /></a>',
+      minimum: 0,
+      maximum: 0,
+      marker: 'sponsor',
+      organization: false,
+      fallback: ''
+    }
+
+    // Valid file structure
+    await promises.writeFile(
+      'README.test.md',
+      'Generated README file for testing <!-- sponsor --><!-- sponsor --> - do not commit'
+    )
+
+    await run(action)
+  })
+
+  it('should run through the commands and enter a skipped state', async () => {
     const action = {
       token: '123',
       file: 'README.test.md',
@@ -74,6 +97,12 @@ describe('lib', () => {
       organization: false,
       fallback: ''
     }
+
+    // Purposely write incorrect data
+    await promises.writeFile(
+      'README.test.md',
+      'Generated README file for testing <!-- sponsorrrr --><!-- sponsors --> - do not commit'
+    )
 
     await run(action)
   })
