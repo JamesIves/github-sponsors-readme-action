@@ -527,11 +527,9 @@ describe('template', () => {
       expect(data).toEqual({data: '12345'})
     })
 
-
-    it('should error if the response is not ok and suppress sensitive information', async () => {
-      // TODO: This is not throwing when it's supposed to.
-      nock(Urls.GITHUB_API).post('/graphql').reply(404, {
-        a: 123
+    it('should appropriate handle an error', async () => {
+      ;(info as jest.Mock).mockImplementationOnce(() => {
+        throw new Error('Mocked throw')
       })
 
       const action = {
@@ -550,7 +548,7 @@ describe('template', () => {
         await getSponsors(action)
       } catch (error) {
         expect(error.message).toBe(
-          'There was an error with the GitHub API request: Error: {"a":1}'
+          'There was an error with the GitHub API request: Mocked throw ❌'
         )
       }
     })
