@@ -74,6 +74,29 @@ These are our really cool sponsors!
 <!-- sponsors --><!-- sponsors -->
 ```
 
+
+#### Install as a Node Module 📦
+
+If you'd like to use the functionality provided by this action in your own action you can install it using [yarn](https://yarnpkg.com/) or [npm](https://www.npmjs.com/get-npm) by running the following commands. It's available on both the [npm](https://www.npmjs.com/package/@jamesives/github-sponsors-readme-action) and [GitHub registry](https://github.com/JamesIves/github-sponsors-readme-action/packages/229982). 
+
+```
+yarn add @jamesives/github-sponsors-readme-action
+```
+
+```
+npm install @jamesives/github-sponsors-readme-action
+```
+
+It can then be imported into your project like so.
+
+```javascript
+import run from "@jamesives/github-sponsors-readme-action";
+
+run(configuration)
+```
+
+Calling the functions directly will require you to pass in an object containing the variables found in the [configuration section](https://github.com/JamesIves/github-sponsors-readme-action#configuration-).
+
 ## Configuration 📁
 
 The `with` portion of the workflow **must** be configured before the action will work. You can add these in the `with` section found in the examples above. Any `secrets` must be referenced using the bracket syntax and stored in the GitHub repository's `Settings/Secrets` menu. You can learn more about setting environment variables with GitHub actions [here](https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets#creating-encrypted-secrets).
