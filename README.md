@@ -33,7 +33,7 @@
 <p align="center"><a href="https://github.com/sponsors/JamesIves">Made possible by the following</a>:</p>
 
 <a align="center">
-<!-- real sponsors -->
+<!-- real-sponsors -->
 <!-- real-sponsors -->
 </a>
 
