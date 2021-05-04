@@ -48,7 +48,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Generate Sponsors 💖
-        uses: JamesIves/github-sponsors-readme-action@releases/beta
+        uses: JamesIves/github-sponsors-readme-action@1.0.0
         with:
           token: ${{ secrets.PAT }}
           file: 'README.md'
@@ -161,7 +161,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Generate Sponsors 💖
-        uses: JamesIves/github-sponsors-readme-action@releases/beta
+        uses: JamesIves/github-sponsors-readme-action@1.0.0
         with:
           token: ${{ secrets.PAT }}
           file: 'README.md'
@@ -212,7 +212,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Generate Sponsors 💖
-        uses: JamesIves/github-sponsors-readme-action@releases/beta
+        uses: JamesIves/github-sponsors-readme-action@1.0.0
         with:
           token: ${{ secrets.PAT }}
           file: 'README.md'
@@ -221,7 +221,7 @@ jobs:
           marker: 'silver'
 
       - name: Generate Sponsors 💖
-        uses: JamesIves/github-sponsors-readme-action@releases/beta
+        uses: JamesIves/github-sponsors-readme-action@1.0.0
         with:
           token: ${{ secrets.PAT }}
           file: 'README.md'
