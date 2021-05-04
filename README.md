@@ -77,10 +77,9 @@ These are our really cool sponsors!
 <!-- sponsors --><!-- sponsors -->
 ```
 
-
 #### Install as a Node Module 📦
 
-If you'd like to use the functionality provided by this action in your own action you can install it using [yarn](https://yarnpkg.com/) or [npm](https://www.npmjs.com/get-npm) by running the following commands. It's available on both the [npm](https://www.npmjs.com/package/@jamesives/github-sponsors-readme-action) and [GitHub registry](https://github.com/JamesIves/github-sponsors-readme-action/packages/229982). 
+If you'd like to use the functionality provided by this action in your own action you can install it using [yarn](https://yarnpkg.com/) or [npm](https://www.npmjs.com/get-npm) by running the following commands. It's available on both the [npm](https://www.npmjs.com/package/@jamesives/github-sponsors-readme-action) and [GitHub registry](https://github.com/JamesIves/github-sponsors-readme-action/packages/229982).
 
 ```
 yarn add @jamesives/github-sponsors-readme-action
@@ -93,7 +92,7 @@ npm install @jamesives/github-sponsors-readme-action
 It can then be imported into your project like so.
 
 ```javascript
-import run from "@jamesives/github-sponsors-readme-action";
+import run from '@jamesives/github-sponsors-readme-action'
 
 run(configuration)
 ```
@@ -115,14 +114,14 @@ The following options must be configured.
 
 #### Optional Choices
 
-| Key            | Value Information                                                                                                                                                                                                                                                                      | Type   | Required |
-| -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | -------- |
-| `organization` | If you're displaying sponsorship information as an organization you should toggle this option to `true`. You also need to provide the action with an `org:read` scoped PAT.                                                                                                            | `with` | **No**   |
-| `minimum`      | Using this input you can set the minimum sponsorship threshold. For example setting this to `500` will only display sponsors who give of `$5 USD` and more. By default the action will display all of your sponsors.                                                                   | `with` | **No**   |
-| `maximum`      | Using this input you can set the minimum sponsorship threshold. For example setting this to `500` will only display sponsors who give of `$5 USD` and less. By default the action will display all of your sponsors.                                                                   | `with` | **No**   |
+| Key            | Value Information                                                                                                                                                                                                                                     | Type   | Required |
+| -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | -------- |
+| `organization` | If you're displaying sponsorship information as an organization you should toggle this option to `true`. You also need to provide the action with an `org:read` scoped PAT.                                                                           | `with` | **No**   |
+| `minimum`      | Using this input you can set the minimum sponsorship threshold. For example setting this to `500` will only display sponsors who give of `$5 USD` and more. By default the action will display all of your sponsors.                                  | `with` | **No**   |
+| `maximum`      | Using this input you can set the minimum sponsorship threshold. For example setting this to `500` will only display sponsors who give of `$5 USD` and less. By default the action will display all of your sponsors.                                  | `with` | **No**   |
 | `marker`       | This allows you to modify the marker comment that is placed in your file. By default this is set to sponsors - `<!-- sponsors --> <!-- sponsors -->`, if you set this to `gold` for example you can place `<!-- gold --> <!-- gold -->` in your file. | `with` | **No**   |
-| `fallback`     | Allows you to specify a fallback if you have no sponsors. By default nothing is displayed.                                                                                                                                                                                             | `with` | **No**   |
-| `template`     | Allows you to modify the default template. Please refer to the `template` section of this README for more information.                                                                                                                                                                 | `with` | **No**   |
+| `fallback`     | Allows you to specify a fallback if you have no sponsors. By default nothing is displayed.                                                                                                                                                            | `with` | **No**   |
+| `template`     | Allows you to modify the default template. Please refer to the `template` section of this README for more information.                                                                                                                                | `with` | **No**   |
 
 #### Deployment Status
 
