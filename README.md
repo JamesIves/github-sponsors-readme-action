@@ -135,8 +135,8 @@ The action will export a step output as `sponsorship-status` that you can use in
 | --------- | ------------------------------------------------------------------------------------------------------- |
 | `success` | The `success` status indicates that the action was able to successfully generate the README.            |
 | `failed`  | The `failed` status indicates that the action encountered an error while trying to generate the README. |
-| `skipped`  | The `skipped` status indicates that the action could not locate the markers in your .md file. |
-| `running`  | The `running` status indicates that the action is actively working. |
+| `skipped` | The `skipped` status indicates that the action could not locate the markers in your .md file.           |
+| `running` | The `running` status indicates that the action is actively working.                                     |
 
 ---
 
