@@ -42,7 +42,7 @@ export default async function run(
           ? 'There was an error generating sponsors. ❌'
           : status === Status.SUCCESS
           ? 'The data was succesfully retrieved and saved! ✅ 💖'
-          : `Unable to locate ${settings.marker} flags in ${settings.file}. Please verify your you have placed <!-- ${settings.marker} --> <!-- ${settings.marker} --> correctly in your markdown file.`
+          : `Unable to locate markers in your file. Please check the documentation and try again. ⚠️`
       }`
     )
 
