@@ -99,10 +99,7 @@ describe('lib', () => {
     }
 
     // Purposely write incorrect data
-    await promises.writeFile(
-      'README.test.md',
-      'Generated README file for testing <!-- sponsorrrr --><!-- sponsors --> - do not commit'
-    )
+    await promises.writeFile('SPONSORS.test.md', 'nothing here')
 
     await run(action)
   })
