@@ -47,3 +47,5 @@ export default async function run(
     setOutput('sponsorship-status', status)
   }
 }
+
+export {generateFile, getSponsors, ActionInterface}
