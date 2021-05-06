@@ -24,6 +24,7 @@ jobs:
           file: 'README.md'
           template: '<a href="https://github.com/{{{ login }}}"><img src="https://github.com/{{{ login }}}.png" width="40px" alt="" /></a>'
           fallback: '<img src="./github/assets/placeholder.png" width="40px" alt="" />'
+          minimum: 500
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@4.1.1
