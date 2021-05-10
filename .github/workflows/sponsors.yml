@@ -1,11 +1,5 @@
 name: publish-sponsors
 on:
-  workflow_dispatch:
-    inputs:
-      branch:
-        description: 'Specifies the branch which the sponsors should be generated on.'
-        required: true
-        default: 'dev'
   schedule:
     - cron: 30 15 * * 0-6
 
@@ -29,5 +23,5 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@4.1.1
         with:
-          branch: ${{ github.event.inputs.branch }}
+          branch: dev
           folder: '.'
