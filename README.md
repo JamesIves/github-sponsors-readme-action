@@ -33,7 +33,7 @@
 <p align="center"><a href="https://github.com/sponsors/JamesIves">Made possible by the following</a>:</p>
 
 <p align="center">
-<!-- real-sponsors --><a href="https://github.com/Chooksta69"><img src="https://github.com/Chooksta69.png" width="40px" alt="" /></a><!-- real-sponsors -->
+<!-- real-sponsors --><img src="./github/assets/placeholder.png" width="40px" alt="" /><!-- real-sponsors -->
 </p>
 
 ## Getting Started ✈️
