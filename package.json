@@ -50,7 +50,7 @@
     "jest": "25.5.4",
     "jest-circus": "26.6.3",
     "nock": "13.1.1",
-    "prettier": "2.2.1",
+    "prettier": "2.4.0",
     "ts-jest": "25.5.1",
     "typescript": "3.9.10"
   }
