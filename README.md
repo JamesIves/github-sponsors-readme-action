@@ -33,7 +33,7 @@
 <p align="center"><a href="https://github.com/sponsors/JamesIves">Made possible by the following</a>:</p>
 
 <p align="center">
-<!-- real-sponsors --><a href="https://github.com/milanpollock"><img src="https://github.com/milanpollock.png" width="40px" alt="" /></a><!-- real-sponsors -->
+<!-- real-sponsors --><a href="https://github.com/milanpollock"><img src="https://github.com/milanpollock.png" width="40px" alt="" /></a><a href="https://github.com/raoulvdberge"><img src="https://github.com/raoulvdberge.png" width="40px" alt="" /></a><!-- real-sponsors -->
 </p>
 
 ## Getting Started ✈️
