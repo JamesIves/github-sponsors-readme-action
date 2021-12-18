@@ -536,7 +536,7 @@ describe('template', () => {
       try {
         await generateFile(response, action)
       } catch (error) {
-        expect(error.message).toBe(
+        expect(error instanceof Error && error.message).toBe(
           'There was an error generating the updated file: Mocked throw ❌'
         )
       }
@@ -608,7 +608,7 @@ describe('template', () => {
       try {
         await getSponsors(action)
       } catch (error) {
-        expect(error.message).toBe(
+        expect(error instanceof Error && error.message).toBe(
           'There was an error with the GitHub API request: Mocked throw ❌'
         )
       }

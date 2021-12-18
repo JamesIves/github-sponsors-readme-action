@@ -1,7 +1,7 @@
 import {info, setFailed, setOutput} from '@actions/core'
 import {ActionInterface, Status} from './constants'
 import {generateFile, getSponsors} from './template'
-import {checkParameters} from './util'
+import {checkParameters, extractErrorMessage} from './util'
 
 /** Initializes and runs the action.
  *
@@ -34,7 +34,7 @@ export default async function run(
     status = await generateFile(response, settings)
   } catch (error) {
     status = Status.FAILED
-    setFailed(error.message)
+    setFailed(extractErrorMessage(error))
   } finally {
     info(
       `${

@@ -1,5 +1,6 @@
 import {
   checkParameters,
+  extractErrorMessage,
   suppressSensitiveInformation,
   isNullOrUndefined
 } from '../src/util'
@@ -81,6 +82,24 @@ describe('util', () => {
       const string = `This is an error message! It contains ${action.token} and ${action.token} again!`
       expect(suppressSensitiveInformation(string, action)).toBe(
         'This is an error message! It contains *** and *** again!'
+      )
+    })
+  })
+
+  describe('extractErrorMessage', () => {
+    it('gets the message of a Error', () => {
+      expect(extractErrorMessage(new Error('a error message'))).toBe(
+        'a error message'
+      )
+    })
+
+    it('gets the message of a string', () => {
+      expect(extractErrorMessage('a error message')).toBe('a error message')
+    })
+
+    it('gets the message of a object', () => {
+      expect(extractErrorMessage({special: 'a error message'})).toBe(
+        `{"special":"a error message"}`
       )
     })
   })

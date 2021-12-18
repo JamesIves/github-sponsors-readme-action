@@ -10,7 +10,7 @@ import {
   Urls
 } from './constants'
 import {render} from 'mustache'
-import {suppressSensitiveInformation} from './util'
+import {extractErrorMessage, suppressSensitiveInformation} from './util'
 import {info} from '@actions/core'
 
 /** Fetches  */
@@ -79,7 +79,7 @@ export async function getSponsors(
   } catch (error) {
     throw new Error(
       `There was an error with the GitHub API request: ${suppressSensitiveInformation(
-        error.message,
+        extractErrorMessage(error),
         action
       )} ❌`
     )
@@ -150,7 +150,7 @@ export async function generateFile(
   } catch (error) {
     throw new Error(
       `There was an error generating the updated file: ${suppressSensitiveInformation(
-        error.message,
+        extractErrorMessage(error),
         action
       )} ❌`
     )
