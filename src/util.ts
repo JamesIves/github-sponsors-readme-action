@@ -35,9 +35,9 @@ export const suppressSensitiveInformation = (
 ): string => {
   let value = str
 
-  const orderedByLength = ([action.token, action.token].filter(
-    Boolean
-  ) as string[]).sort((a, b) => b.length - a.length)
+  const orderedByLength = (
+    [action.token, action.token].filter(Boolean) as string[]
+  ).sort((a, b) => b.length - a.length)
 
   for (const find of orderedByLength) {
     value = replaceAll(value, find, '***')
@@ -45,3 +45,10 @@ export const suppressSensitiveInformation = (
 
   return value
 }
+
+export const extractErrorMessage = (error: unknown): string =>
+  error instanceof Error
+    ? error.message
+    : typeof error == 'string'
+    ? error
+    : JSON.stringify(error)

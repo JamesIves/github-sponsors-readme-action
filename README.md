@@ -30,10 +30,10 @@
   This <a href="https://github.com/features/actions">GitHub Action</a> will automatically add your <a href="https://github.com/sponsors">GitHub Sponsors</a> to your README. It can be configured in multiple ways allowing you to display and breakdown your sponsors by price tier with fallbacks. It also includes templating support so you can display your sponsors how you'd like.
 </p>
 
-<p align="center"><a href="https://github.com/sponsors/JamesIves">Made possible by the following</a>:</p>
+<p align="center">You can find an example of this below:</p>
 
 <p align="center">
-<!-- real-sponsors --><a href="https://github.com/Chooksta69"><img src="https://github.com/Chooksta69.png" width="40px" alt="" /></a><!-- real-sponsors -->
+<!-- real-sponsors --><a href="https://github.com/milanpollock"><img src="https://github.com/milanpollock.png" width="40px" alt="" /></a><a href="https://github.com/raoulvdberge"><img src="https://github.com/raoulvdberge.png" width="40px" alt="" /></a><!-- real-sponsors -->
 </p>
 
 ## Getting Started ✈️
@@ -54,7 +54,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Generate Sponsors 💖
-        uses: JamesIves/github-sponsors-readme-action@1.0.0
+        uses: JamesIves/github-sponsors-readme-action@1.0.5
         with:
           token: ${{ secrets.PAT }}
           file: 'README.md'
@@ -110,10 +110,10 @@ The `with` portion of the workflow **must** be configured before the action will
 
 The following options must be configured.
 
-| Key     | Value Information                                                                                                                                                                                                                                                                                                                       | Type   | Required |
-| ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | -------- |
-| `token` | You must provide the action with a Personal Access Token (PAT) with either the `user:read` or `org:read` permission scope and store it in the `secrets / with` menu **as a secret**. This should be generated from the account or organization that recieves sponsorship. [Learn more about creating and using encrypted secrets here]. | `with` | **Yes**  |
-| `file`  | This should point to the file that you're generating, for example `README.md` or `path/to/CREDITS.md`. Defaults to `README.md` if no value is provided.                                                                                                                                                                                 | `with` | **Yes**  |
+| Key     | Value Information                                                                                                                                                                                                                                                                                                                                                                                       | Type   | Required |
+| ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | -------- |
+| `token` | You must provide the action with a Personal Access Token (PAT) with either the `user:read` or `org:read` permission scope and store it in the `secrets / with` menu **as a secret**. This should be generated from the account or organization that recieves sponsorship. [Learn more about creating and using encrypted secrets here](https://docs.github.com/en/actions/reference/encrypted-secrets). | `with` | **Yes**  |
+| `file`  | This should point to the file that you're generating, for example `README.md` or `path/to/CREDITS.md`. Defaults to `README.md` if no value is provided.                                                                                                                                                                                                                                                 | `with` | **Yes**  |
 
 #### Optional Choices
 
@@ -121,7 +121,7 @@ The following options must be configured.
 | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | -------- |
 | `organization` | If you're displaying sponsorship information as an organization you should toggle this option to `true`. You also need to provide the action with an `org:read` scoped PAT.                                                                           | `with` | **No**   |
 | `minimum`      | Using this input you can set the minimum sponsorship threshold. For example setting this to `500` will only display sponsors who give of `$5 USD` and more. By default the action will display all of your sponsors.                                  | `with` | **No**   |
-| `maximum`      | Using this input you can set the minimum sponsorship threshold. For example setting this to `500` will only display sponsors who give of `$5 USD` and less. By default the action will display all of your sponsors.                                  | `with` | **No**   |
+| `maximum`      | Using this input you can set the maximum sponsorship threshold. For example setting this to `500` will only display sponsors who give of `$5 USD` and less. By default the action will display all of your sponsors.                                  | `with` | **No**   |
 | `marker`       | This allows you to modify the marker comment that is placed in your file. By default this is set to sponsors - `<!-- sponsors --> <!-- sponsors -->`, if you set this to `gold` for example you can place `<!-- gold --> <!-- gold -->` in your file. | `with` | **No**   |
 | `fallback`     | Allows you to specify a fallback if you have no sponsors. By default nothing is displayed.                                                                                                                                                            | `with` | **No**   |
 | `template`     | Allows you to modify the default template. Please refer to the `template` section of this README for more information.                                                                                                                                | `with` | **No**   |
@@ -168,7 +168,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Generate Sponsors 💖
-        uses: JamesIves/github-sponsors-readme-action@1.0.0
+        uses: JamesIves/github-sponsors-readme-action@1.0.5
         with:
           token: ${{ secrets.PAT }}
           file: 'README.md'
@@ -219,7 +219,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Generate Sponsors 💖
-        uses: JamesIves/github-sponsors-readme-action@1.0.0
+        uses: JamesIves/github-sponsors-readme-action@1.0.5
         with:
           token: ${{ secrets.PAT }}
           file: 'README.md'
@@ -228,7 +228,7 @@ jobs:
           marker: 'silver'
 
       - name: Generate Sponsors 💖
-        uses: JamesIves/github-sponsors-readme-action@1.0.0
+        uses: JamesIves/github-sponsors-readme-action@1.0.5
         with:
           token: ${{ secrets.PAT }}
           file: 'README.md'
@@ -260,3 +260,11 @@ Go you!
 
 </p>
 </details>
+
+---
+
+## Support 💖
+
+This project would not be possible without all of our fantastic [contributors](https://github.com/JamesIves/github-sponsors-readme-action/graphs/contributors) and [sponsors](https://github.com/sponsors/JamesIves). If you'd like to support the maintenance and upkeep of this project you can [donate via GitHub Sponsors](https://github.com/sponsors/JamesIves).
+
+<!-- sponsors --><a href="https://github.com/milanpollock"><img src="https://github.com/milanpollock.png" width="50px" alt="" /></a><a href="https://github.com/raoulvdberge"><img src="https://github.com/raoulvdberge.png" width="50px" alt="" /></a><!-- sponsors -->
