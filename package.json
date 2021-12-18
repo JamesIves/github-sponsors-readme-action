@@ -46,7 +46,7 @@
     "eslint": "7.32.0",
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-jest": "24.4.0",
-    "eslint-plugin-prettier": "3.4.0",
+    "eslint-plugin-prettier": "4.0.0",
     "jest": "25.5.4",
     "jest-circus": "26.6.3",
     "nock": "13.2.1",
