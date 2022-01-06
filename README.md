@@ -60,7 +60,7 @@ jobs:
           file: 'README.md'
 
       - name: Deploy to GitHub Pages 🚀
-        uses: JamesIves/github-pages-deploy-action@4.1.1
+        uses: JamesIves/github-pages-deploy-action@4.2.0
         with:
           branch: main
           folder: '.'
