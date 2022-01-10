@@ -54,13 +54,13 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Generate Sponsors 💖
-        uses: JamesIves/github-sponsors-readme-action@1.0.5
+        uses: JamesIves/github-sponsors-readme-action@v1.0.8
         with:
           token: ${{ secrets.PAT }}
           file: 'README.md'
 
       - name: Deploy to GitHub Pages 🚀
-        uses: JamesIves/github-pages-deploy-action@4.1.1
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: main
           folder: '.'
@@ -168,14 +168,14 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Generate Sponsors 💖
-        uses: JamesIves/github-sponsors-readme-action@1.0.5
+        uses: JamesIves/github-sponsors-readme-action@v1.0.8
         with:
           token: ${{ secrets.PAT }}
           file: 'README.md'
           template: '* [{{{ name }}}]({{{ url }}}) - {{{ login }}}'
 
       - name: Deploy to GitHub Pages 🚀
-        uses: JamesIves/github-pages-deploy-action@4.1.1
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: main
           folder: '.'
@@ -219,7 +219,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Generate Sponsors 💖
-        uses: JamesIves/github-sponsors-readme-action@1.0.5
+        uses: JamesIves/github-sponsors-readme-action@v1.0.8
         with:
           token: ${{ secrets.PAT }}
           file: 'README.md'
@@ -228,7 +228,7 @@ jobs:
           marker: 'silver'
 
       - name: Generate Sponsors 💖
-        uses: JamesIves/github-sponsors-readme-action@1.0.5
+        uses: JamesIves/github-sponsors-readme-action@v1.0.8
         with:
           token: ${{ secrets.PAT }}
           file: 'README.md'
@@ -236,7 +236,7 @@ jobs:
           marker: 'gold'
 
       - name: Deploy to GitHub Pages 🚀
-        uses: JamesIves/github-pages-deploy-action@4.1.1
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: main
           folder: '.'
