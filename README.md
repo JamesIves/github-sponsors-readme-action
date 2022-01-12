@@ -29,11 +29,16 @@
 <p align="center">
   This <a href="https://github.com/features/actions">GitHub Action</a> will automatically add your <a href="https://github.com/sponsors">GitHub Sponsors</a> to your README. It can be configured in multiple ways allowing you to display and breakdown your sponsors by price tier with fallbacks. It also includes templating support so you can display your sponsors how you'd like.
 </p>
-
-<p align="center">You can find an example of this below:</p>
+<p align="center">
+ Maintainence of this project is made possible by all the <a href="https://github.com/JamesIves/github-pages-deploy-action/graphs/contributors">contributors</a> and <a href="https://github.com/sponsors/JamesIves">sponsors</a>. If you'd like to sponsor this project and have your avatar or company logo appear below <a href="https://github.com/sponsors/JamesIves">click here</a>. 💖
+</p>
 
 <p align="center">
-<!-- real-sponsors --><a href="https://github.com/milanpollock"><img src="https://github.com/milanpollock.png" width="40px" alt="" /></a><a href="https://github.com/raoulvdberge"><img src="https://github.com/raoulvdberge.png" width="40px" alt="" /></a><!-- real-sponsors -->
+<!-- real-premium --> <!-- real-premium -->
+</p>
+
+<p align="center">
+<!-- real-sponsors --><a href="https://github.com/milanpollock"><img src="https://github.com/milanpollock.png" width="50px" alt="milanpollock" /></a>&nbsp;&nbsp;<a href="https://github.com/raoulvdberge"><img src="https://github.com/raoulvdberge.png" width="50px" alt="raoulvdberge" /></a>&nbsp;&nbsp;<!-- real-sponsors -->
 </p>
 
 ## Getting Started ✈️
@@ -260,11 +265,3 @@ Go you!
 
 </p>
 </details>
-
----
-
-## Support 💖
-
-This project would not be possible without all of our fantastic [contributors](https://github.com/JamesIves/github-sponsors-readme-action/graphs/contributors) and [sponsors](https://github.com/sponsors/JamesIves). If you'd like to support the maintenance and upkeep of this project you can [donate via GitHub Sponsors](https://github.com/sponsors/JamesIves).
-
-<!-- sponsors --><a href="https://github.com/milanpollock"><img src="https://github.com/milanpollock.png" width="50px" alt="" /></a><a href="https://github.com/raoulvdberge"><img src="https://github.com/raoulvdberge.png" width="50px" alt="" /></a><!-- sponsors -->
