@@ -26,7 +26,7 @@ jobs:
 
       - name: Install and Test
         run: |
-          yarn install
+          yarn install --frozen-lockfile
           yarn lint
           yarn test
 
@@ -56,7 +56,7 @@ jobs:
 
       - name: Rebuild production node_modules
         run: |
-          yarn install --production
+          yarn install --production --frozen-lockfile
           ls node_modules
 
       - name: artifact
