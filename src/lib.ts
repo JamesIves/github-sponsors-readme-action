@@ -31,7 +31,7 @@ export default async function run(
     checkParameters(settings)
 
     const response = await getSponsors(settings)
-    console.log(response)
+    info(JSON.stringify(response))
     status = await generateFile(response, settings)
   } catch (error) {
     status = Status.FAILED
