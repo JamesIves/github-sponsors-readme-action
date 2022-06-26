@@ -41,7 +41,9 @@ export async function getSponsors(
                 name
                 login
                 url
-              }` : ``}
+              }`
+                  : ``
+              }
               
               ... on User {
                 name
