@@ -34,11 +34,11 @@
 </p>
 
 <p align="center">
-<!-- real-premium --><!-- real-premium -->
+<!-- real-premium --><a href="https://github.com/github"><img src="https://github.com/github.png" width="80px" alt="github" /></a>&nbsp;&nbsp;<!-- real-premium -->
 </p>
 
 <p align="center">
-<!-- real-sponsors --><a href="https://github.com/Chooksta69"><img src="https://github.com/Chooksta69.png" width="50px" alt="Chooksta69" /></a>&nbsp;&nbsp;<a href="https://github.com/milanpollock"><img src="https://github.com/milanpollock.png" width="50px" alt="milanpollock" /></a>&nbsp;&nbsp;<a href="https://github.com/robjtede"><img src="https://github.com/robjtede.png" width="50px" alt="robjtede" /></a>&nbsp;&nbsp;<!-- real-sponsors -->
+<!-- real-sponsors --><a href="https://github.com/Chooksta69"><img src="https://github.com/Chooksta69.png" width="50px" alt="Chooksta69" /></a>&nbsp;&nbsp;<a href="https://github.com/robjtede"><img src="https://github.com/robjtede.png" width="50px" alt="robjtede" /></a>&nbsp;&nbsp;<a href="https://github.com/hadley"><img src="https://github.com/hadley.png" width="50px" alt="hadley" /></a>&nbsp;&nbsp;<a href="https://github.com/kevinchalet"><img src="https://github.com/kevinchalet.png" width="50px" alt="kevinchalet" /></a>&nbsp;&nbsp;<a href="https://github.com/Yousazoe"><img src="https://github.com/Yousazoe.png" width="50px" alt="Yousazoe" /></a>&nbsp;&nbsp;<!-- real-sponsors -->
 </p>
 
 ## Getting Started ✈️
@@ -59,7 +59,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Generate Sponsors 💖
-        uses: JamesIves/github-sponsors-readme-action@v1.0.8
+        uses: JamesIves/github-sponsors-readme-action@v1
         with:
           token: ${{ secrets.PAT }}
           file: 'README.md'
@@ -124,7 +124,7 @@ The following options must be configured.
 
 | Key            | Value Information                                                                                                                                                                                                                                     | Type   | Required |
 | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | -------- |
-| `organization` | If you're displaying sponsorship information as an organization you should toggle this option to `true`. You also need to provide the action with an `org:read` scoped PAT.                                                                           | `with` | **No**   |
+| `organization` | If you're displaying sponsorship information as or for an organization you should toggle this option to `true`. You also need to provide the action with an `org:read` scoped PAT.                                                                    | `with` | **No**   |
 | `minimum`      | Using this input you can set the minimum sponsorship threshold. For example setting this to `500` will only display sponsors who give of `$5 USD` and more. By default the action will display all of your sponsors.                                  | `with` | **No**   |
 | `maximum`      | Using this input you can set the maximum sponsorship threshold. For example setting this to `500` will only display sponsors who give of `$5 USD` and less. By default the action will display all of your sponsors.                                  | `with` | **No**   |
 | `marker`       | This allows you to modify the marker comment that is placed in your file. By default this is set to sponsors - `<!-- sponsors --> <!-- sponsors -->`, if you set this to `gold` for example you can place `<!-- gold --> <!-- gold -->` in your file. | `with` | **No**   |
@@ -173,7 +173,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Generate Sponsors 💖
-        uses: JamesIves/github-sponsors-readme-action@v1.0.8
+        uses: JamesIves/github-sponsors-readme-action@v1
         with:
           token: ${{ secrets.PAT }}
           file: 'README.md'
@@ -224,7 +224,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Generate Sponsors 💖
-        uses: JamesIves/github-sponsors-readme-action@v1.0.8
+        uses: JamesIves/github-sponsors-readme-action@v1
         with:
           token: ${{ secrets.PAT }}
           file: 'README.md'
@@ -233,7 +233,7 @@ jobs:
           marker: 'silver'
 
       - name: Generate Sponsors 💖
-        uses: JamesIves/github-sponsors-readme-action@v1.0.8
+        uses: JamesIves/github-sponsors-readme-action@v1
         with:
           token: ${{ secrets.PAT }}
           file: 'README.md'
