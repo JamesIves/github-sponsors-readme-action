@@ -14,9 +14,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
-      - uses: actions/setup-node@v2.5.1
+      - uses: actions/setup-node@v3
         with:
           node-version: 'v14.18.1'
           registry-url: 'https://registry.npmjs.org'
@@ -38,7 +38,7 @@ jobs:
 
       - name: Install Production node_modules
         run: |
-          yarn install --production
+          yarn install --production --frozen-lockfile
 
       - name: Commit and Push
         # Keep the run green if the commit fails for the lack of changes

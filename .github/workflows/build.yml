@@ -14,9 +14,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
-      - uses: actions/setup-node@v2.5.1
+      - uses: actions/setup-node@v3
         with:
           node-version: 'v14.18.1'
           registry-url: 'https://registry.npmjs.org'
@@ -26,12 +26,13 @@ jobs:
 
       - name: Install and Test
         run: |
-          yarn install
-          yarn lint
+          yarn install --frozen-lockfile
+          yarn lint:check
+          yarn lint:format:check
           yarn test
 
       - name: Uploade CodeCov Report
-        uses: codecov/codecov-action@v2.1.0
+        uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
 
@@ -39,9 +40,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
-      - uses: actions/setup-node@v2.5.1
+      - uses: actions/setup-node@v3
         with:
           node-version: 'v14.18.1'
           registry-url: 'https://registry.npmjs.org'
@@ -56,11 +57,11 @@ jobs:
 
       - name: Rebuild production node_modules
         run: |
-          yarn install --production
+          yarn install --production --frozen-lockfile
           ls node_modules
 
       - name: artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: dist
           path: |
