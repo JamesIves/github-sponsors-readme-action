@@ -10,8 +10,10 @@
   "scripts": {
     "build": "rm -rf lib && tsc --declaration",
     "test": "jest",
-    "lint": "eslint src/**/*.ts __tests__/**/*.ts",
-    "lint:format": "prettier --write './**/*.{ts,js,json,yml,md}' './*.{ts,js,json,yml,md}'"
+    "lint": "eslint --fix .",
+    "lint:check": "eslint .",
+    "lint:format": "prettier --write .",
+    "lint:format:check": "prettier --check ."
   },
   "repository": {
     "type": "git",
@@ -40,12 +42,12 @@
     "@types/async-retry": "1.4.3",
     "@types/jest": "27.4.1",
     "@types/mustache": "4.1.2",
-    "@types/node": "17.0.25",
+    "@types/node": "18.0.0",
     "@typescript-eslint/eslint-plugin": "5.29.0",
     "@typescript-eslint/parser": "5.20.0",
     "eslint": "8.14.0",
     "eslint-config-prettier": "8.5.0",
-    "eslint-plugin-jest": "26.1.5",
+    "eslint-plugin-jest": "26.5.3",
     "eslint-plugin-prettier": "4.0.0",
     "jest": "27.5.1",
     "jest-circus": "27.5.1",
