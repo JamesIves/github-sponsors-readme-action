@@ -34,7 +34,7 @@
 </p>
 
 <p align="center">
-<!-- real-premium --><a href="https://github.com/"><img src="https://github.com/.png" width="80px" alt="" /></a>&nbsp;&nbsp;<!-- real-premium -->
+<!-- real-premium --><a href="https://github.com/github"><img src="https://github.com/github.png" width="80px" alt="github" /></a>&nbsp;&nbsp;<!-- real-premium -->
 </p>
 
 <p align="center">
@@ -124,7 +124,7 @@ The following options must be configured.
 
 | Key            | Value Information                                                                                                                                                                                                                                     | Type   | Required |
 | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | -------- |
-| `organization` | If you're displaying sponsorship information as an organization you should toggle this option to `true`. You also need to provide the action with an `org:read` scoped PAT.                                                                           | `with` | **No**   |
+| `organization` | If you're displaying sponsorship information as or for an organization you should toggle this option to `true`. You also need to provide the action with an `org:read` scoped PAT.                                                                           | `with` | **No**   |
 | `minimum`      | Using this input you can set the minimum sponsorship threshold. For example setting this to `500` will only display sponsors who give of `$5 USD` and more. By default the action will display all of your sponsors.                                  | `with` | **No**   |
 | `maximum`      | Using this input you can set the maximum sponsorship threshold. For example setting this to `500` will only display sponsors who give of `$5 USD` and less. By default the action will display all of your sponsors.                                  | `with` | **No**   |
 | `marker`       | This allows you to modify the marker comment that is placed in your file. By default this is set to sponsors - `<!-- sponsors --> <!-- sponsors -->`, if you set this to `gold` for example you can place `<!-- gold --> <!-- gold -->` in your file. | `with` | **No**   |
