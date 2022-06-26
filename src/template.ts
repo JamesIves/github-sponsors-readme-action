@@ -34,11 +34,15 @@ export async function getSponsors(
           }
           nodes {
             sponsorEntity {
+              ${
+                action.organization
+                  ? `
               ... on Organization {
                 name
                 login
                 url
-              }
+              }` : ``}
+              
               ... on User {
                 name
                 login
