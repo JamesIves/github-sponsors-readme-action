@@ -39,7 +39,7 @@ jobs:
       - name: Install Production node_modules
         run: |
           yarn install --production --frozen-lockfile
- 
+
       - name: Commit and Push
         # Keep the run green if the commit fails for the lack of changes
         continue-on-error: true
