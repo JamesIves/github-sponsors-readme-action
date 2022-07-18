@@ -935,10 +935,10 @@
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.9.tgz#97edc9037ea0c38585320b28964dde3b39e4660d"
   integrity sha512-qcUXuemtEu+E5wZSJHNxUXeCZhAfXKQ41D+duX+VYPde7xyEVZci+/oXKJL13tnRs9lR2pr4fod59GT6/X1/yQ==
 
-"@types/mustache@4.1.2":
-  version "4.1.2"
-  resolved "https://registry.yarnpkg.com/@types/mustache/-/mustache-4.1.2.tgz#d0e158013c81674a5b6d8780bc3fe234e1804eaf"
-  integrity sha512-c4OVMMcyodKQ9dpwBwh3ofK9P6U9ZktKU9S+p33UqwMNN1vlv2P0zJZUScTshnx7OEoIIRcCFNQ904sYxZz8kg==
+"@types/mustache@4.2.0":
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/@types/mustache/-/mustache-4.2.0.tgz#1cdc79f456a8abd630865859f435daf1f9504b3a"
+  integrity sha512-FXrh/N8ka/NTwiF9ed/xkStafRDtU9c0PT7VwGKfQ6Vh8OAESc4EuyfF0HIEjq2QuUTY+QOnoiq5Br1rk6G6kw==
 
 "@types/node@*", "@types/node@18.0.0":
   version "18.0.0"
