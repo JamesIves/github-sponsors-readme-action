@@ -34,7 +34,7 @@
 </p>
 
 <p align="center">
-<!-- real-premium --><a href="https://github.com/github"><img src="https://github.com/github.png" width="80px" alt="github" /></a>&nbsp;&nbsp;<!-- real-premium -->
+<!-- real-premium --><!-- real-premium -->
 </p>
 
 <p align="center">
