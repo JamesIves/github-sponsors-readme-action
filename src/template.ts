@@ -5,7 +5,6 @@ import {
   GitHubResponse,
   PrivacyLevel,
   Sponsor,
-  SponsorshipsAsMaintainer,
   Status,
   Urls
 } from './constants'
