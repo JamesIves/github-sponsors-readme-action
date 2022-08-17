@@ -27,7 +27,11 @@ export async function getSponsors(
     )
 
     const query = `query { 
-      ${action.organization ? `organization (login: "${process.env.GITHUB_REPOSITORY_OWNER}")` : `viewer`} {
+      ${
+        action.organization
+          ? `organization (login: "${process.env.GITHUB_REPOSITORY_OWNER}")`
+          : `viewer`
+      } {
         login
         sponsorshipsAsMaintainer(first: 100, orderBy: {field: CREATED_AT, direction: ASC}, includePrivate: true) {
           totalCount
@@ -95,7 +99,9 @@ export function generateTemplate(
 
   const {
     sponsorshipsAsMaintainer
-  }: {sponsorshipsAsMaintainer: SponsorshipsAsMaintainer} = action.organization ? response.data.organization : response.data.viewer
+  }: {sponsorshipsAsMaintainer: SponsorshipsAsMaintainer} = action.organization
+    ? response.data.organization
+    : response.data.viewer
 
   /* Appends the template, the API call returns all users regardless of if they are hidden or not.
   In an effort to respect a users decision to be anonymous we filter these users out. */

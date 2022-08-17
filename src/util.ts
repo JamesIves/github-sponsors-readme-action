@@ -1,13 +1,13 @@
 import {ActionInterface, RequiredActionParameters} from './constants'
 
 /**
- * Utility function that checks to see if a value is undefined or not. 
-*/
+ * Utility function that checks to see if a value is undefined or not.
+ */
 export const isNullOrUndefined = (value: string | undefined | null): boolean =>
   typeof value === 'undefined' || value === null || value === ''
 
 /**
- * Checks for the required tokens and formatting. Throws an error if any case is matched. 
+ * Checks for the required tokens and formatting. Throws an error if any case is matched.
  */
 const hasRequiredParameters = <K extends keyof RequiredActionParameters>(
   action: ActionInterface,
@@ -31,12 +31,12 @@ export const checkParameters = (action: ActionInterface): void => {
 }
 
 /**
- * Replaces all instances of a match in a string. 
+ * Replaces all instances of a match in a string.
  */
 const replaceAll = (input: string, find: string, replace: string): string =>
   input.split(find).join(replace)
 
-/** 
+/**
  * Suppresses sensitive information from being exposed in error messages.
  */
 export const suppressSensitiveInformation = (
