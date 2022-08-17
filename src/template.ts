@@ -13,7 +13,9 @@ import {render} from 'mustache'
 import {extractErrorMessage, suppressSensitiveInformation} from './util'
 import {info} from '@actions/core'
 
-/** Fetches  */
+/**
+ * Fetches sponsors from the GitHub Sponsors API.
+ */
 export async function getSponsors(
   action: ActionInterface
 ): Promise<GitHubResponse> {
@@ -25,7 +27,7 @@ export async function getSponsors(
     )
 
     const query = `query { 
-      viewer {
+      ${action.organization ? `organization (login: "${process.env.GITHUB_REPOSITORY_OWNER}")` : `viewer`} {
         login
         sponsorshipsAsMaintainer(first: 100, orderBy: {field: CREATED_AT, direction: ASC}, includePrivate: true) {
           totalCount
@@ -34,21 +36,17 @@ export async function getSponsors(
           }
           nodes {
             sponsorEntity {
-              ${
-                action.organization
-                  ? `
               ... on Organization {
                 name
                 login
                 url
-              }`
-                  : ``
+                websiteUrl
               }
-              
               ... on User {
                 name
                 login
                 url
+                websiteUrl
               }
             }
             createdAt
@@ -84,6 +82,9 @@ export async function getSponsors(
   }
 }
 
+/**
+ * Generates the sponsorship template.
+ */
 export function generateTemplate(
   response: GitHubResponse,
   action: ActionInterface
@@ -94,10 +95,10 @@ export function generateTemplate(
 
   const {
     sponsorshipsAsMaintainer
-  }: {sponsorshipsAsMaintainer: SponsorshipsAsMaintainer} = response.data.viewer
+  }: {sponsorshipsAsMaintainer: SponsorshipsAsMaintainer} = action.organization ? response.data.organization : response.data.viewer
 
   /* Appends the template, the API call returns all users regardless of if they are hidden or not.
-  In an effort to respect a users decisison to be anoymous we filter these users out. */
+  In an effort to respect a users decision to be anonymous we filter these users out. */
   let filteredSponsors = sponsorshipsAsMaintainer.nodes.filter(
     (user: Sponsor) =>
       user.privacyLevel !== PrivacyLevel.PRIVATE &&
