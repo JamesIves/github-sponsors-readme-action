@@ -1,10 +1,14 @@
 import {ActionInterface, RequiredActionParameters} from './constants'
 
-/* Utility function that checks to see if a value is undefined or not. */
+/**
+ * Utility function that checks to see if a value is undefined or not.
+ */
 export const isNullOrUndefined = (value: string | undefined | null): boolean =>
   typeof value === 'undefined' || value === null || value === ''
 
-/* Checks for the required tokens and formatting. Throws an error if any case is matched. */
+/**
+ * Checks for the required tokens and formatting. Throws an error if any case is matched.
+ */
 const hasRequiredParameters = <K extends keyof RequiredActionParameters>(
   action: ActionInterface,
   params: K[]
@@ -15,7 +19,9 @@ const hasRequiredParameters = <K extends keyof RequiredActionParameters>(
   return Boolean(nonNullParams.length)
 }
 
-/* Verifies the action has the required parameters to run, otherwise throw an error. */
+/**
+ * Verifies the action has the required parameters to run, otherwise throw an error.
+ */
 export const checkParameters = (action: ActionInterface): void => {
   if (!hasRequiredParameters(action, ['token'])) {
     throw new Error(
@@ -24,11 +30,15 @@ export const checkParameters = (action: ActionInterface): void => {
   }
 }
 
-/* Replaces all instances of a match in a string. */
+/**
+ * Replaces all instances of a match in a string.
+ */
 const replaceAll = (input: string, find: string, replace: string): string =>
   input.split(find).join(replace)
 
-/* Suppresses sensitive information from being exposed in error messages. */
+/**
+ * Suppresses sensitive information from being exposed in error messages.
+ */
 export const suppressSensitiveInformation = (
   str: string,
   action: ActionInterface
@@ -46,6 +56,9 @@ export const suppressSensitiveInformation = (
   return value
 }
 
+/**
+ * Extracts error message from an error.
+ */
 export const extractErrorMessage = (error: unknown): string =>
   error instanceof Error
     ? error.message

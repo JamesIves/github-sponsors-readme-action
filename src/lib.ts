@@ -41,7 +41,7 @@ export default async function run(
         status === Status.FAILED
           ? 'There was an error generating sponsors. ❌'
           : status === Status.SUCCESS
-          ? 'The data was succesfully retrieved and saved! ✅ 💖'
+          ? 'The data was successfully retrieved and saved! ✅ 💖'
           : `Unable to locate markers in your file. Please check the documentation and try again. ⚠️`
       }`
     )
