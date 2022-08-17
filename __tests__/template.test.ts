@@ -32,7 +32,8 @@ describe('template', () => {
                   sponsorEntity: {
                     name: 'James Ives',
                     login: 'JamesIves',
-                    url: 'https://github.com/JamesIves'
+                    url: 'https://github.com/JamesIves',
+                    websiteUrl: 'https://jamesiv.es'
                   }
                 },
                 {
@@ -44,7 +45,8 @@ describe('template', () => {
                   sponsorEntity: {
                     name: 'Montezuma Ives',
                     login: 'MontezumaIves',
-                    url: 'https://github.com/MontezumaIves'
+                    url: 'https://github.com/MontezumaIves',
+                    websiteUrl: 'https://jamesiv.es'
                   }
                 }
               ]
@@ -57,7 +59,7 @@ describe('template', () => {
         token: '123',
         file: 'README.test.md',
         template:
-          '<a href="https://github.com/{{{ login }}}"><img src="https://github.com/{{{ login }}}.png" width="60px" alt="" /></a>',
+          '<a href="https://github.com/{{{ login }}}"><img src="https://github.com/{{{ login }}}.png" width="60px" alt="" /><span>{{{ websiteUrl}}}</span></a>',
         minimum: 0,
         maximum: 0,
         marker: 'sponsors',
@@ -66,7 +68,7 @@ describe('template', () => {
       }
 
       expect(generateTemplate(response, action)).toEqual(
-        '<a href="https://github.com/JamesIves"><img src="https://github.com/JamesIves.png" width="60px" alt="" /></a><a href="https://github.com/MontezumaIves"><img src="https://github.com/MontezumaIves.png" width="60px" alt="" /></a>'
+        '<a href="https://github.com/JamesIves"><img src="https://github.com/JamesIves.png" width="60px" alt="" /><span>https://jamesiv.es</span></a><a href="https://github.com/MontezumaIves"><img src="https://github.com/MontezumaIves.png" width="60px" alt="" /><span>https://jamesiv.es</span></a>'
       )
     })
 
@@ -89,7 +91,8 @@ describe('template', () => {
                   sponsorEntity: {
                     name: 'James Ives',
                     login: 'JamesIves',
-                    url: 'https://github.com/JamesIves'
+                    url: 'https://github.com/JamesIves',
+                    websiteUrl: 'https://jamesiv.es'
                   }
                 },
                 {
@@ -101,7 +104,8 @@ describe('template', () => {
                   sponsorEntity: {
                     name: 'Montezuma Ives',
                     login: 'MontezumaIves',
-                    url: 'https://github.com/MontezumaIves'
+                    url: 'https://github.com/MontezumaIves',
+                    websiteUrl: 'https://jamesiv.es'
                   }
                 }
               ]
@@ -146,7 +150,8 @@ describe('template', () => {
                   sponsorEntity: {
                     name: 'James Ives',
                     login: 'JamesIves',
-                    url: 'https://github.com/JamesIves'
+                    url: 'https://github.com/JamesIves',
+                    websiteUrl: 'https://jamesiv.es'
                   }
                 },
                 {
@@ -158,7 +163,8 @@ describe('template', () => {
                   sponsorEntity: {
                     name: 'Montezuma Ives',
                     login: 'MontezumaIves',
-                    url: 'https://github.com/MontezumaIves'
+                    url: 'https://github.com/MontezumaIves',
+                    websiteUrl: 'https://jamesiv.es'
                   }
                 }
               ]
@@ -203,7 +209,8 @@ describe('template', () => {
                   sponsorEntity: {
                     name: 'James Ives',
                     login: 'JamesIves',
-                    url: 'https://github.com/JamesIves'
+                    url: 'https://github.com/JamesIves',
+                    websiteUrl: 'https://jamesiv.es'
                   }
                 },
                 {
@@ -215,7 +222,8 @@ describe('template', () => {
                   sponsorEntity: {
                     name: 'Montezuma Ives',
                     login: 'MontezumaIves',
-                    url: 'https://github.com/MontezumaIves'
+                    url: 'https://github.com/MontezumaIves',
+                    websiteUrl: 'https://jamesiv.es'
                   }
                 }
               ]
@@ -260,7 +268,8 @@ describe('template', () => {
                   sponsorEntity: {
                     name: 'James Ives',
                     login: 'JamesIves',
-                    url: 'https://github.com/JamesIves'
+                    url: 'https://github.com/JamesIves',
+                    websiteUrl: 'https://jamesiv.es'
                   }
                 },
                 {
@@ -272,7 +281,8 @@ describe('template', () => {
                   sponsorEntity: {
                     name: 'Montezuma Ives',
                     login: 'MontezumaIves',
-                    url: 'https://github.com/MontezumaIves'
+                    url: 'https://github.com/MontezumaIves',
+                    websiteUrl: 'https://jamesiv.es'
                   }
                 }
               ]
@@ -317,7 +327,8 @@ describe('template', () => {
                   sponsorEntity: {
                     name: 'James Ives',
                     login: 'JamesIves',
-                    url: 'https://github.com/JamesIves'
+                    url: 'https://github.com/JamesIves',
+                    websiteUrl: 'https://jamesiv.es'
                   }
                 },
                 {
@@ -329,7 +340,8 @@ describe('template', () => {
                   sponsorEntity: {
                     name: 'Montezuma Ives',
                     login: 'MontezumaIves',
-                    url: 'https://github.com/MontezumaIves'
+                    url: 'https://github.com/MontezumaIves',
+                    websiteUrl: 'https://jamesiv.es'
                   }
                 }
               ]
@@ -374,7 +386,8 @@ describe('template', () => {
                   sponsorEntity: {
                     name: 'James Ives',
                     login: 'JamesIves',
-                    url: 'https://github.com/JamesIves'
+                    url: 'https://github.com/JamesIves',
+                    websiteUrl: 'https://jamesiv.es'
                   }
                 },
                 {
@@ -386,7 +399,8 @@ describe('template', () => {
                   sponsorEntity: {
                     name: 'Montezuma Ives',
                     login: 'MontezumaIves',
-                    url: 'https://github.com/MontezumaIves'
+                    url: 'https://github.com/MontezumaIves',
+                    websiteUrl: 'https://jamesiv.es'
                   }
                 }
               ]
@@ -435,7 +449,8 @@ describe('template', () => {
                   sponsorEntity: {
                     name: 'James Ives',
                     login: 'JamesIves',
-                    url: 'https://github.com/JamesIves'
+                    url: 'https://github.com/JamesIves',
+                    websiteUrl: 'https://jamesiv.es'
                   }
                 },
                 {
@@ -447,7 +462,8 @@ describe('template', () => {
                   sponsorEntity: {
                     name: 'Montezuma Ives',
                     login: 'MontezumaIves',
-                    url: 'https://github.com/MontezumaIves'
+                    url: 'https://github.com/MontezumaIves',
+                    websiteUrl: 'https://jamesiv.es'
                   }
                 }
               ]
@@ -500,7 +516,8 @@ describe('template', () => {
                   sponsorEntity: {
                     name: 'James Ives',
                     login: 'JamesIves',
-                    url: 'https://github.com/JamesIves'
+                    url: 'https://github.com/JamesIves',
+                    websiteUrl: 'https://jamesiv.es'
                   }
                 },
                 {
@@ -512,7 +529,8 @@ describe('template', () => {
                   sponsorEntity: {
                     name: 'Montezuma Ives',
                     login: 'MontezumaIves',
-                    url: 'https://github.com/MontezumaIves'
+                    url: 'https://github.com/MontezumaIves',
+                    websiteUrl: 'https://jamesiv.es'
                   }
                 }
               ]
@@ -588,7 +606,7 @@ describe('template', () => {
       expect(data).toEqual({data: '12345'})
     })
 
-    it('should appropriate handle an error', async () => {
+    it('should appropriately handle an error', async () => {
       ;(info as jest.Mock).mockImplementationOnce(() => {
         throw new Error('Mocked throw')
       })

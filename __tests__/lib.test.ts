@@ -23,7 +23,8 @@ export const response: GitHubResponse = {
             sponsorEntity: {
               name: 'James Ives',
               login: 'JamesIves',
-              url: 'https://github.com/JamesIves'
+              url: 'https://github.com/JamesIves',
+              websiteUrl: 'https://jamesiv.es'
             }
           },
           {
@@ -35,7 +36,8 @@ export const response: GitHubResponse = {
             sponsorEntity: {
               name: 'Montezuma Ives',
               login: 'MontezumaIves',
-              url: 'https://github.com/MontezumaIves'
+              url: 'https://github.com/MontezumaIves',
+              websiteUrl: 'https://jamesiv.es'
             }
           }
         ]

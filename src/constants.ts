@@ -50,6 +50,7 @@ export interface Sponsor {
     name: string | null
     login: string
     url: string
+    websiteUrl: string | null
   }
   createdAt: string
   privacyLevel: PrivacyLevel
@@ -68,7 +69,10 @@ export interface SponsorshipsAsMaintainer {
 
 export interface GitHubResponse {
   data: {
-    viewer: {
+    organization?: {
+      sponsorshipsAsMaintainer: SponsorshipsAsMaintainer
+    }
+    viewer?: {
       sponsorshipsAsMaintainer: SponsorshipsAsMaintainer
     }
   }

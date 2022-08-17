@@ -97,34 +97,38 @@ export function generateTemplate(
 
   info('Generating template… ✨')
 
-  const {
-    sponsorshipsAsMaintainer
-  }: {sponsorshipsAsMaintainer: SponsorshipsAsMaintainer} = action.organization
+  const data = action.organization
     ? response.data.organization
     : response.data.viewer
 
-  /* Appends the template, the API call returns all users regardless of if they are hidden or not.
+  const sponsorshipsAsMaintainer = data?.sponsorshipsAsMaintainer
+
+  if (sponsorshipsAsMaintainer) {
+    /* Appends the template, the API call returns all users regardless of if they are hidden or not.
   In an effort to respect a users decision to be anonymous we filter these users out. */
-  let filteredSponsors = sponsorshipsAsMaintainer.nodes.filter(
-    (user: Sponsor) =>
-      user.privacyLevel !== PrivacyLevel.PRIVATE &&
-      user.tier.monthlyPriceInCents >= action.minimum
-  )
-
-  if (action.maximum > 0) {
-    filteredSponsors = filteredSponsors.filter(
-      (user: Sponsor) => user.tier.monthlyPriceInCents <= action.maximum
+    let filteredSponsors = sponsorshipsAsMaintainer.nodes.filter(
+      (user: Sponsor) =>
+        user.privacyLevel !== PrivacyLevel.PRIVATE &&
+        user.tier.monthlyPriceInCents >= action.minimum
     )
-  }
 
-  /** If there are no valid sponsors then we return the provided fallback. */
-  if (!filteredSponsors.length) {
-    return action.fallback
-  }
+    if (action.maximum > 0) {
+      filteredSponsors = filteredSponsors.filter(
+        (user: Sponsor) => user.tier.monthlyPriceInCents <= action.maximum
+      )
+    }
 
-  filteredSponsors.map(({sponsorEntity}) => {
-    template = template += render(action.template, sponsorEntity)
-  })
+    /** If there are no valid sponsors then we return the provided fallback. */
+    if (!filteredSponsors.length) {
+      return action.fallback
+    }
+
+    filteredSponsors.map(({sponsorEntity}) => {
+      template = template += render(action.template, sponsorEntity)
+    })
+  } else {
+    info(`No sponsorship data was found… ❌`)
+  }
 
   return template
 }
