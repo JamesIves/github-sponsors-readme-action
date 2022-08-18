@@ -72,6 +72,65 @@ describe('template', () => {
       )
     })
 
+    it('should fallback to url if websiteUrl is not provided', () => {
+      const response: GitHubResponse = {
+        data: {
+          viewer: {
+            sponsorshipsAsMaintainer: {
+              totalCount: 2,
+              pageInfo: {
+                endCursor: 'MQ'
+              },
+              nodes: [
+                {
+                  createdAt: '123',
+                  privacyLevel: PrivacyLevel.PUBLIC,
+                  tier: {
+                    monthlyPriceInCents: 5000
+                  },
+                  sponsorEntity: {
+                    name: 'James Ives',
+                    login: 'JamesIves',
+                    url: 'https://github.com/JamesIves',
+                    websiteUrl: null
+                  }
+                },
+                {
+                  createdAt: '123',
+                  privacyLevel: PrivacyLevel.PUBLIC,
+                  tier: {
+                    monthlyPriceInCents: 5000
+                  },
+                  sponsorEntity: {
+                    name: 'Montezuma Ives',
+                    login: 'MontezumaIves',
+                    url: 'https://github.com/MontezumaIves',
+                    websiteUrl: null
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+
+      const action = {
+        token: '123',
+        file: 'README.test.md',
+        template:
+          '<a href="{{{ websiteUrl }}}"><img src="https://github.com/{{{ login }}}.png" width="60px" alt="" /></a>',
+        minimum: 0,
+        maximum: 0,
+        marker: 'sponsors',
+        organization: false,
+        fallback: ''
+      }
+
+      expect(generateTemplate(response, action)).toEqual(
+        '<a href="https://github.com/JamesIves"><img src="https://github.com/JamesIves.png" width="60px" alt="" /></a><a href="https://github.com/MontezumaIves"><img src="https://github.com/MontezumaIves.png" width="60px" alt="" /></a>'
+      )
+    })
+
     it('should filter out sponsors who are marked as private', () => {
       const response: GitHubResponse = {
         data: {
