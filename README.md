@@ -43,10 +43,11 @@
 
 ## Getting Started ✈️
 
-You can include the action in your workflow to trigger on any event that [GitHub Actions supports](https://help.github.com/en/articles/events-that-trigger-workflows). You'll need to provide the action with a **Personal Access Token (PAT)** scoped to `read:user` and `read:org`, and the file to parse.
+You can include the action in your workflow to trigger on any event that [GitHub Actions supports](https://help.github.com/en/articles/events-that-trigger-workflows).
+
 
 > **Note**
-> This action only applies the template within the workspace. You will need to combine it with a deployment action in order to commit it to your project. You can see a full example of this below.
+> You'll need to provide the action with a **Personal Access Token (PAT)** scoped to `read:user` and `read:org`. This action only applies the template within the workspace. You will need to combine it with a deployment action in order to commit it to your project. You can see a full example of this below.
 
 ```yml
 name: Generate Sponsors README
