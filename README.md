@@ -45,7 +45,6 @@
 
 You can include the action in your workflow to trigger on any event that [GitHub Actions supports](https://help.github.com/en/articles/events-that-trigger-workflows).
 
-
 > **Note**
 > You'll need to provide the action with a **Personal Access Token (PAT)** scoped to `read:user` and `read:org`. This action only applies the template within the workspace. You will need to combine it with a deployment action in order to commit it to your project. You can see a full example of this below.
 
@@ -119,10 +118,10 @@ The `with` portion of the workflow **must** be configured before the action will
 
 The following options must be configured.
 
-| Key     | Value Information                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Type   | Required |
-| ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | -------- |
+| Key     | Value Information                                                                                                                                                                                                                                                                                                                                                                                                                                                           | Type   | Required |
+| ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | -------- |
 | `token` | You must provide the action with a Personal Access Token (PAT) with the `read:user` and `read:org` permission scope and store it in the `secrets / with` menu **as a secret**. This should be generated from the account or organization that receives sponsorship, and depending on your use case you may need to provide additional scopes. [Learn more about creating and using encrypted secrets here](https://docs.github.com/en/actions/reference/encrypted-secrets). | `with` | **Yes**  |
-| `file`  | This should point to the file that you're generating, for example `README.md` or `path/to/CREDITS.md`. Defaults to `README.md` if no value is provided.                                                                                                                                                                                                                                                                                                                           | `with` | **Yes**  |
+| `file`  | This should point to the file that you're generating, for example `README.md` or `path/to/CREDITS.md`. Defaults to `README.md` if no value is provided.                                                                                                                                                                                                                                                                                                                     | `with` | **Yes**  |
 
 #### Optional Choices
 
