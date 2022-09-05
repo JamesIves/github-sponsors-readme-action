@@ -51,9 +51,9 @@ You can include the action in your workflow to trigger on any event that [GitHub
 ```yml
 name: Generate Sponsors README
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+  schedule:
+    - cron: 30 15 * * 0-6
 jobs:
   deploy:
     runs-on: ubuntu-latest
