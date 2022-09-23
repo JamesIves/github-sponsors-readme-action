@@ -40,13 +40,9 @@ describe('util', () => {
         fallback: ''
       }
 
-      try {
-        checkParameters(action)
-      } catch (error) {
-        expect(extractErrorMessage(error)).toMatch(
-          'No deployment token was provided. You must provide the action with a Personal Access Token scoped to user:read or org:read.'
-        )
-      }
+      expect(() => checkParameters(action)).toThrow(
+        'No deployment token was provided. You must provide the action with a Personal Access Token scoped to user:read or org:read.'
+      )
     })
 
     it('should not fail if it has all of the parameters', () => {

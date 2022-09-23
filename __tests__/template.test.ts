@@ -610,13 +610,9 @@ describe('template', () => {
         fallback: 'There are no sponsors in this tier'
       }
 
-      try {
-        await generateFile(response, action)
-      } catch (error) {
-        expect(error instanceof Error && error.message).toBe(
-          'There was an error generating the updated file: Mocked throw ❌'
-        )
-      }
+      await expect(generateFile(response, action)).rejects.toThrow(
+        'There was an error generating the updated file: Mocked throw ❌'
+      )
     })
   })
 
@@ -682,13 +678,9 @@ describe('template', () => {
         fallback: 'There are no sponsors in this tier'
       }
 
-      try {
-        await getSponsors(action)
-      } catch (error) {
-        expect(error instanceof Error && error.message).toBe(
-          'There was an error with the GitHub API request: Mocked throw ❌'
-        )
-      }
+      await expect(getSponsors(action)).rejects.toThrow(
+        'There was an error with the GitHub API request: Mocked throw ❌'
+      )
     })
   })
 })
