@@ -38,19 +38,22 @@
 </p>
 
 <p align="center">
-<!-- real-sponsors --><!-- real-sponsors -->
+<!-- real-sponsors --><a href="https://github.com/Chooksta69"><img src="https://github.com/Chooksta69.png" width="50px" alt="Chooksta69" /></a>&nbsp;&nbsp;<a href="https://github.com/robjtede"><img src="https://github.com/robjtede.png" width="50px" alt="robjtede" /></a>&nbsp;&nbsp;<a href="https://github.com/hadley"><img src="https://github.com/hadley.png" width="50px" alt="hadley" /></a>&nbsp;&nbsp;<a href="https://github.com/kevinchalet"><img src="https://github.com/kevinchalet.png" width="50px" alt="kevinchalet" /></a>&nbsp;&nbsp;<!-- real-sponsors -->
 </p>
 
 ## Getting Started ✈️
 
-You can include the action in your workflow to trigger on any event that [GitHub Actions supports](https://help.github.com/en/articles/events-that-trigger-workflows). You'll need to provide the action with a **Personal Access Token (PAT)** scoped to `user:read` (or `org:read` depending on your needs), and the file to parse.
+You can include the action in your workflow to trigger on any event that [GitHub Actions supports](https://help.github.com/en/articles/events-that-trigger-workflows).
+
+> **Note**
+> You'll need to provide the action with a **Personal Access Token (PAT)** scoped to `read:user` and `read:org`. This action only applies the template within the workspace. You will need to combine it with a deployment action in order to commit it to your project. You can see a full example of this below.
 
 ```yml
 name: Generate Sponsors README
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+  schedule:
+    - cron: 30 15 * * 0-6
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -115,16 +118,16 @@ The `with` portion of the workflow **must** be configured before the action will
 
 The following options must be configured.
 
-| Key     | Value Information                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Type   | Required |
-| ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | -------- |
-| `token` | You must provide the action with a Personal Access Token (PAT) with either the `user:read` or `org:read` permission scope and store it in the `secrets / with` menu **as a secret**. This should be generated from the account or organization that receives sponsorship, and depending on your use case you may need to provide additional scopes. [Learn more about creating and using encrypted secrets here](https://docs.github.com/en/actions/reference/encrypted-secrets). | `with` | **Yes**  |
-| `file`  | This should point to the file that you're generating, for example `README.md` or `path/to/CREDITS.md`. Defaults to `README.md` if no value is provided.                                                                                                                                                                                                                                                                                                                           | `with` | **Yes**  |
+| Key     | Value Information                                                                                                                                                                                                                                                                                                                                                                                                                                                           | Type   | Required |
+| ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | -------- |
+| `token` | You must provide the action with a Personal Access Token (PAT) with the `read:user` and `read:org` permission scope and store it in the `secrets / with` menu **as a secret**. This should be generated from the account or organization that receives sponsorship, and depending on your use case you may need to provide additional scopes. [Learn more about creating and using encrypted secrets here](https://docs.github.com/en/actions/reference/encrypted-secrets). | `with` | **Yes**  |
+| `file`  | This should point to the file that you're generating, for example `README.md` or `path/to/CREDITS.md`. Defaults to `README.md` if no value is provided.                                                                                                                                                                                                                                                                                                                     | `with` | **Yes**  |
 
 #### Optional Choices
 
 | Key            | Value Information                                                                                                                                                                                                                                     | Type   | Required |
 | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | -------- |
-| `organization` | If you're displaying sponsorship information as or for an organization you should toggle this option to `true`. You also need to provide the action with an `org:read` and `user:read` scoped PAT.                                                    | `with` | **No**   |
+| `organization` | If you're displaying sponsorship information as or for an organization you should toggle this option to `true`. You also need to provide the action with an `read:org` and `read:user` scoped PAT.                                                    | `with` | **No**   |
 | `minimum`      | Using this input you can set the minimum sponsorship threshold. For example setting this to `500` will only display sponsors who give of `$5 USD` and more. By default the action will display all of your sponsors.                                  | `with` | **No**   |
 | `maximum`      | Using this input you can set the maximum sponsorship threshold. For example setting this to `500` will only display sponsors who give of `$5 USD` and less. By default the action will display all of your sponsors.                                  | `with` | **No**   |
 | `marker`       | This allows you to modify the marker comment that is placed in your file. By default this is set to sponsors - `<!-- sponsors --> <!-- sponsors -->`, if you set this to `gold` for example you can place `<!-- gold --> <!-- gold -->` in your file. | `with` | **No**   |
@@ -148,12 +151,12 @@ The action will export a step output as `sponsorship-status` that you can use in
 
 You can modify the template that gets generated in your file by using the `template` input. This input allows you to leverage mustache templating to modify what is displayed. The following values are available.
 
-| Status       | Description                                                                                                                      |
-| ------------ | -------------------------------------------------------------------------------------------------------------------------------- |
-| `name`       | The users full name. This can sometimes be `null` if the user hasn't set one. This can be accessed using `{{{ name }}}`          |
-| `login`      | The users login, this can be accessed using `{{{ login }}}`                                                                      |
-| `url`        | The users GitHub profile url, this can be accessed using `{{{ url }}}`.                                                          |
-| `websiteUrl` | The users website url. This can sometimes be `null` if the user hasn't set one. this can be accessed using `{{{ websiteUrl }}}`. |
+| Status       | Description                                                                                                                                                                |
+| ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `name`       | The users full name. This can sometimes be `null` if the user hasn't set one. This can be accessed using `{{{ name }}}`                                                    |
+| `login`      | The users login, this can be accessed using `{{{ login }}}`                                                                                                                |
+| `url`        | The users GitHub profile url, this can be accessed using `{{{ url }}}`.                                                                                                    |
+| `websiteUrl` | The users website url. This can sometimes be `null` if the user hasn't set one, if so this field will fall back to `url`. This can be accessed using `{{{ websiteUrl }}}`. |
 
 You're able to use markdown or GitHub approved basic HTML. The default template can be found [here](./src/constants.ts#L28).
 
