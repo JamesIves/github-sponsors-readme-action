@@ -5,7 +5,7 @@ import {GitHubResponse, PrivacyLevel, Urls} from '../src/constants'
 import run from '../src/lib'
 import '../src/main'
 
-export const response: GitHubResponse = {
+const response: GitHubResponse = {
   data: {
     viewer: {
       sponsorshipsAsMaintainer: {
@@ -118,10 +118,7 @@ describe('lib', () => {
       fallback: ''
     }
 
-    try {
-      await run(action)
-    } catch (error) {
-      expect(setFailed).toBeCalled()
-    }
+    await expect(run(action)).rejects.toThrow()
+    expect(setFailed).toHaveBeenCalled()
   })
 })
