@@ -42,7 +42,7 @@
     "@types/async-retry": "1.4.3",
     "@types/jest": "27.4.1",
     "@types/mustache": "4.2.4",
-    "@types/node": "20.4.0",
+    "@types/node": "20.8.7",
     "@typescript-eslint/eslint-plugin": "5.62.0",
     "@typescript-eslint/parser": "5.62.0",
     "eslint": "8.43.0",
