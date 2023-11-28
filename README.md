@@ -38,7 +38,7 @@
 </p>
 
 <p align="center">
-<!-- real-sponsors --><a href="https://github.com/Chooksta69"><img src="https://github.com/Chooksta69.png" width="50px" alt="Chooksta69" /></a>&nbsp;&nbsp;<a href="https://github.com/robjtede"><img src="https://github.com/robjtede.png" width="50px" alt="robjtede" /></a>&nbsp;&nbsp;<a href="https://github.com/hadley"><img src="https://github.com/hadley.png" width="50px" alt="hadley" /></a>&nbsp;&nbsp;<a href="https://github.com/kevinchalet"><img src="https://github.com/kevinchalet.png" width="50px" alt="kevinchalet" /></a>&nbsp;&nbsp;<!-- real-sponsors -->
+<!-- real-sponsors --><a href="https://github.com/Chooksta69"><img src="https://github.com/Chooksta69.png" width="50px" alt="Chooksta69" /></a>&nbsp;&nbsp;<a href="https://github.com/robjtede"><img src="https://github.com/robjtede.png" width="50px" alt="robjtede" /></a>&nbsp;&nbsp;<a href="https://github.com/hadley"><img src="https://github.com/hadley.png" width="50px" alt="hadley" /></a>&nbsp;&nbsp;<a href="https://github.com/kevinchalet"><img src="https://github.com/kevinchalet.png" width="50px" alt="kevinchalet" /></a>&nbsp;&nbsp;<a href="https://github.com/sckott"><img src="https://github.com/sckott.png" width="50px" alt="sckott" /></a>&nbsp;&nbsp;<a href="https://github.com/electrovir"><img src="https://github.com/electrovir.png" width="50px" alt="electrovir" /></a>&nbsp;&nbsp;<!-- real-sponsors -->
 </p>
 
 ## Getting Started ✈️
@@ -125,14 +125,14 @@ The following options must be configured.
 
 #### Optional Choices
 
-| Key            | Value Information                                                                                                                                                                                                                                     | Type   | Required |
-| -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | -------- |
-| `organization` | If you're displaying sponsorship information as or for an organization you should toggle this option to `true`. You also need to provide the action with an `read:org` and `read:user` scoped PAT.                                                    | `with` | **No**   |
-| `minimum`      | Using this input you can set the minimum sponsorship threshold. For example setting this to `500` will only display sponsors who give of `$5 USD` and more. By default the action will display all of your sponsors.                                  | `with` | **No**   |
-| `maximum`      | Using this input you can set the maximum sponsorship threshold. For example setting this to `500` will only display sponsors who give of `$5 USD` and less. By default the action will display all of your sponsors.                                  | `with` | **No**   |
-| `marker`       | This allows you to modify the marker comment that is placed in your file. By default this is set to sponsors - `<!-- sponsors --> <!-- sponsors -->`, if you set this to `gold` for example you can place `<!-- gold --> <!-- gold -->` in your file. | `with` | **No**   |
-| `fallback`     | Allows you to specify a fallback if you have no sponsors. By default nothing is displayed.                                                                                                                                                            | `with` | **No**   |
-| `template`     | Allows you to modify the default template. Please refer to the `template` section of this README for more information.                                                                                                                                | `with` | **No**   |
+| Key            | Value Information                                                                                                                                                                                                                                                 | Type   | Required |
+| -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | -------- |
+| `organization` | If you're displaying sponsorship information as or for an organization you should toggle this option to `true`. You also need to provide the action with an `read:org` and `read:user` scoped PAT. **Note**: The PAT must belong to an owner of the organization. | `with` | **No**   |
+| `minimum`      | Using this input you can set the minimum sponsorship threshold. For example setting this to `500` will only display sponsors who give of `$5 USD` and more. By default the action will display all of your sponsors.                                              | `with` | **No**   |
+| `maximum`      | Using this input you can set the maximum sponsorship threshold. For example setting this to `500` will only display sponsors who give of `$5 USD` and less. By default the action will display all of your sponsors.                                              | `with` | **No**   |
+| `marker`       | This allows you to modify the marker comment that is placed in your file. By default this is set to sponsors - `<!-- sponsors --> <!-- sponsors -->`, if you set this to `gold` for example you can place `<!-- gold --> <!-- gold -->` in your file.             | `with` | **No**   |
+| `fallback`     | Allows you to specify a fallback if you have no sponsors. By default nothing is displayed.                                                                                                                                                                        | `with` | **No**   |
+| `template`     | Allows you to modify the default template. Please refer to the `template` section of this README for more information.                                                                                                                                            | `with` | **No**   |
 
 #### Deployment Status
 
