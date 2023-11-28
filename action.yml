@@ -2,7 +2,7 @@ name: 'Add GitHub Sponsors to Readme'
 description: 'This GitHub Action will automatically add your GitHub Sponsors to your README.'
 author: 'James Ives <iam@jamesiv.es>'
 runs:
-  using: 'node16'
+  using: 'node20'
   main: 'lib/main.js'
 branding:
   icon: 'heart'
