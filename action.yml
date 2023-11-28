@@ -45,5 +45,5 @@ inputs:
     required: false
 
 outputs:
-  sponsorship-status:
+  sponsorshipStatus:
     description: 'The status of the action that indicates if the run failed or passed. Possible outputs include: success|failed'
