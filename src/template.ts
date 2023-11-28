@@ -108,12 +108,15 @@ export function generateTemplate(
     let filteredSponsors = sponsorshipsAsMaintainer.nodes.filter(
       (user: Sponsor) =>
         user.privacyLevel !== PrivacyLevel.PRIVATE &&
-        user.tier.monthlyPriceInCents >= action.minimum
+        (user.tier.monthlyPriceInCents ? user.tier.monthlyPriceInCents : 0) >=
+          action.minimum
     )
 
     if (action.maximum > 0) {
       filteredSponsors = filteredSponsors.filter(
-        (user: Sponsor) => user.tier.monthlyPriceInCents <= action.maximum
+        (user: Sponsor) =>
+          (user.tier.monthlyPriceInCents ? user.tier.monthlyPriceInCents : 0) <=
+          action.maximum
       )
     }
 
@@ -133,6 +136,9 @@ export function generateTemplate(
   return template
 }
 
+/**
+ * Generates the updated file with the attached sponsorship template.
+ */
 export async function generateFile(
   response: GitHubResponse,
   action: ActionInterface
