@@ -1,3 +1,6 @@
+/**
+ * Describes the action interface.
+ */
 export interface ActionInterface {
     /** Deployment token. */
     token?: string;
@@ -16,6 +19,9 @@ export interface ActionInterface {
     /** Fetches organization level sponsors if true. */
     organization: boolean;
 }
+/**
+ * Gets the action configuration.
+ */
 export declare const action: {
     token: string;
     template: string;
@@ -26,7 +32,9 @@ export declare const action: {
     fallback: string;
     organization: boolean;
 };
-/** Describes the response from the GitHub GraphQL query. */
+/**
+ * Describes the sponsor object.
+ */
 export interface Sponsor {
     sponsorEntity: {
         name: string | null;
@@ -37,9 +45,12 @@ export interface Sponsor {
     createdAt: string;
     privacyLevel: PrivacyLevel;
     tier: {
-        monthlyPriceInCents: number;
+        monthlyPriceInCents?: number;
     };
 }
+/**
+ * Describes the response from the GitHub GraphQL query.
+ */
 export interface SponsorshipsAsMaintainer {
     totalCount: number;
     pageInfo: {
@@ -47,6 +58,9 @@ export interface SponsorshipsAsMaintainer {
     };
     nodes: Sponsor[];
 }
+/**
+ * Describes the response from the GitHub GraphQL query.
+ */
 export interface GitHubResponse {
     data: {
         organization?: {
@@ -57,19 +71,29 @@ export interface GitHubResponse {
         };
     };
 }
-/** Types for the required action parameters. */
+/**
+ * Describes the action interface.
+ */
 export declare type RequiredActionParameters = Pick<ActionInterface, 'token'>;
+/**
+ * Privacy levels for the sponsorship.
+ */
 export declare enum PrivacyLevel {
     PUBLIC = "PUBLIC",
     PRIVATE = "PRIVATE"
 }
-/** Status codes for the action. */
+/**
+ * Statuses for the action.
+ */
 export declare enum Status {
     SUCCESS = "success",
     FAILED = "failed",
     RUNNING = "running",
     SKIPPED = "skipped"
 }
+/**
+ * URLs used within the action.
+ */
 export declare enum Urls {
     GITHUB_API = "https://api.github.com"
 }
