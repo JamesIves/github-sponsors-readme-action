@@ -2,7 +2,7 @@ name: 'Add GitHub Sponsors to Readme'
 description: 'This GitHub Action will automatically add your GitHub Sponsors to your README.'
 author: 'James Ives <iam@jamesiv.es>'
 runs:
-  using: 'node16'
+  using: 'node20'
   main: 'lib/main.js'
 branding:
   icon: 'heart'
@@ -11,7 +11,7 @@ inputs:
   token:
     description: >
       You must provide the action with a Personal Access Token (PAT) with either the user:read or org:read permission scope and store it in the secrets / with menu as a secret. 
-      This should be generated from the account or organization that recieves sponsorship.
+      This should be generated from the account or organization that receives sponsorship.
 
       [Learn more about creating and using encrypted secrets here.](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets)
     required: true

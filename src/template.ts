@@ -108,15 +108,17 @@ export function generateTemplate(
     let filteredSponsors = sponsorshipsAsMaintainer.nodes.filter(
       (user: Sponsor) =>
         user.privacyLevel !== PrivacyLevel.PRIVATE &&
-        (user.tier.monthlyPriceInCents ? user.tier.monthlyPriceInCents : 0) >=
-          action.minimum
+        (user.tier && user.tier.monthlyPriceInCents
+          ? user.tier.monthlyPriceInCents
+          : 0) >= action.minimum
     )
 
     if (action.maximum > 0) {
       filteredSponsors = filteredSponsors.filter(
         (user: Sponsor) =>
-          (user.tier.monthlyPriceInCents ? user.tier.monthlyPriceInCents : 0) <=
-          action.maximum
+          (user.tier && user.tier.monthlyPriceInCents
+            ? user.tier.monthlyPriceInCents
+            : 0) <= action.maximum
       )
     }
 
