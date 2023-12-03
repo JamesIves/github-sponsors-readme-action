@@ -11,7 +11,7 @@ inputs:
   token:
     description: >
       You must provide the action with a Personal Access Token (PAT) with either the user:read or org:read permission scope and store it in the secrets / with menu as a secret. 
-      This should be generated from the account or organization that recieves sponsorship.
+      This should be generated from the account or organization that receives sponsorship.
 
       [Learn more about creating and using encrypted secrets here.](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets)
     required: true
