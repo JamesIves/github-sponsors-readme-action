@@ -44,7 +44,7 @@ export interface Sponsor {
     };
     createdAt: string;
     privacyLevel: PrivacyLevel;
-    tier: {
+    tier?: {
         monthlyPriceInCents?: number;
     };
 }
