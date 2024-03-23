@@ -64,7 +64,8 @@ describe('template', () => {
         maximum: 0,
         marker: 'sponsors',
         organization: false,
-        fallback: ''
+        fallback: '',
+        activeOnly: true
       }
 
       expect(generateTemplate(response, action)).toEqual(
@@ -123,7 +124,8 @@ describe('template', () => {
         maximum: 0,
         marker: 'sponsors',
         organization: false,
-        fallback: ''
+        fallback: '',
+        activeOnly: true
       }
 
       expect(generateTemplate(response, action)).toEqual(
@@ -182,7 +184,8 @@ describe('template', () => {
         maximum: 0,
         marker: 'sponsors',
         organization: false,
-        fallback: ''
+        fallback: '',
+        activeOnly: true
       }
 
       expect(generateTemplate(response, action)).toEqual(
@@ -241,7 +244,8 @@ describe('template', () => {
         maximum: 0,
         marker: 'sponsors',
         organization: false,
-        fallback: ''
+        fallback: '',
+        activeOnly: true
       }
 
       expect(generateTemplate(response, action)).toEqual(
@@ -300,7 +304,8 @@ describe('template', () => {
         maximum: 10000,
         marker: 'sponsors',
         organization: false,
-        fallback: ''
+        fallback: '',
+        activeOnly: true
       }
 
       expect(generateTemplate(response, action)).toEqual(
@@ -359,7 +364,8 @@ describe('template', () => {
         maximum: 10000,
         marker: 'sponsors',
         organization: false,
-        fallback: ''
+        fallback: '',
+        activeOnly: true
       }
 
       expect(generateTemplate(response, action)).toEqual(
@@ -418,7 +424,8 @@ describe('template', () => {
         maximum: 10000,
         marker: 'sponsors',
         organization: false,
-        fallback: 'There are no sponsors in this tier'
+        fallback: 'There are no sponsors in this tier',
+        activeOnly: true
       }
 
       expect(generateTemplate(response, action)).toEqual(action.fallback)
@@ -477,7 +484,8 @@ describe('template', () => {
         maximum: 10000,
         marker: 'sponsors',
         organization: false,
-        fallback: 'There are no sponsors in this tier'
+        fallback: 'There are no sponsors in this tier',
+        activeOnly: true
       }
 
       // Write temp README file for testing
@@ -540,7 +548,8 @@ describe('template', () => {
         maximum: 10000,
         marker: 'sponsors',
         organization: false,
-        fallback: 'There are no sponsors in this tier'
+        fallback: 'There are no sponsors in this tier',
+        activeOnly: true
       }
 
       // Purposely write incorrect data
@@ -607,7 +616,8 @@ describe('template', () => {
         maximum: 10000,
         marker: 'sponsors',
         organization: false,
-        fallback: 'There are no sponsors in this tier'
+        fallback: 'There are no sponsors in this tier',
+        activeOnly: true
       }
 
       try {
@@ -631,7 +641,8 @@ describe('template', () => {
         maximum: 10000,
         marker: 'sponsors',
         organization: false,
-        fallback: 'There are no sponsors in this tier'
+        fallback: 'There are no sponsors in this tier',
+        activeOnly: true
       }
 
       nock(Urls.GITHUB_API).post('/graphql').reply(200, {
@@ -653,7 +664,8 @@ describe('template', () => {
         maximum: 10000,
         marker: 'sponsors',
         organization: true,
-        fallback: 'There are no sponsors in this tier'
+        fallback: 'There are no sponsors in this tier',
+        activeOnly: true
       }
 
       nock(Urls.GITHUB_API).post('/graphql').reply(200, {
@@ -679,7 +691,8 @@ describe('template', () => {
         maximum: 10000,
         marker: 'sponsors',
         organization: true,
-        fallback: 'There are no sponsors in this tier'
+        fallback: 'There are no sponsors in this tier',
+        activeOnly: true
       }
 
       try {

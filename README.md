@@ -45,7 +45,7 @@
 
 You can include the action in your workflow to trigger on any event that [GitHub Actions supports](https://help.github.com/en/articles/events-that-trigger-workflows).
 
-> **Note**
+> [!IMPORTANT]
 > You'll need to provide the action with a **Personal Access Token (PAT)** scoped to `read:user` and `read:org`. This action only applies the template within the workspace. You will need to combine it with a deployment action in order to commit it to your project. You can see a full example of this below.
 
 ```yml
@@ -133,6 +133,7 @@ The following options must be configured.
 | `marker`       | This allows you to modify the marker comment that is placed in your file. By default this is set to sponsors - `<!-- sponsors --> <!-- sponsors -->`, if you set this to `gold` for example you can place `<!-- gold --> <!-- gold -->` in your file.             | `with` | **No**   |
 | `fallback`     | Allows you to specify a fallback if you have no sponsors. By default nothing is displayed.                                                                                                                                                                        | `with` | **No**   |
 | `template`     | Allows you to modify the default template. Please refer to the `template` section of this README for more information.                                                                                                                                            | `with` | **No**   |
+| `active-only`  | If set to `false`, inactive sponsors will be displayed. This can be useful if you want to display all sponsors, regardless of their status. By default this is set to `true`.                                                                                     | `with` | **No**   |
 
 #### Deployment Status
 

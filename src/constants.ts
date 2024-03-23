@@ -21,6 +21,8 @@ export interface ActionInterface {
   fallback: string
   /** Fetches organization level sponsors if true. */
   organization: boolean
+  /** Determines if inactive sponsors should be returned or not. */
+  activeOnly: boolean
 }
 
 /**
@@ -46,6 +48,9 @@ export const action = {
     : ``,
   organization: !isNullOrUndefined(getInput('organization'))
     ? getInput('organization').toLowerCase() === 'true'
+    : false,
+  activeOnly: !isNullOrUndefined(getInput('active-only'))
+    ? getInput('active-only').toLowerCase() === 'true'
     : false
 }
 
