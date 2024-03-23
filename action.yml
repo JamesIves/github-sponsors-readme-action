@@ -44,6 +44,11 @@ inputs:
     description: Allows you to specify a fallback if you have no sponsors. By default nothing is displayed.
     required: false
 
+  active-only:
+    description: If set to false, inactive sponsors will be displayed. This can be useful if you want to display all sponsors, regardless of their status.
+    default: 'true'
+    required: false
+
 outputs:
   sponsorshipStatus:
     description: 'The status of the action that indicates if the run failed or passed. Possible outputs include: success|failed'

@@ -32,7 +32,9 @@ export async function getSponsors(
           : `viewer`
       } {
         login
-        sponsorshipsAsMaintainer(first: 100, orderBy: {field: CREATED_AT, direction: ASC}, includePrivate: true) {
+        sponsorshipsAsMaintainer(first: 100, orderBy: {field: CREATED_AT, direction: ASC}, includePrivate: true, activeOnly: ${
+          action.activeOnly
+        }) {
           totalCount
           pageInfo {
             endCursor

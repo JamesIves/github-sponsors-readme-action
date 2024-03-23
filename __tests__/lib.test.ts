@@ -75,7 +75,8 @@ describe('lib', () => {
       maximum: 0,
       marker: 'sponsor',
       organization: false,
-      fallback: ''
+      fallback: '',
+      activeOnly: true
     }
 
     // Valid file structure
@@ -97,7 +98,8 @@ describe('lib', () => {
       maximum: 0,
       marker: 'sponsors',
       organization: false,
-      fallback: ''
+      fallback: '',
+      activeOnly: true
     }
 
     // Purposely write incorrect data
@@ -115,7 +117,8 @@ describe('lib', () => {
       maximum: 0,
       marker: 'sponsors',
       organization: false,
-      fallback: ''
+      fallback: '',
+      activeOnly: true
     }
 
     try {
