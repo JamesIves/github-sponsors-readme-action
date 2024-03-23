@@ -18,6 +18,8 @@ export interface ActionInterface {
     fallback: string;
     /** Fetches organization level sponsors if true. */
     organization: boolean;
+    /** Determines if inactive sponsors should be returned or not. */
+    activeOnly: boolean;
 }
 /**
  * Gets the action configuration.
@@ -31,6 +33,7 @@ export declare const action: {
     file: string;
     fallback: string;
     organization: boolean;
+    activeOnly: boolean;
 };
 /**
  * Describes the sponsor object.
@@ -74,7 +77,7 @@ export interface GitHubResponse {
 /**
  * Describes the action interface.
  */
-export declare type RequiredActionParameters = Pick<ActionInterface, 'token'>;
+export type RequiredActionParameters = Pick<ActionInterface, 'token'>;
 /**
  * Privacy levels for the sponsorship.
  */
