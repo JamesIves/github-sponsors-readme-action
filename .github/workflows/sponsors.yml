@@ -17,7 +17,6 @@ jobs:
         with:
           persist-credentials: false
         
-
       - name: Generate Sponsors 💖
         uses: JamesIves/github-sponsors-readme-action@v1
         with:
