@@ -34,7 +34,7 @@ jobs:
           active-only: false
 
       - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4
+        uses: JamesIves/github-pages-deploy-action@releases/v4-worktree
         with:
           branch: dev
           folder: '.'
