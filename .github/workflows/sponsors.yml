@@ -24,7 +24,7 @@ jobs:
           active-only: false
 
       - name: Generate Sponsors 💖
-        uses: JamesIves/github-sponsors-readme-action@releases/v4-worktree
+        uses: JamesIves/github-sponsors-readme-action@v1
         with:
           token: ${{ secrets.PAT }}
           file: 'README.md'
@@ -34,7 +34,7 @@ jobs:
           active-only: false
 
       - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4-worktree
+        uses: JamesIves/github-pages-deploy-action@releases/v4-worktree
         with:
           branch: dev
           folder: '.'
