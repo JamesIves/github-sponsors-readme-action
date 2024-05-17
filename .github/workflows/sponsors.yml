@@ -11,11 +11,17 @@ jobs:
       - name: config
         run: |
           git config --global extensions.worktreeConfig false
+          git config --global worktree.guessRemoteHEAD false
           
       - name: Checkout 🛎️
         uses: actions/checkout@v4.1.4 
         with:
           persist-credentials: false
+
+      - name: config
+        run: |
+          git config --global extensions.worktreeConfig false
+          git config --global worktree.guessRemoteHEAD false
         
       - name: Generate Sponsors 💖
         uses: JamesIves/github-sponsors-readme-action@v1
