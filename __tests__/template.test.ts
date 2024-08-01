@@ -59,7 +59,7 @@ describe('template', () => {
         token: '123',
         file: 'README.test.md',
         template:
-          '<a href="https://github.com/{{{ login }}}"><img src="https://github.com/{{{ login }}}.png" width="60px" alt="" /><span>{{{ websiteUrl}}}</span></a>',
+          '<a href="https://github.com/{{ login }}"><img src="https://github.com/{{ login }}.png" width="60px" alt="" /><span>{{ websiteUrl}}</span></a>',
         minimum: 0,
         maximum: 0,
         marker: 'sponsors',
@@ -119,7 +119,7 @@ describe('template', () => {
         token: '123',
         file: 'README.test.md',
         template:
-          '<a href="{{{ websiteUrl }}}"><img src="https://github.com/{{{ login }}}.png" width="60px" alt="" /></a>',
+          '<a href="{{ websiteUrl }}"><img src="https://github.com/{{ login }}.png" width="60px" alt="" /></a>',
         minimum: 0,
         maximum: 0,
         marker: 'sponsors',
@@ -179,7 +179,7 @@ describe('template', () => {
         token: '123',
         file: 'README.test.md',
         template:
-          '<a href="https://github.com/{{{ login }}}"><img src="https://github.com/{{{ login }}}.png" width="60px" alt="" /></a>',
+          '<a href="https://github.com/{{ login }}"><img src="https://github.com/{{ login }}.png" width="60px" alt="" /></a>',
         minimum: 0,
         maximum: 0,
         marker: 'sponsors',
@@ -239,7 +239,7 @@ describe('template', () => {
         token: '123',
         file: 'README.test.md',
         template:
-          '<a href="https://github.com/{{{ login }}}"><img src="https://github.com/{{{ login }}}.png" width="60px" alt="" /></a>',
+          '<a href="https://github.com/{{ login }}"><img src="https://github.com/{{ login }}.png" width="60px" alt="" /></a>',
         minimum: 6000,
         maximum: 0,
         marker: 'sponsors',
@@ -299,7 +299,7 @@ describe('template', () => {
         token: '123',
         file: 'README.test.md',
         template:
-          '<a href="https://github.com/{{{ login }}}"><img src="https://github.com/{{{ login }}}.png" width="60px" alt="" /></a>',
+          '<a href="https://github.com/{{ login }}"><img src="https://github.com/{{ login }}.png" width="60px" alt="" /></a>',
         minimum: 0,
         maximum: 10000,
         marker: 'sponsors',
@@ -359,7 +359,7 @@ describe('template', () => {
         token: '123',
         file: 'README.test.md',
         template:
-          '<a href="https://github.com/{{{ login }}}"><img src="https://github.com/{{{ login }}}.png" width="60px" alt="" /></a>',
+          '<a href="https://github.com/{{ login }}"><img src="https://github.com/{{ login }}.png" width="60px" alt="" /></a>',
         minimum: 6000,
         maximum: 10000,
         marker: 'sponsors',
@@ -419,7 +419,7 @@ describe('template', () => {
         token: '123',
         file: 'README.test.md',
         template:
-          '<a href="https://github.com/{{{ login }}}"><img src="https://github.com/{{{ login }}}.png" width="60px" alt="" /></a>',
+          '<a href="https://github.com/{{ login }}"><img src="https://github.com/{{ login }}.png" width="60px" alt="" /></a>',
         minimum: 6000,
         maximum: 10000,
         marker: 'sponsors',
@@ -479,7 +479,7 @@ describe('template', () => {
         token: '123',
         file: 'README.test.md',
         template:
-          '<a href="https://github.com/{{{ login }}}"><img src="https://github.com/{{{ login }}}.png" width="60px" alt="" /></a>',
+          '<a href="https://github.com/{{ login }}"><img src="https://github.com/{{ login }}.png" width="60px" alt="" /></a>',
         minimum: 6000,
         maximum: 10000,
         marker: 'sponsors',
@@ -543,7 +543,7 @@ describe('template', () => {
         token: '123',
         file: 'README.test.md',
         template:
-          '<a href="https://github.com/{{{ login }}}"><img src="https://github.com/{{{ login }}}.png" width="60px" alt="" /></a>',
+          '<a href="https://github.com/{{ login }}"><img src="https://github.com/{{ login }}.png" width="60px" alt="" /></a>',
         minimum: 6000,
         maximum: 10000,
         marker: 'sponsors',
@@ -611,7 +611,7 @@ describe('template', () => {
         token: '123',
         file: 'README.test.md',
         template:
-          '<a href="https://github.com/{{{ login }}}"><img src="https://github.com/{{{ login }}}.png" width="60px" alt="" /></a>',
+          '<a href="https://github.com/{{ login }}"><img src="https://github.com/{{ login }}.png" width="60px" alt="" /></a>',
         minimum: 6000,
         maximum: 10000,
         marker: 'sponsors',
@@ -636,7 +636,7 @@ describe('template', () => {
         token: '123',
         file: 'README.test.md',
         template:
-          '<a href="https://github.com/{{{ login }}}"><img src="https://github.com/{{{ login }}}.png" width="60px" alt="" /></a>',
+          '<a href="https://github.com/{{ login }}"><img src="https://github.com/{{ login }}.png" width="60px" alt="" /></a>',
         minimum: 6000,
         maximum: 10000,
         marker: 'sponsors',
@@ -659,7 +659,7 @@ describe('template', () => {
         token: '123',
         file: 'README.test.md',
         template:
-          '<a href="https://github.com/{{{ login }}}"><img src="https://github.com/{{{ login }}}.png" width="60px" alt="" /></a>',
+          '<a href="https://github.com/{{ login }}"><img src="https://github.com/{{ login }}.png" width="60px" alt="" /></a>',
         minimum: 6000,
         maximum: 10000,
         marker: 'sponsors',
@@ -686,7 +686,7 @@ describe('template', () => {
         token: '123',
         file: 'README.test.md',
         template:
-          '<a href="https://github.com/{{{ login }}}"><img src="https://github.com/{{{ login }}}.png" width="60px" alt="" /></a>',
+          '<a href="https://github.com/{{ login }}"><img src="https://github.com/{{ login }}.png" width="60px" alt="" /></a>',
         minimum: 6000,
         maximum: 10000,
         marker: 'sponsors',

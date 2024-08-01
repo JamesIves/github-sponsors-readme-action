@@ -70,7 +70,7 @@ describe('lib', () => {
       token: '123',
       file: '.github/TEST.md',
       template:
-        '<a href="https://github.com/{{{ login }}}"><img src="https://github.com/{{{ login }}}.png" width="60px" alt="" /></a>',
+        '<a href="https://github.com/{{ login }}"><img src="https://github.com/{{ login }}.png" width="60px" alt="" /></a>',
       minimum: 0,
       maximum: 0,
       marker: 'sponsors',
@@ -95,7 +95,7 @@ describe('lib', () => {
       token: '123',
       file: '.github/TEST.md',
       template:
-        '<a href="https://github.com/{{{ login }}}"><img src="https://github.com/{{{ login }}}.png" width="60px" alt="" /></a>',
+        '<a href="https://github.com/{{ login }}"><img src="https://github.com/{{ login }}.png" width="60px" alt="" /></a>',
       minimum: 0,
       maximum: 0,
       marker: 'fake-marker',
@@ -116,7 +116,7 @@ describe('lib', () => {
     const action = {
       file: 'README.test.md',
       template:
-        '<a href="https://github.com/{{{ login }}}"><img src="https://github.com/{{{ login }}}.png" width="60px" alt="" /></a>',
+        '<a href="https://github.com/{{ login }}"><img src="https://github.com/{{ login }}.png" width="60px" alt="" /></a>',
       minimum: 0,
       maximum: 0,
       marker: 'sponsors',
