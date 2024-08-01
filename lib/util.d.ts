@@ -8,6 +8,10 @@ export declare const isNullOrUndefined: (value: string | undefined | null) => bo
  */
 export declare const checkParameters: (action: ActionInterface) => void;
 /**
+ * Replaces all instances of a match in a string.
+ */
+export declare const replaceAll: (input: string, find: string, replace: string) => string;
+/**
  * Suppresses sensitive information from being exposed in error messages.
  */
 export declare const suppressSensitiveInformation: (str: string, action: ActionInterface) => string;
@@ -15,3 +19,7 @@ export declare const suppressSensitiveInformation: (str: string, action: ActionI
  * Extracts error message from an error.
  */
 export declare const extractErrorMessage: (error: unknown) => string;
+/**
+ * Sanitizes and cleans an input.
+ */
+export declare const sanitizeAndClean: (input: string) => any;
