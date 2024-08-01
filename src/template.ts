@@ -9,7 +9,12 @@ import {
   Urls
 } from './constants'
 import {render} from 'mustache'
-import {extractErrorMessage, suppressSensitiveInformation} from './util'
+import {
+  extractErrorMessage,
+  suppressSensitiveInformation,
+  sanitizeAndClean,
+  replaceAll
+} from './util'
 import {info} from '@actions/core'
 
 /**
@@ -130,8 +135,21 @@ export function generateTemplate(
     }
 
     filteredSponsors.map(({sponsorEntity}) => {
-      sponsorEntity.websiteUrl = sponsorEntity.websiteUrl || sponsorEntity.url
-      template = template += render(action.template, sponsorEntity)
+      const sanitizedSponsorEntity = {
+        websiteUrl: sanitizeAndClean(
+          sponsorEntity.websiteUrl || sponsorEntity.url
+        ),
+        name: sanitizeAndClean(sponsorEntity.name || ''),
+        login: sponsorEntity.login
+      }
+
+      const safeTemplate = replaceAll(
+        replaceAll(action.template, '{{{', '{{'),
+        '}}}',
+        '}}'
+      )
+
+      template = template += render(safeTemplate, sanitizedSponsorEntity)
     })
   } else {
     info(`No sponsorship data was found… ❌`)

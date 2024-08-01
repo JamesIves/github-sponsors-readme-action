@@ -73,6 +73,66 @@ describe('template', () => {
       )
     })
 
+    it('should generate the default template and sanitize user inputs', () => {
+      const response: GitHubResponse = {
+        data: {
+          viewer: {
+            sponsorshipsAsMaintainer: {
+              totalCount: 2,
+              pageInfo: {
+                endCursor: 'MQ'
+              },
+              nodes: [
+                {
+                  createdAt: '123',
+                  privacyLevel: PrivacyLevel.PUBLIC,
+                  tier: {
+                    monthlyPriceInCents: 5000
+                  },
+                  sponsorEntity: {
+                    name: '><h1>HELLO!!!!</h1>',
+                    login: 'JamesIves',
+                    url: 'https://github.com/JamesIves',
+                    websiteUrl: 'https://jamesiv.es'
+                  }
+                },
+                {
+                  createdAt: '123',
+                  privacyLevel: PrivacyLevel.PUBLIC,
+                  tier: {
+                    monthlyPriceInCents: 5000
+                  },
+                  sponsorEntity: {
+                    name: '><h1>HELLO!!!!</h1>',
+                    login: 'MontezumaIves',
+                    url: 'https://github.com/MontezumaIves"><h1>HELLO!!!!</h1>',
+                    websiteUrl: 'https://jamesiv.es'
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+
+      const action = {
+        token: '123',
+        file: 'README.test.md',
+        template:
+          '<a href="https://github.com/{{{ login }}}"><img src="https://github.com/{{{ login }}}.png" width="60px" alt="{{{ name }}}" /><span>{{{ websiteUrl}}}</span></a>',
+        minimum: 0,
+        maximum: 0,
+        marker: 'sponsors',
+        organization: false,
+        fallback: '',
+        activeOnly: true
+      }
+
+      expect(generateTemplate(response, action)).toEqual(
+        '<a href="https://github.com/JamesIves"><img src="https://github.com/JamesIves.png" width="60px" alt="" /><span>https://jamesiv.es</span></a><a href="https://github.com/MontezumaIves"><img src="https://github.com/MontezumaIves.png" width="60px" alt="" /><span>https://jamesiv.es</span></a>'
+      )
+    })
+
     it('should fallback to url if websiteUrl is not provided', () => {
       const response: GitHubResponse = {
         data: {

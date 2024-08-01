@@ -1,4 +1,16 @@
 import {ActionInterface, RequiredActionParameters} from './constants'
+import {JSDOM} from 'jsdom'
+import DOMPurify from 'dompurify'
+
+/**
+ * Defines the a new virtual DOM.
+ */
+const window = new JSDOM('').window
+
+/**
+ * Sanitizes the input.
+ */
+const {sanitize} = DOMPurify(window)
 
 /**
  * Utility function that checks to see if a value is undefined or not.
@@ -33,8 +45,11 @@ export const checkParameters = (action: ActionInterface): void => {
 /**
  * Replaces all instances of a match in a string.
  */
-const replaceAll = (input: string, find: string, replace: string): string =>
-  input.split(find).join(replace)
+export const replaceAll = (
+  input: string,
+  find: string,
+  replace: string
+): string => input.split(find).join(replace)
 
 /**
  * Suppresses sensitive information from being exposed in error messages.
@@ -65,3 +80,14 @@ export const extractErrorMessage = (error: unknown): string =>
     : typeof error == 'string'
       ? error
       : JSON.stringify(error)
+
+/**
+ * Sanitizes and cleans an input.
+ */
+export const sanitizeAndClean = (input: string) => {
+  const sanitizedInput = sanitize(input, {
+    ALLOWED_TAGS: [],
+    ALLOWED_ATTR: []
+  })
+  return sanitizedInput.replace(/[">}]/g, '')
+}
