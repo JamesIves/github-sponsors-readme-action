@@ -32,7 +32,7 @@ export const action = {
   token: getInput('token'),
   template: !isNullOrUndefined(getInput('template'))
     ? getInput('template')
-    : `<a href="https://github.com/{{{ login }}}"><img src="https://github.com/{{{ login }}}.png" width="60px" alt="{{{ name }}}" /></a>`,
+    : `<a href="https://github.com/{{ login }}"><img src="https://github.com/{{ login }}.png" width="60px" alt="{{ name }}" /></a>`,
   minimum: !isNullOrUndefined(getInput('minimum'))
     ? parseInt(getInput('minimum'))
     : 0,

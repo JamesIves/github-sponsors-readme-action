@@ -156,10 +156,10 @@ You can modify the template that gets generated in your file by using the `templ
 
 | Status       | Description                                                                                                                                                                |
 | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `name`       | The users full name. This can sometimes be `null` if the user hasn't set one. This can be accessed using `{{{ name }}}`                                                    |
-| `login`      | The users login, this can be accessed using `{{{ login }}}`                                                                                                                |
-| `url`        | The users GitHub profile url, this can be accessed using `{{{ url }}}`.                                                                                                    |
-| `websiteUrl` | The users website url. This can sometimes be `null` if the user hasn't set one, if so this field will fall back to `url`. This can be accessed using `{{{ websiteUrl }}}`. |
+| `name`       | The users full name. This can sometimes be `null` if the user hasn't set one. This can be accessed using `{{ name }}`                                                    |
+| `login`      | The users login, this can be accessed using `{{ login }}`                                                                                                                |
+| `url`        | The users GitHub profile url, this can be accessed using `{{ url }}`.                                                                                                    |
+| `websiteUrl` | The users website url. This can sometimes be `null` if the user hasn't set one, if so this field will fall back to `url`. This can be accessed using `{{ websiteUrl }}`. |
 
 You're able to use markdown or GitHub approved basic HTML. The default template can be found [here](./src/constants.ts#L28).
 
@@ -186,7 +186,7 @@ jobs:
         with:
           token: ${{ secrets.PAT }}
           file: 'README.md'
-          template: '* [{{{ name }}}]({{{ url }}}) - {{{ login }}}'
+          template: '* [{{ name }}]({{ url }}) - {{ login }}'
 
       - name: Deploy to GitHub Pages 🚀
         uses: JamesIves/github-pages-deploy-action@v4

@@ -32,7 +32,7 @@ describe('util', () => {
     it('should fail if there is no provided Access Token', () => {
       const action = {
         file: 'README.test.md',
-        template: '* {{{ url }}}',
+        template: '* {{ url }}',
         minimum: 0,
         maximum: 0,
         marker: 'sponsors',
@@ -54,7 +54,7 @@ describe('util', () => {
       const action = {
         token: 'montezuma',
         file: 'README.test.md',
-        template: '* {{{ url }}}',
+        template: '* {{ url }}',
         minimum: 0,
         maximum: 0,
         marker: 'sponsors',
@@ -73,7 +73,7 @@ describe('util', () => {
       const action = {
         token: 'insanelyimportanttokendonotsteal',
         file: 'README.test.md',
-        template: '* {{{ url }}}',
+        template: '* {{ url }}',
         minimum: 0,
         maximum: 0,
         marker: 'sponsors',
