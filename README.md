@@ -154,8 +154,8 @@ The action will export a step output as `sponsorship-status` that you can use in
 
 You can modify the template that gets generated in your file by using the `template` input. This input allows you to leverage mustache templating to modify what is displayed. The following values are available.
 
-| Status       | Description                                                                                                                                                                |
-| ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Status       | Description                                                                                                                                                              |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `name`       | The users full name. This can sometimes be `null` if the user hasn't set one. This can be accessed using `{{ name }}`                                                    |
 | `login`      | The users login, this can be accessed using `{{ login }}`                                                                                                                |
 | `url`        | The users GitHub profile url, this can be accessed using `{{ url }}`.                                                                                                    |
