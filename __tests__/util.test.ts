@@ -38,7 +38,8 @@ describe('util', () => {
         marker: 'sponsors',
         organization: false,
         fallback: '',
-        activeOnly: true
+        activeOnly: true,
+        includePrivate: false
       }
 
       try {
@@ -60,7 +61,8 @@ describe('util', () => {
         marker: 'sponsors',
         organization: false,
         fallback: '',
-        activeOnly: true
+        activeOnly: true,
+        includePrivate: false
       }
 
       const response = checkParameters(action)
@@ -79,7 +81,8 @@ describe('util', () => {
         marker: 'sponsors',
         organization: false,
         fallback: '',
-        activeOnly: true
+        activeOnly: true,
+        includePrivate: false
       }
 
       const string = `This is an error message! It contains ${action.token} and ${action.token} again!`

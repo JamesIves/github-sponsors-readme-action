@@ -23,6 +23,9 @@ export interface ActionInterface {
   organization: boolean
   /** Determines if inactive sponsors should be returned or not. */
   activeOnly: boolean
+  /** Determines if private sponsors should be returned or not. If marked as true, the identity of the sponsor is still
+    kept private, however, an anonymized version of the sponsor is still included in the list. */
+  includePrivate: boolean
 }
 
 /**
@@ -32,7 +35,7 @@ export const action = {
   token: getInput('token'),
   template: !isNullOrUndefined(getInput('template'))
     ? getInput('template')
-    : `<a href="https://github.com/{{ login }}"><img src="https://github.com/{{ login }}.png" width="60px" alt="{{ name }}" /></a>`,
+    : `<a href="https://github.com/{{ login }}"><img src="{{ avatarUrl }}" width="60px" alt="{{ name }}" /></a>`,
   minimum: !isNullOrUndefined(getInput('minimum'))
     ? parseInt(getInput('minimum'))
     : 0,
@@ -51,6 +54,9 @@ export const action = {
     : false,
   activeOnly: !isNullOrUndefined(getInput('active-only'))
     ? getInput('active-only').toLowerCase() === 'true'
+    : false,
+  includePrivate: !isNullOrUndefined(getInput('include-private'))
+    ? getInput('include-private').toLowerCase() === 'true'
     : false
 }
 
@@ -62,6 +68,7 @@ export interface Sponsor {
     name: string | null
     login: string
     url: string
+    avatarUrl: string
     websiteUrl: string | null
   }
   createdAt: string

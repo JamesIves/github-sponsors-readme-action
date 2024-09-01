@@ -33,7 +33,9 @@ describe('template', () => {
                     name: 'James Ives',
                     login: 'JamesIves',
                     url: 'https://github.com/JamesIves',
-                    websiteUrl: 'https://jamesiv.es'
+                    websiteUrl: 'https://jamesiv.es',
+                    avatarUrl:
+                      'https://avatars.githubusercontent.com/u/10888441?v=4'
                   }
                 },
                 {
@@ -46,7 +48,9 @@ describe('template', () => {
                     name: 'Montezuma Ives',
                     login: 'MontezumaIves',
                     url: 'https://github.com/MontezumaIves',
-                    websiteUrl: 'https://jamesiv.es'
+                    websiteUrl: 'https://jamesiv.es',
+                    avatarUrl:
+                      'https://avatars.githubusercontent.com/u/78580739?v=4'
                   }
                 }
               ]
@@ -65,7 +69,8 @@ describe('template', () => {
         marker: 'sponsors',
         organization: false,
         fallback: '',
-        activeOnly: true
+        activeOnly: true,
+        includePrivate: false
       }
 
       expect(generateTemplate(response, action)).toEqual(
@@ -93,7 +98,9 @@ describe('template', () => {
                     name: '><h1>HELLO!!!!</h1>',
                     login: 'JamesIves',
                     url: 'https://github.com/JamesIves',
-                    websiteUrl: 'https://jamesiv.es'
+                    websiteUrl: 'https://jamesiv.es',
+                    avatarUrl:
+                      'https://avatars.githubusercontent.com/u/10888441?v=4'
                   }
                 },
                 {
@@ -106,7 +113,9 @@ describe('template', () => {
                     name: '><h1>HELLO!!!!</h1>',
                     login: 'MontezumaIves',
                     url: 'https://github.com/MontezumaIves"><h1>HELLO!!!!</h1>',
-                    websiteUrl: 'https://jamesiv.es'
+                    websiteUrl: 'https://jamesiv.es',
+                    avatarUrl:
+                      'https://avatars.githubusercontent.com/u/78580739?v=4'
                   }
                 }
               ]
@@ -125,7 +134,8 @@ describe('template', () => {
         marker: 'sponsors',
         organization: false,
         fallback: '',
-        activeOnly: true
+        activeOnly: true,
+        includePrivate: false
       }
 
       expect(generateTemplate(response, action)).toEqual(
@@ -153,7 +163,9 @@ describe('template', () => {
                     name: 'James Ives',
                     login: 'JamesIves',
                     url: 'https://github.com/JamesIves',
-                    websiteUrl: null
+                    websiteUrl: null,
+                    avatarUrl:
+                      'https://avatars.githubusercontent.com/u/10888441?v=4'
                   }
                 },
                 {
@@ -166,7 +178,9 @@ describe('template', () => {
                     name: 'Montezuma Ives',
                     login: 'MontezumaIves',
                     url: 'https://github.com/MontezumaIves',
-                    websiteUrl: null
+                    websiteUrl: null,
+                    avatarUrl:
+                      'https://avatars.githubusercontent.com/u/78580739?v=4'
                   }
                 }
               ]
@@ -185,7 +199,8 @@ describe('template', () => {
         marker: 'sponsors',
         organization: false,
         fallback: '',
-        activeOnly: true
+        activeOnly: true,
+        includePrivate: false
       }
 
       expect(generateTemplate(response, action)).toEqual(
@@ -213,7 +228,9 @@ describe('template', () => {
                     name: 'James Ives',
                     login: 'JamesIves',
                     url: 'https://github.com/JamesIves',
-                    websiteUrl: 'https://jamesiv.es'
+                    websiteUrl: 'https://jamesiv.es',
+                    avatarUrl:
+                      'https://avatars.githubusercontent.com/u/10888441?v=4'
                   }
                 },
                 {
@@ -226,7 +243,9 @@ describe('template', () => {
                     name: 'Montezuma Ives',
                     login: 'MontezumaIves',
                     url: 'https://github.com/MontezumaIves',
-                    websiteUrl: 'https://jamesiv.es'
+                    websiteUrl: 'https://jamesiv.es',
+                    avatarUrl:
+                      'https://avatars.githubusercontent.com/u/78580739?v=4'
                   }
                 }
               ]
@@ -245,11 +264,77 @@ describe('template', () => {
         marker: 'sponsors',
         organization: false,
         fallback: '',
-        activeOnly: true
+        activeOnly: true,
+        includePrivate: false
       }
 
       expect(generateTemplate(response, action)).toEqual(
         '<a href="https://github.com/JamesIves"><img src="https://github.com/JamesIves.png" width="60px" alt="" /></a>'
+      )
+    })
+
+    it('should anonymize private data if includePrivate is true', () => {
+      const response: GitHubResponse = {
+        data: {
+          viewer: {
+            sponsorshipsAsMaintainer: {
+              totalCount: 2,
+              pageInfo: {
+                endCursor: 'MQ'
+              },
+              nodes: [
+                {
+                  createdAt: '123',
+                  privacyLevel: PrivacyLevel.PUBLIC,
+                  tier: {
+                    monthlyPriceInCents: 5000
+                  },
+                  sponsorEntity: {
+                    name: 'James Ives',
+                    login: 'JamesIves',
+                    url: 'https://github.com/JamesIves',
+                    websiteUrl: 'https://jamesiv.es',
+                    avatarUrl:
+                      'https://avatars.githubusercontent.com/u/10888441?v=4'
+                  }
+                },
+                {
+                  createdAt: '123',
+                  privacyLevel: PrivacyLevel.PRIVATE,
+                  tier: {
+                    monthlyPriceInCents: 5000
+                  },
+                  sponsorEntity: {
+                    name: 'Montezuma Ives',
+                    login: 'MontezumaIves',
+                    url: 'https://github.com/MontezumaIves',
+                    websiteUrl: 'https://jamesiv.es',
+                    avatarUrl:
+                      'https://avatars.githubusercontent.com/u/78580739?v=4'
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+
+      const action = {
+        token: '123',
+        file: 'README.test.md',
+        template:
+          '<a href="https://github.com/{{ login }}"><img src="{{ avatarUrl }}" width="60px" alt="" /></a>',
+        minimum: 0,
+        maximum: 0,
+        marker: 'sponsors',
+        organization: false,
+        fallback: '',
+        activeOnly: true,
+        includePrivate: true
+      }
+
+      expect(generateTemplate(response, action)).toEqual(
+        '<a href="https://github.com/JamesIves"><img src="https:&#x2F;&#x2F;avatars.githubusercontent.com&#x2F;u&#x2F;10888441?v&#x3D;4" width="60px" alt="" /></a><a href="https://github.com/"><img src="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;JamesIves&#x2F;github-sponsors-readme-action&#x2F;dev&#x2F;.github&#x2F;assets&#x2F;placeholder.png" width="60px" alt="" /></a>'
       )
     })
 
@@ -273,7 +358,9 @@ describe('template', () => {
                     name: 'James Ives',
                     login: 'JamesIves',
                     url: 'https://github.com/JamesIves',
-                    websiteUrl: 'https://jamesiv.es'
+                    websiteUrl: 'https://jamesiv.es',
+                    avatarUrl:
+                      'https://avatars.githubusercontent.com/u/10888441?v=4'
                   }
                 },
                 {
@@ -286,7 +373,9 @@ describe('template', () => {
                     name: 'Montezuma Ives',
                     login: 'MontezumaIves',
                     url: 'https://github.com/MontezumaIves',
-                    websiteUrl: 'https://jamesiv.es'
+                    websiteUrl: 'https://jamesiv.es',
+                    avatarUrl:
+                      'https://avatars.githubusercontent.com/u/78580739?v=4'
                   }
                 }
               ]
@@ -305,7 +394,8 @@ describe('template', () => {
         marker: 'sponsors',
         organization: false,
         fallback: '',
-        activeOnly: true
+        activeOnly: true,
+        includePrivate: true
       }
 
       expect(generateTemplate(response, action)).toEqual(
@@ -333,7 +423,9 @@ describe('template', () => {
                     name: 'James Ives',
                     login: 'JamesIves',
                     url: 'https://github.com/JamesIves',
-                    websiteUrl: 'https://jamesiv.es'
+                    websiteUrl: 'https://jamesiv.es',
+                    avatarUrl:
+                      'https://avatars.githubusercontent.com/u/10888441?v=4'
                   }
                 },
                 {
@@ -346,7 +438,9 @@ describe('template', () => {
                     name: 'Montezuma Ives',
                     login: 'MontezumaIves',
                     url: 'https://github.com/MontezumaIves',
-                    websiteUrl: 'https://jamesiv.es'
+                    websiteUrl: 'https://jamesiv.es',
+                    avatarUrl:
+                      'https://avatars.githubusercontent.com/u/78580739?v=4'
                   }
                 }
               ]
@@ -365,7 +459,8 @@ describe('template', () => {
         marker: 'sponsors',
         organization: false,
         fallback: '',
-        activeOnly: true
+        activeOnly: true,
+        includePrivate: false
       }
 
       expect(generateTemplate(response, action)).toEqual(
@@ -393,7 +488,9 @@ describe('template', () => {
                     name: 'James Ives',
                     login: 'JamesIves',
                     url: 'https://github.com/JamesIves',
-                    websiteUrl: 'https://jamesiv.es'
+                    websiteUrl: 'https://jamesiv.es',
+                    avatarUrl:
+                      'https://avatars.githubusercontent.com/u/10888441?v=4'
                   }
                 },
                 {
@@ -406,7 +503,9 @@ describe('template', () => {
                     name: 'Montezuma Ives',
                     login: 'MontezumaIves',
                     url: 'https://github.com/MontezumaIves',
-                    websiteUrl: 'https://jamesiv.es'
+                    websiteUrl: 'https://jamesiv.es',
+                    avatarUrl:
+                      'https://avatars.githubusercontent.com/u/78580739?v=4'
                   }
                 }
               ]
@@ -425,7 +524,8 @@ describe('template', () => {
         marker: 'sponsors',
         organization: false,
         fallback: '',
-        activeOnly: true
+        activeOnly: true,
+        includePrivate: false
       }
 
       expect(generateTemplate(response, action)).toEqual(
@@ -453,7 +553,9 @@ describe('template', () => {
                     name: 'James Ives',
                     login: 'JamesIves',
                     url: 'https://github.com/JamesIves',
-                    websiteUrl: 'https://jamesiv.es'
+                    websiteUrl: 'https://jamesiv.es',
+                    avatarUrl:
+                      'https://avatars.githubusercontent.com/u/10888441?v=4'
                   }
                 },
                 {
@@ -466,7 +568,9 @@ describe('template', () => {
                     name: 'Montezuma Ives',
                     login: 'MontezumaIves',
                     url: 'https://github.com/MontezumaIves',
-                    websiteUrl: 'https://jamesiv.es'
+                    websiteUrl: 'https://jamesiv.es',
+                    avatarUrl:
+                      'https://avatars.githubusercontent.com/u/78580739?v=4'
                   }
                 }
               ]
@@ -485,7 +589,8 @@ describe('template', () => {
         marker: 'sponsors',
         organization: false,
         fallback: 'There are no sponsors in this tier',
-        activeOnly: true
+        activeOnly: true,
+        includePrivate: false
       }
 
       expect(generateTemplate(response, action)).toEqual(action.fallback)
@@ -513,7 +618,9 @@ describe('template', () => {
                     name: 'James Ives',
                     login: 'JamesIves',
                     url: 'https://github.com/JamesIves',
-                    websiteUrl: 'https://jamesiv.es'
+                    websiteUrl: 'https://jamesiv.es',
+                    avatarUrl:
+                      'https://avatars.githubusercontent.com/u/78580739?v=4'
                   }
                 },
                 {
@@ -526,7 +633,9 @@ describe('template', () => {
                     name: 'Montezuma Ives',
                     login: 'MontezumaIves',
                     url: 'https://github.com/MontezumaIves',
-                    websiteUrl: 'https://jamesiv.es'
+                    websiteUrl: 'https://jamesiv.es',
+                    avatarUrl:
+                      'https://avatars.githubusercontent.com/u/78580739?v=4'
                   }
                 }
               ]
@@ -545,7 +654,8 @@ describe('template', () => {
         marker: 'sponsors',
         organization: false,
         fallback: 'There are no sponsors in this tier',
-        activeOnly: true
+        activeOnly: true,
+        includePrivate: false
       }
 
       // Write temp README file for testing
@@ -577,7 +687,9 @@ describe('template', () => {
                     name: 'James Ives',
                     login: 'JamesIves',
                     url: 'https://github.com/JamesIves',
-                    websiteUrl: 'https://jamesiv.es'
+                    websiteUrl: 'https://jamesiv.es',
+                    avatarUrl:
+                      'https://avatars.githubusercontent.com/u/10888441?v=4'
                   }
                 },
                 {
@@ -590,7 +702,9 @@ describe('template', () => {
                     name: 'Montezuma Ives',
                     login: 'MontezumaIves',
                     url: 'https://github.com/MontezumaIves',
-                    websiteUrl: 'https://jamesiv.es'
+                    websiteUrl: 'https://jamesiv.es',
+                    avatarUrl:
+                      'https://avatars.githubusercontent.com/u/78580739?v=4'
                   }
                 }
               ]
@@ -609,7 +723,8 @@ describe('template', () => {
         marker: 'sponsors',
         organization: false,
         fallback: 'There are no sponsors in this tier',
-        activeOnly: true
+        activeOnly: true,
+        includePrivate: false
       }
 
       // Purposely write incorrect data
@@ -645,7 +760,9 @@ describe('template', () => {
                     name: 'James Ives',
                     login: 'JamesIves',
                     url: 'https://github.com/JamesIves',
-                    websiteUrl: 'https://jamesiv.es'
+                    websiteUrl: 'https://jamesiv.es',
+                    avatarUrl:
+                      'https://avatars.githubusercontent.com/u/10888441?v=4'
                   }
                 },
                 {
@@ -658,7 +775,9 @@ describe('template', () => {
                     name: 'Montezuma Ives',
                     login: 'MontezumaIves',
                     url: 'https://github.com/MontezumaIves',
-                    websiteUrl: 'https://jamesiv.es'
+                    websiteUrl: 'https://jamesiv.es',
+                    avatarUrl:
+                      'https://avatars.githubusercontent.com/u/78580739?v=4'
                   }
                 }
               ]
@@ -677,7 +796,8 @@ describe('template', () => {
         marker: 'sponsors',
         organization: false,
         fallback: 'There are no sponsors in this tier',
-        activeOnly: true
+        activeOnly: true,
+        includePrivate: false
       }
 
       try {
@@ -702,7 +822,8 @@ describe('template', () => {
         marker: 'sponsors',
         organization: false,
         fallback: 'There are no sponsors in this tier',
-        activeOnly: true
+        activeOnly: true,
+        includePrivate: false
       }
 
       nock(Urls.GITHUB_API).post('/graphql').reply(200, {
@@ -725,7 +846,8 @@ describe('template', () => {
         marker: 'sponsors',
         organization: true,
         fallback: 'There are no sponsors in this tier',
-        activeOnly: true
+        activeOnly: true,
+        includePrivate: false
       }
 
       nock(Urls.GITHUB_API).post('/graphql').reply(200, {
@@ -752,7 +874,8 @@ describe('template', () => {
         marker: 'sponsors',
         organization: true,
         fallback: 'There are no sponsors in this tier',
-        activeOnly: true
+        activeOnly: true,
+        includePrivate: false
       }
 
       try {

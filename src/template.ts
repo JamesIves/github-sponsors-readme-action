@@ -37,7 +37,7 @@ export async function getSponsors(
           : `viewer`
       } {
         login
-        sponsorshipsAsMaintainer(first: 100, orderBy: {field: CREATED_AT, direction: ASC}, includePrivate: false, activeOnly: ${
+        sponsorshipsAsMaintainer(first: 100, orderBy: {field: CREATED_AT, direction: ASC}, includePrivate: ${action.includePrivate}, activeOnly: ${
           action.activeOnly
         }) {
           totalCount
@@ -51,12 +51,14 @@ export async function getSponsors(
                 login
                 url
                 websiteUrl
+                avatarUrl
               }
               ... on User {
                 name
                 login
                 url
                 websiteUrl
+                avatarUrl
               }
             }
             createdAt
@@ -110,16 +112,42 @@ export function generateTemplate(
   const sponsorshipsAsMaintainer = data?.sponsorshipsAsMaintainer
 
   if (sponsorshipsAsMaintainer) {
-    /* Appends the template, the API call returns all users regardless of if they are hidden or not.
-      In an effort to totally respect a users decision to be anonymous we filter these users out even though the `includePrivate` flag is set to `false`, just in case. */
     let filteredSponsors = sponsorshipsAsMaintainer.nodes.filter(
       (user: Sponsor) =>
-        user.privacyLevel &&
-        user.privacyLevel !== PrivacyLevel.PRIVATE &&
         (user.tier && user.tier.monthlyPriceInCents
           ? user.tier.monthlyPriceInCents
           : 0) >= action.minimum
     )
+
+    /**
+     * If `includePrivate` is true here, we replace the private sponsors with a placeholder asset and anonymize all data to respect privacy.
+     */
+    if (action.includePrivate) {
+      filteredSponsors = filteredSponsors.map((user: Sponsor) => {
+        if (user.privacyLevel === PrivacyLevel.PRIVATE) {
+          return {
+            ...user,
+            sponsorEntity: {
+              name: 'Private Sponsor',
+              login: '',
+              url: 'https://github.com',
+              websiteUrl: 'https://github.com',
+              avatarUrl:
+                'https://raw.githubusercontent.com/JamesIves/github-sponsors-readme-action/dev/.github/assets/placeholder.png'
+            }
+          }
+        }
+        return user
+      })
+    } else {
+      /**
+       * If `includePrivate` is false we filter out any priv1ate sponsors. This is a safeguard incase the GitHub API
+       * decides to return private sponsors for some reason.
+       */
+      filteredSponsors = filteredSponsors.filter(
+        (user: Sponsor) => user.privacyLevel !== PrivacyLevel.PRIVATE
+      )
+    }
 
     if (action.maximum > 0) {
       filteredSponsors = filteredSponsors.filter(
@@ -144,7 +172,8 @@ export function generateTemplate(
           sponsorEntity.websiteUrl || sponsorEntity.url
         ),
         name: sanitizeAndClean(sponsorEntity.name || ''),
-        login: sanitizeAndClean(sponsorEntity.login)
+        login: sanitizeAndClean(sponsorEntity.login),
+        avatarUrl: sponsorEntity.avatarUrl
       }
 
       /**
