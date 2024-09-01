@@ -20,6 +20,9 @@ export interface ActionInterface {
     organization: boolean;
     /** Determines if inactive sponsors should be returned or not. */
     activeOnly: boolean;
+    /** Determines if private sponsors should be returned or not. If marked as true, the identity of the sponsor is still
+      kept private, however, an anonymized version of the sponsor is still included in the list. */
+    includePrivate: boolean;
 }
 /**
  * Gets the action configuration.
@@ -34,6 +37,7 @@ export declare const action: {
     fallback: string;
     organization: boolean;
     activeOnly: boolean;
+    includePrivate: boolean;
 };
 /**
  * Describes the sponsor object.
@@ -43,6 +47,7 @@ export interface Sponsor {
         name: string | null;
         login: string;
         url: string;
+        avatarUrl: string;
         websiteUrl: string | null;
     };
     createdAt: string;
