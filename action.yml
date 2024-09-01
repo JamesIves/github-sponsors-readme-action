@@ -49,6 +49,11 @@ inputs:
     default: 'true'
     required: false
 
+  include-private:
+    description: If set to true, private sponsors will be displayed in the list, however any identifying information will be redacted. This can be useful if you want to display all sponsors, regardless of their privacy settings.
+    default: 'false'
+    required: false
+
 outputs:
   sponsorshipStatus:
     description: 'The status of the action that indicates if the run failed or passed. Possible outputs include: success|failed'
