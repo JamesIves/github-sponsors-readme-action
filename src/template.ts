@@ -123,6 +123,7 @@ export function generateTemplate(
      * If `includePrivate` is true here, we replace the private sponsors with a placeholder asset and anonymize all data to respect privacy.
      */
     if (action.includePrivate) {
+      console.log('I am anonymizing data', action.includePrivate)
       filteredSponsors = filteredSponsors.map((user: Sponsor) => {
         if (user.privacyLevel === PrivacyLevel.PRIVATE) {
           return {
@@ -140,6 +141,7 @@ export function generateTemplate(
         return user
       })
     } else {
+      console.log('I am nuking data', action.includePrivate)
       /**
        * If `includePrivate` is false we filter out any priv1ate sponsors. This is a safeguard incase the GitHub API
        * decides to return private sponsors for some reason.
