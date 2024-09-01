@@ -24,7 +24,8 @@ const response: GitHubResponse = {
               name: 'James Ives',
               login: 'JamesIves',
               url: 'https://github.com/JamesIves',
-              websiteUrl: 'https://jamesiv.es'
+              websiteUrl: 'https://jamesiv.es',
+              avatarUrl: 'https://avatars.githubusercontent.com/u/10888441?v=4'
             }
           },
           {
@@ -37,7 +38,8 @@ const response: GitHubResponse = {
               name: 'Montezuma Ives',
               login: 'MontezumaIves',
               url: 'https://github.com/MontezumaIves',
-              websiteUrl: 'https://jamesiv.es'
+              websiteUrl: 'https://jamesiv.es',
+              avatarUrl: 'https://avatars.githubusercontent.com/u/78580739?v=4'
             }
           }
         ]
@@ -76,7 +78,8 @@ describe('lib', () => {
       marker: 'sponsors',
       organization: false,
       fallback: '',
-      activeOnly: true
+      activeOnly: true,
+      includePrivate: false
     }
 
     // Valid file structure
@@ -101,7 +104,8 @@ describe('lib', () => {
       marker: 'fake-marker',
       organization: false,
       fallback: '',
-      activeOnly: true
+      activeOnly: true,
+      includePrivate: false
     }
 
     // Purposely write incorrect data
@@ -122,7 +126,8 @@ describe('lib', () => {
       marker: 'sponsors',
       organization: false,
       fallback: '',
-      activeOnly: true
+      activeOnly: true,
+      includePrivate: false
     }
 
     try {
