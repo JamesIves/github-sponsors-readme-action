@@ -158,7 +158,9 @@ export function generateTemplate(
       )
     }
 
-    /** If there are no valid sponsors then we return the provided fallback. */
+    /**
+     * If there are no valid sponsors then we return the provided fallback.
+     */
     if (!filteredSponsors.length) {
       return action.fallback
     }

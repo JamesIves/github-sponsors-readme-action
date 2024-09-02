@@ -5,26 +5,46 @@ import {isNullOrUndefined} from './util'
  * Describes the action interface.
  */
 export interface ActionInterface {
-  /** Deployment token. */
+  /**
+   * Deployment token.
+   */
   token?: string
-  /** The template to use. */
+  /**
+   * The template to use.
+   */
   template: string
-  /** The file to replace the content in. */
+  /**
+   * The file to replace the content in.
+   */
   file: string
-  /** The minimum amount sponsored to be included. */
+  /**
+   * The minimum amount sponsored to be included.
+   */
   minimum: number
-  /** The maximum amount sponsored to be included. */
+  /**
+   * The maximum amount sponsored to be included.
+   */
   maximum: number
-  /** The marker at which the content should be included within. */
+  /**
+   * The marker at which the content should be included within.
+   */
   marker: string
-  /** If the user has no sponsors, we can replace it with a fallback. */
+  /**
+   * If the user has no sponsors, we can replace it with a fallback.
+   */
   fallback: string
-  /** Fetches organization level sponsors if true. */
+  /**
+   * Fetches organization level sponsors if true.
+   */
   organization: boolean
-  /** Determines if inactive sponsors should be returned or not. */
+  /**
+   * Determines if inactive sponsors should be returned or not.
+   */
   activeOnly: boolean
-  /** Determines if private sponsors should be returned or not. If marked as true, the identity of the sponsor is still
-    kept private, however, an anonymized version of the sponsor is still included in the list. */
+  /**
+   * Determines if private sponsors should be returned or not. If marked as true, the identity of the sponsor is still
+   * kept private, however, an anonymized version of the sponsor is still included in the list.
+   */
   includePrivate: boolean
 }
 

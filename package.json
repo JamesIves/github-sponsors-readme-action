@@ -2,7 +2,7 @@
   "name": "@jamesives/github-sponsors-readme-action",
   "description": "This GitHub Action will automatically add your GitHub Sponsors to your README. It can be configured in multiple ways allowing you to display and breakdown your sponsors by price tier with fallbacks.",
   "author": "James Ives <iam@jamesiv.es> (https://jamesiv.es)",
-  "version": "1.4.5",
+  "version": "1.5.0",
   "license": "MIT",
   "main": "lib/lib.js",
   "types": "lib/lib.d.ts",

@@ -4,20 +4,24 @@ import {
   exportVariable,
   setOutput as setEnvironmentOutput
 } from '@actions/core'
-import {ActionInterface, Status} from './constants'
+import {action, ActionInterface, Status} from './constants'
 import {generateFile, getSponsors} from './template'
 import {checkParameters, extractErrorMessage} from './util'
 
-/** Initializes and runs the action.
- *
- * @param {ActionInterface} configuration - The configuration object.
+/**
+ * Initializes and runs the action.
+ * If no configuration is provided, the action will run with the default configuration.
  */
 export default async function run(
-  configuration: ActionInterface
+  configuration?: ActionInterface
 ): Promise<Status> {
   let status: Status = Status.RUNNING
 
+  /**
+   * Merges the action configuration with the user configuration.
+   */
   const settings: ActionInterface = {
+    ...action,
     ...configuration
   }
 
