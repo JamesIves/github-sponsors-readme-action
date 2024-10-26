@@ -158,6 +158,8 @@ export function generateTemplate(
       )
     }
 
+    info(`Found ${filteredSponsors.length} sponsors… ${filteredSponsors.length > 0 ? '🎉' : '😢'}`);
+
     /**
      * If there are no valid sponsors then we return the provided fallback.
      */
