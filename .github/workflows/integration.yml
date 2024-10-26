@@ -1,6 +1,9 @@
 name: Integration Tests 🧪
 on:
   workflow_call:
+    secrets:
+      PAT:
+        required: true
   workflow_dispatch:
   schedule:
     - cron: 30 15 * * 0-6
