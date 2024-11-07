@@ -8,5 +8,8 @@ module.exports = {
   },
   verbose: true,
   collectCoverage: true,
-  collectCoverageFrom: ['src/*.ts', '!src/constants.ts']
+  collectCoverageFrom: ['src/*.ts', '!src/constants.ts'],
+  automock: false,
+  resetMocks: true,
+  restoreMocks: true
 }
