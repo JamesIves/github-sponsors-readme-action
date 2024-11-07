@@ -132,7 +132,9 @@ describe('lib', () => {
 
     try {
       await run(action)
-    } catch (error) {
+    } catch (_error) {
+      console.error(_error)
+
       expect(setFailed).toHaveBeenCalled()
     }
   })
