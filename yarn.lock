@@ -2081,7 +2081,7 @@ jest-changed-files@^29.7.0:
     jest-util "^29.7.0"
     p-limit "^3.1.0"
 
-jest-circus@29.7.0, jest-circus@^29.7.0:
+jest-circus@^29.7.0:
   version "29.7.0"
   resolved "https://registry.yarnpkg.com/jest-circus/-/jest-circus-29.7.0.tgz#b6817a45fcc835d8b16d5962d0c026473ee3668a"
   integrity sha512-3E1nCMgipcTkCocFwM90XXQab9bS+GMsjdpmPrlelaxwD93Ad8iVEjX/vvHPdLPnFf+L40u+5+iutRdA1N9myw==
