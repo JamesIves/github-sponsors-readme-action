@@ -1,5 +1,4 @@
 import {setFailed} from '@actions/core'
-import nock from 'nock'
 import {promises} from 'fs'
 import {GitHubResponse, PrivacyLevel, Status} from '../src/constants'
 import run from '../src/lib'
