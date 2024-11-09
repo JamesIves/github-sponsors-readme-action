@@ -1,7 +1,7 @@
 import {setFailed} from '@actions/core'
 import nock from 'nock'
 import {promises} from 'fs'
-import {GitHubResponse, PrivacyLevel, Status, Urls} from '../src/constants'
+import {GitHubResponse, PrivacyLevel, Status} from '../src/constants'
 import run from '../src/lib'
 
 const response: GitHubResponse = {
@@ -57,16 +57,15 @@ jest.mock('@actions/core', () => ({
 
 describe('lib', () => {
   beforeEach(() => {
-    nock.cleanAll()
-    nock(Urls.GITHUB_API).post('/graphql').reply(200, response)
+    jest.resetAllMocks()
+    global.fetch = jest.fn().mockResolvedValue({
+      json: jest.fn().mockResolvedValue(response)
+    })
   })
 
   afterEach(() => {
-    nock.restore()
-    jest.resetAllMocks()
+    jest.restoreAllMocks()
   })
-
-  afterEach(nock.cleanAll)
 
   it('should run through the commands and enter a success state', async () => {
     const action = {

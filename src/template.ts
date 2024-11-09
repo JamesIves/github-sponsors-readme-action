@@ -1,4 +1,3 @@
-import 'cross-fetch/polyfill'
 import {promises} from 'fs'
 import {
   ActionInterface,
@@ -111,10 +110,10 @@ export function generateTemplate(
    * reference it as the API results can be somewhat sporadic.
    */
   const data =
-    action.organization && response.data?.organization
-      ? response.data?.organization
-      : response.data?.viewer
-        ? response.data?.viewer
+    action.organization && response?.data?.organization
+      ? response?.data?.organization
+      : response?.data?.viewer
+        ? response?.data?.viewer
         : null
 
   const sponsorshipsAsMaintainer = data?.sponsorshipsAsMaintainer
