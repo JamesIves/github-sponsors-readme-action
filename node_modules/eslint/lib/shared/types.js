@@ -21,7 +21,7 @@ module.exports = {};
 /**
  * @typedef {Object} ParserOptions
  * @property {EcmaFeatures} [ecmaFeatures] The optional features.
- * @property {3|5|6|7|8|9|10|11|12|13|14|15|2015|2016|2017|2018|2019|2020|2021|2022|2023|2024} [ecmaVersion] The ECMAScript version (or revision number).
+ * @property {3|5|6|7|8|9|10|11|12|13|14|15|16|2015|2016|2017|2018|2019|2020|2021|2022|2023|2024|2025} [ecmaVersion] The ECMAScript version (or revision number).
  * @property {"script"|"module"} [sourceType] The source code type.
  * @property {boolean} [allowReserved] Allowing the use of reserved words as identifiers in ES3.
  */
@@ -245,6 +245,6 @@ module.exports = {};
  * A formatter function.
  * @callback FormatterFunction
  * @param {LintResult[]} results The list of linting results.
- * @param {{cwd: string, maxWarningsExceeded?: MaxWarningsExceeded, rulesMeta: Record<string, RuleMeta>}} [context] A context object.
+ * @param {{cwd: string, maxWarningsExceeded?: MaxWarningsExceeded, rulesMeta: Record<string, RuleMeta>}} context A context object.
  * @returns {string | Promise<string>} Formatted text.
  */

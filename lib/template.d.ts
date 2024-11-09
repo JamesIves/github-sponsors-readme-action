@@ -1,4 +1,3 @@
-import 'cross-fetch/polyfill';
 import { ActionInterface, GitHubResponse, Status } from './constants';
 /**
  * Fetches sponsors from the GitHub Sponsors API.
