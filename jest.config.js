@@ -3,11 +3,13 @@ module.exports = {
   moduleFileExtensions: ['js', 'ts'],
   testEnvironment: 'node',
   testMatch: ['**/*.test.ts'],
-  testRunner: 'jest-circus/runner',
   transform: {
     '^.+\\.ts$': 'ts-jest'
   },
   verbose: true,
   collectCoverage: true,
-  collectCoverageFrom: ['src/*.ts', '!src/constants.ts']
+  collectCoverageFrom: ['src/*.ts', '!src/constants.ts'],
+  automock: false,
+  resetMocks: true,
+  restoreMocks: true
 }

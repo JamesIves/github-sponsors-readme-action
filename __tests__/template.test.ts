@@ -1,8 +1,7 @@
-import {GitHubResponse, PrivacyLevel, Status, Urls} from '../src/constants'
-import {generateFile, generateTemplate, getSponsors} from '../src/template'
-import {promises} from 'fs'
 import {info} from '@actions/core'
-import nock from 'nock'
+import {promises} from 'fs'
+import {GitHubResponse, PrivacyLevel, Status} from '../src/constants'
+import {generateFile, generateTemplate, getSponsors} from '../src/template'
 
 jest.setTimeout(60000)
 
@@ -811,6 +810,10 @@ describe('template', () => {
   })
 
   describe('getSponsors', () => {
+    beforeEach(() => {
+      jest.resetAllMocks()
+    })
+
     it('should return some data as user', async () => {
       const action = {
         token: '123',
@@ -826,13 +829,17 @@ describe('template', () => {
         includePrivate: false
       }
 
-      nock(Urls.GITHUB_API).post('/graphql').reply(200, {
-        data: '12345'
+      global.fetch = jest.fn().mockResolvedValue({
+        json: jest.fn().mockResolvedValue({data: '12345'})
       })
 
       const data = await getSponsors(action)
 
       expect(data).toEqual({data: '12345'})
+      expect(global.fetch).toHaveBeenCalledWith(
+        'https://api.github.com/graphql',
+        expect.any(Object)
+      )
     })
 
     it('should return some data as organization', async () => {
@@ -850,13 +857,17 @@ describe('template', () => {
         includePrivate: false
       }
 
-      nock(Urls.GITHUB_API).post('/graphql').reply(200, {
-        data: '12345'
+      global.fetch = jest.fn().mockResolvedValue({
+        json: jest.fn().mockResolvedValue({data: '12345'})
       })
 
       const data = await getSponsors(action)
 
       expect(data).toEqual({data: '12345'})
+      expect(global.fetch).toHaveBeenCalledWith(
+        'https://api.github.com/graphql',
+        expect.any(Object)
+      )
     })
 
     it('should appropriately handle an error', async () => {

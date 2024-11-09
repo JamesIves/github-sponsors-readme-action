@@ -1,9 +1,7 @@
 import {setFailed} from '@actions/core'
-import nock from 'nock'
 import {promises} from 'fs'
-import {GitHubResponse, PrivacyLevel, Status, Urls} from '../src/constants'
+import {GitHubResponse, PrivacyLevel, Status} from '../src/constants'
 import run from '../src/lib'
-import '../src/main'
 
 const response: GitHubResponse = {
   data: {
@@ -58,31 +56,31 @@ jest.mock('@actions/core', () => ({
 
 describe('lib', () => {
   beforeEach(() => {
-    nock(Urls.GITHUB_API).post('/graphql').reply(200, response)
+    jest.resetAllMocks()
+    global.fetch = jest.fn().mockResolvedValue({
+      json: jest.fn().mockResolvedValue(response)
+    })
   })
 
   afterEach(() => {
-    nock.restore()
+    jest.restoreAllMocks()
   })
-
-  afterEach(nock.cleanAll)
 
   it('should run through the commands and enter a success state', async () => {
     const action = {
       token: '123',
-      file: '.github/TEST.md',
+      file: './README.test.md',
       template:
         '<a href="https://github.com/{{ login }}"><img src="https://github.com/{{ login }}.png" width="60px" alt="" /></a>',
       minimum: 0,
       maximum: 0,
-      marker: 'sponsors',
+      marker: 'sponsor',
       organization: false,
       fallback: '',
       activeOnly: true,
       includePrivate: false
     }
 
-    // Valid file structure
     await promises.writeFile(
       'README.test.md',
       'Generated README file for testing <!-- sponsor --><!-- sponsor --> - do not commit'
@@ -132,7 +130,9 @@ describe('lib', () => {
 
     try {
       await run(action)
-    } catch (error) {
+    } catch (_error) {
+      console.error(_error)
+
       expect(setFailed).toHaveBeenCalled()
     }
   })
