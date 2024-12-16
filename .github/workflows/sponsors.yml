@@ -25,6 +25,7 @@ jobs:
           token: ${{ secrets.PAT }}
           file: 'README.md'
           maximum: 2499
+          template: '<a href="https://github.com/{{{ login }}}"><img src="{{{ avatarUrl }}}" width="50px" alt="{{{ login }}}" /></a>&nbsp;&nbsp;'
           marker: 'real-sponsors'
           active-only: false
           include-private: true
