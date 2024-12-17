@@ -292,9 +292,7 @@ describe('template', () => {
                     name: 'James Ives',
                     login: 'JamesIves',
                     url: 'https://github.com/JamesIves',
-                    websiteUrl: 'https://jamesiv.es',
-                    avatarUrl:
-                      'https://avatars.githubusercontent.com/u/10888441?v=4'
+                    websiteUrl: 'https://jamesiv.es'
                   }
                 },
                 {
@@ -307,9 +305,7 @@ describe('template', () => {
                     name: 'Montezuma Ives',
                     login: 'MontezumaIves',
                     url: 'https://github.com/MontezumaIves',
-                    websiteUrl: 'https://jamesiv.es',
-                    avatarUrl:
-                      'https://avatars.githubusercontent.com/u/78580739?v=4'
+                    websiteUrl: 'https://jamesiv.es'
                   }
                 }
               ]
@@ -333,7 +329,7 @@ describe('template', () => {
       }
 
       expect(generateTemplate(response, action)).toEqual(
-        '<a href="https://github.com/JamesIves"><img src="https:&#x2F;&#x2F;avatars.githubusercontent.com&#x2F;u&#x2F;10888441?v&#x3D;4" width="60px" alt="" /></a><a href="https://github.com/"><img src="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;JamesIves&#x2F;github-sponsors-readme-action&#x2F;dev&#x2F;.github&#x2F;assets&#x2F;placeholder.png" width="60px" alt="" /></a>'
+        '<a href="https://github.com/JamesIves"><img src="https:&#x2F;&#x2F;github.com&#x2F;JamesIves.png" width="60px" alt="" /></a><a href="https://github.com/"><img src="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;JamesIves&#x2F;github-sponsors-readme-action&#x2F;dev&#x2F;.github&#x2F;assets&#x2F;placeholder.png" width="60px" alt="" /></a>'
       )
     })
 

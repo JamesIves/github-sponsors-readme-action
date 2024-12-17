@@ -88,7 +88,7 @@ export interface Sponsor {
     name: string | null
     login: string
     url: string
-    avatarUrl: string
+    avatarUrl?: string
     websiteUrl: string | null
   }
   createdAt: string

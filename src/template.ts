@@ -50,14 +50,12 @@ export async function getSponsors(
                 login
                 url
                 websiteUrl
-                avatarUrl
               }
               ... on User {
                 name
                 login
                 url
                 websiteUrl
-                avatarUrl
               }
             }
             createdAt
@@ -186,7 +184,13 @@ export function generateTemplate(
         ),
         name: sanitizeAndClean(sponsorEntity.name || ''),
         login: sanitizeAndClean(sponsorEntity.login),
+        /**
+         * The avatar URL provided by the GitHub API includes an expiration token so we circumvent this for now
+         * by using a path that is always available.
+         */
         avatarUrl: sponsorEntity.avatarUrl
+          ? sponsorEntity.avatarUrl
+          : `https://github.com/${sanitizeAndClean(sponsorEntity.login)}.png`
       }
 
       /**
