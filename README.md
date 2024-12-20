@@ -80,7 +80,7 @@ jobs:
           folder: '.'
 ```
 
-You'll also need to the following `<!-- sponsors --><!-- sponsors -->` in your `.md` file so the action knows where to place the data.
+You'll also need to add the following `<!-- sponsors --><!-- sponsors -->` in your `.md` file so the action knows where to place the data.
 
 ```md
 # Awesome Project
