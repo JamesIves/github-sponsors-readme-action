@@ -9,24 +9,6 @@
 </h1>
 
 <p align="center">
-  <a href="https://github.com/JamesIves/github-sponsors-readme-action/actions">
-    <img src="https://github.com/JamesIves/github-sponsors-readme-action/workflows/unit-tests/badge.svg" alt="Unit test status badge">
-  </a>
-  
-  <a href="https://github.com/JamesIves/github-sponsors-readme-action/actions">
-    <img src="https://github.com/JamesIves/github-sponsors-readme-action/workflows/integration-tests/badge.svg" alt="Integration test status badge">
-  </a>
-  
-  <a href="https://codecov.io/gh/JamesIves/github-sponsors-readme-action/branch/dev">
-    <img src="https://codecov.io/gh/JamesIves/github-sponsors-readme-action/branch/dev/graph/badge.svg" alt="Code coverage status badge">
-  </a>
-  
-  <a href="https://github.com/JamesIves/github-sponsors-readme-action/releases">
-    <img src="https://img.shields.io/github/v/release/JamesIves/github-sponsors-readme-action.svg?logo=github" alt="Release version badge">
-  </a>
-</p>
-
-<p align="center">
   This <a href="https://github.com/features/actions">GitHub Action</a> will automatically add your <a href="https://github.com/sponsors">GitHub Sponsors</a> to your README. It can be configured in multiple ways allowing you to display and breakdown your sponsors by price tier with fallbacks. It also includes templating support so you can display your sponsors how you'd like.
 </p>
 <p align="center">
