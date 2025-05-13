@@ -39,7 +39,7 @@
     "dompurify": "3.2.5",
     "jsdom": "26.1.0",
     "mustache": "4.2.0",
-    "typescript-eslint": "8.32.0"
+    "typescript-eslint": "8.32.1"
   },
   "devDependencies": {
     "@types/async-retry": "1.4.9",
