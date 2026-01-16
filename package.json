@@ -33,7 +33,7 @@
     "github-action"
   ],
   "dependencies": {
-    "@actions/core": "1.11.1",
+    "@actions/core": "2.0.1",
     "@actions/io": "2.0.0",
     "@eslint/js": "9.39.2",
     "dompurify": "3.2.7",
