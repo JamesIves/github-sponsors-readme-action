@@ -37,7 +37,8 @@ CSSOM.parse = function parse(token) {
 		"atBlock": true,
 		"containerBlock": true,
 		"conditionBlock": true,
-		'documentRule-begin': true
+		'documentRule-begin': true,
+		"layerBlock": true
 	};
 
 	var styleSheet = new CSSOM.CSSStyleSheet();
@@ -52,7 +53,7 @@ CSSOM.parse = function parse(token) {
 	var hasAncestors = false;
 	var prevScope;
 
-	var name, priority="", styleRule, mediaRule, containerRule, supportsRule, importRule, fontFaceRule, keyframesRule, documentRule, hostRule, startingStyleRule;
+	var name, priority="", styleRule, mediaRule, containerRule, supportsRule, importRule, fontFaceRule, keyframesRule, documentRule, hostRule, startingStyleRule, layerBlockRule;
 
 	var atKeyframesRegExp = /@(-(?:\w+-)+)?keyframes/g;
 
@@ -165,7 +166,14 @@ CSSOM.parse = function parse(token) {
 				i += "container".length;
 				buffer = "";
 				break;
-			} else if (token.indexOf("@supports", i) === i) {
+			} else if (token.indexOf("@layer", i) === i) {
+				state = "layerBlock"
+				layerBlockRule = new CSSOM.CSSLayerBlockRule();
+				layerBlockRule.__starts = i;
+				i += "layer".length;
+				buffer = "";
+				break;
+			}  else if (token.indexOf("@supports", i) === i) {
 				state = "conditionBlock";
 				supportsRule = new CSSOM.CSSSupportsRule();
 				supportsRule.__starts = i;
@@ -252,6 +260,17 @@ CSSOM.parse = function parse(token) {
 
 				currentScope = parentRule = supportsRule;
 				supportsRule.parentStyleSheet = styleSheet;
+				buffer = "";
+				state = "before-selector";
+			} else if (state === "layerBlock") {
+				layerBlockRule.layerNameText = buffer.trim();
+
+				if (parentRule) {
+					ancestorRules.push(parentRule);
+				}
+
+				currentScope = parentRule = layerBlockRule;
+				layerBlockRule.parentStyleSheet = styleSheet;
 				buffer = "";
 				state = "before-selector";
 			} else if (state === "hostRule-begin") {
@@ -430,6 +449,7 @@ CSSOM.parse = function parse(token) {
 							parentRule.constructor.name === "CSSMediaRule"
 							|| parentRule.constructor.name === "CSSSupportsRule"
 							|| parentRule.constructor.name === "CSSContainerRule"
+							|| parentRule.constructor.name === "CSSLayerBlockRule"
 							|| parentRule.constructor.name === "CSSStartingStyleRule"
 						) {
 							prevScope = currentScope;
@@ -501,4 +521,5 @@ CSSOM.CSSKeyframeRule = require('./CSSKeyframeRule').CSSKeyframeRule;
 CSSOM.CSSKeyframesRule = require('./CSSKeyframesRule').CSSKeyframesRule;
 CSSOM.CSSValueExpression = require('./CSSValueExpression').CSSValueExpression;
 CSSOM.CSSDocumentRule = require('./CSSDocumentRule').CSSDocumentRule;
+CSSOM.CSSLayerBlockRule = require("./CSSLayerBlockRule").CSSLayerBlockRule;
 ///CommonJS

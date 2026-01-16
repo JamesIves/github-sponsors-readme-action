@@ -10,7 +10,8 @@ var CSSOM = {
 	CSSSupportsRule: require("./CSSSupportsRule").CSSSupportsRule,
 	CSSStyleDeclaration: require("./CSSStyleDeclaration").CSSStyleDeclaration,
 	CSSKeyframeRule: require('./CSSKeyframeRule').CSSKeyframeRule,
-	CSSKeyframesRule: require('./CSSKeyframesRule').CSSKeyframesRule
+	CSSKeyframesRule: require('./CSSKeyframesRule').CSSKeyframesRule,
+	CSSLayerBlockRule: require('./CSSLayerBlockRule').CSSLayerBlockRule
 };
 ///CommonJS
 
@@ -59,6 +60,10 @@ CSSOM.clone = function clone(stylesheet) {
 
 		if (rule.hasOwnProperty('conditionText')) {
 			ruleClone.conditionText = rule.conditionText;
+		}
+
+		if (rule.hasOwnProperty('layerName')) {
+			ruleClone.layerName = rule.layerName;
 		}
 
 		if (rule.hasOwnProperty('cssRules')) {

@@ -19,7 +19,7 @@ pids
 # lib-cov
 
 # Compiled output directory
-lib
+# lib
 
 # Coverage directory used by tools like istanbul
 coverage

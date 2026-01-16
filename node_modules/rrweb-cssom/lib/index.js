@@ -21,5 +21,6 @@ exports.MatcherList = require('./MatcherList').MatcherList;
 exports.CSSDocumentRule = require('./CSSDocumentRule').CSSDocumentRule;
 exports.CSSValue = require('./CSSValue').CSSValue;
 exports.CSSValueExpression = require('./CSSValueExpression').CSSValueExpression;
+exports.CSSLayerBlockRule = require('./CSSLayerBlockRule').CSSLayerBlockRule;
 exports.parse = require('./parse').parse;
 exports.clone = require('./clone').clone;

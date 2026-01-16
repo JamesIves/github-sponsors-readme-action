@@ -23,3 +23,7 @@ and limitations under the License.
 /// <reference lib="esnext.collection" />
 /// <reference lib="esnext.array" />
 /// <reference lib="esnext.iterator" />
+/// <reference lib="esnext.promise" />
+/// <reference lib="esnext.float16" />
+/// <reference lib="esnext.error" />
+/// <reference lib="esnext.sharedmemory" />
