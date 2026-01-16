@@ -4,8 +4,11 @@ module.exports = {
   testEnvironment: 'node',
   testMatch: ['**/*.test.ts'],
   transform: {
-    '^.+\\.ts$': 'ts-jest'
+    '^.+\\.(ts|js)$': 'ts-jest'
   },
+  transformIgnorePatterns: [
+    'node_modules/(?!(@exodus/bytes|html-encoding-sniffer|parse5|entities)/)'
+  ],
   verbose: true,
   collectCoverage: true,
   collectCoverageFrom: ['src/*.ts', '!src/constants.ts'],
