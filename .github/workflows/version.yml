@@ -24,12 +24,12 @@ jobs:
     name: Publish to Registries 📦
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6.0.1
         with:
           ref: dev
 
       # Setup .npmrc file to publish to npm
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6.2.0
         with:
           node-version-file: '.node-version'
           registry-url: 'https://registry.npmjs.org'
@@ -47,6 +47,7 @@ jobs:
       - run: yarn build
       - run: git stash
       - name: Set version to match the tag
+        continue-on-error: true
         run: |
           VERSION=${GITHUB_REF#refs/tags/v}
           npm version $VERSION -m "Release $VERSION 📣"
@@ -60,7 +61,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       # Setup .npmrc file to publish to GitHub Packages
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6.2.0
         with:
           node-version-file: '.node-version'
           registry-url: 'https://npm.pkg.github.com'
