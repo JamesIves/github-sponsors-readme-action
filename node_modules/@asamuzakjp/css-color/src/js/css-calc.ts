@@ -13,7 +13,7 @@ import {
 } from './cache';
 import { isString, isStringOrNumber } from './common';
 import { resolveVar } from './css-var';
-import { roundToPrecision } from './util';
+import { resolveLengthInPixels, roundToPrecision } from './util';
 import { MatchedRegExp, Options } from './typedef';
 
 /* constants */
@@ -786,22 +786,12 @@ export const resolveDimension = (
     unit: string;
     value: number;
   };
-  const { dimension = {} } = opt;
   if (unit === 'px') {
     return `${value}${unit}`;
   }
-  const relativeValue = Number(value);
-  if (unit && Number.isFinite(relativeValue)) {
-    let pixelValue;
-    if (Object.hasOwn(dimension, unit)) {
-      pixelValue = dimension[unit];
-    } else if (typeof dimension.callback === 'function') {
-      pixelValue = dimension.callback(unit);
-    }
-    pixelValue = Number(pixelValue);
-    if (Number.isFinite(pixelValue)) {
-      return `${relativeValue * pixelValue}px`;
-    }
+  const pixelValue = resolveLengthInPixels(Number(value), unit, opt);
+  if (Number.isFinite(pixelValue)) {
+    return `${roundToPrecision(pixelValue, HEX)}px`;
   }
   return new NullObject();
 };

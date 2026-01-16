@@ -110,11 +110,22 @@ function isArrayIndexPropName(P) {
   return true;
 }
 
-const byteLengthGetter =
+const arrayBufferByteLengthGetter =
     Object.getOwnPropertyDescriptor(ArrayBuffer.prototype, "byteLength").get;
 function isArrayBuffer(value) {
   try {
-    byteLengthGetter.call(value);
+    arrayBufferByteLengthGetter.call(value);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+const sharedArrayBufferByteLengthGetter =
+  Object.getOwnPropertyDescriptor(SharedArrayBuffer.prototype, "byteLength").get;
+function isSharedArrayBuffer(value) {
+  try {
+    sharedArrayBufferByteLengthGetter.call(value);
     return true;
   } catch {
     return false;
@@ -219,6 +230,7 @@ module.exports = exports = {
   tryImplForWrapper,
   iterInternalSymbol,
   isArrayBuffer,
+  isSharedArrayBuffer,
   isArrayIndexPropName,
   supportsPropertyIndex,
   supportedPropertyIndices,

@@ -5,7 +5,7 @@ const vm = require("vm");
 const toughCookie = require("tough-cookie");
 const sniffHTMLEncoding = require("html-encoding-sniffer");
 const whatwgURL = require("whatwg-url");
-const whatwgEncoding = require("whatwg-encoding");
+const { legacyHookDecode } = require("@exodus/bytes/encoding.js");
 const { URL } = require("whatwg-url");
 const MIMEType = require("whatwg-mimetype");
 const idlUtils = require("./jsdom/living/generated/utils.js");
@@ -298,10 +298,10 @@ function normalizeHTML(html, mimeType) {
 
   if (Buffer.isBuffer(html)) {
     encoding = sniffHTMLEncoding(html, {
-      defaultEncoding: mimeType.isXML() ? "UTF-8" : "windows-1252",
+      xml: mimeType.isXML(),
       transportLayerEncodingLabel: mimeType.parameters.get("charset")
     });
-    html = whatwgEncoding.decode(html, encoding);
+    html = legacyHookDecode(html, encoding);
   } else {
     html = String(html);
   }
