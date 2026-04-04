@@ -7,7 +7,7 @@ import {
   Status,
   Urls
 } from './constants'
-import {render} from 'mustache'
+import Mustache from 'mustache'
 import {
   extractErrorMessage,
   suppressSensitiveInformation,
@@ -202,7 +202,7 @@ export function generateTemplate(
         '}}'
       )
 
-      template = template += render(safeTemplate, sanitizedSponsorEntity)
+      template = template += Mustache.render(safeTemplate, sanitizedSponsorEntity)
     })
   } else {
     info(`No sponsorship data was found… ❌`)

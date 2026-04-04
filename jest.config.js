@@ -4,7 +4,7 @@ module.exports = {
   testEnvironment: 'node',
   testMatch: ['**/*.test.ts'],
   transform: {
-    '^.+\\.(ts|js)$': 'ts-jest'
+    '^.+\\.(ts|js)$': ['ts-jest', {tsconfig: 'tsconfig.test.json'}]
   },
   transformIgnorePatterns: [
     'node_modules/(?!(@exodus/bytes|html-encoding-sniffer|parse5|entities)/)'
