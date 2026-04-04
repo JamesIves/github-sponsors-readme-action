@@ -31,7 +31,7 @@ jobs:
           yarn lint:format:check
           yarn test
 
-      - name: Uploade CodeCov Report
+      - name: Upload CodeCov Report
         uses: codecov/codecov-action@v6
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
