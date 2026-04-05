@@ -6,14 +6,14 @@ import {
   Sponsor,
   Status,
   Urls
-} from './constants'
+} from './constants.js'
 import Mustache from 'mustache'
 import {
   extractErrorMessage,
   suppressSensitiveInformation,
   sanitizeAndClean,
   replaceAll
-} from './util'
+} from './util.js'
 import {info} from '@actions/core'
 
 /**

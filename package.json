@@ -6,7 +6,11 @@
   "license": "MIT",
   "main": "lib/lib.js",
   "types": "lib/lib.d.ts",
+  "type": "module",
   "root": true,
+  "resolutions": {
+    "@asamuzakjp/css-color": "4.1.1"
+  },
   "scripts": {
     "build": "rm -rf lib && tsc --declaration",
     "test": "jest",
@@ -33,8 +37,8 @@
     "github-action"
   ],
   "dependencies": {
-    "@actions/core": "2.0.1",
-    "@actions/io": "2.0.0",
+    "@actions/core": "3.0.0",
+    "@actions/io": "3.0.2",
     "@eslint/js": "10.0.1",
     "dompurify": "3.3.3",
     "jsdom": "28.0.0",

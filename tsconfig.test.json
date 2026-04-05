@@ -1,6 +1,12 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
+    // module: CommonJS needed so ts-jest outputs CJS for Jest's CJS runtime.
+    // Bundler moduleResolution is incompatible with CommonJS module mode,
+    // so Node is used here. The moduleNameMapper in jest.config.cjs handles
+    // .js extension stripping at runtime.
+    "module": "CommonJS",
+    "moduleResolution": "Node",
     "rootDir": ".",
     "types": ["node", "jest"]
   },

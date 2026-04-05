@@ -5,6 +5,10 @@ import {
   isNullOrUndefined
 } from '../src/util'
 
+jest.mock('@actions/core', () => ({
+  getInput: jest.fn()
+}))
+
 describe('util', () => {
   describe('isNullOrUndefined', () => {
     it('should return true if the value is null', async () => {
