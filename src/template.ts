@@ -86,7 +86,8 @@ export async function getSponsors(
       `There was an error with the GitHub API request: ${suppressSensitiveInformation(
         extractErrorMessage(error),
         action
-      )} ❌`
+      )} ❌`,
+      {cause: error}
     )
   }
 }
@@ -244,7 +245,8 @@ export async function generateFile(
       `There was an error generating the updated file: ${suppressSensitiveInformation(
         extractErrorMessage(error),
         action
-      )} ❌`
+      )} ❌`,
+      {cause: error}
     )
   }
 }

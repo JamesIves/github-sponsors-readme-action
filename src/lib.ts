@@ -15,7 +15,7 @@ import {checkParameters, extractErrorMessage} from './util.js'
 export default async function run(
   configuration?: ActionInterface
 ): Promise<Status> {
-  let status: Status = Status.RUNNING
+  let status: Status = Status.FAILED
 
   /**
    * Merges the action configuration with the user configuration.
@@ -69,7 +69,6 @@ export default async function run(
     const response = await getSponsors(settings)
     status = await generateFile(response, settings)
   } catch (error) {
-    status = Status.FAILED
     setFailed(extractErrorMessage(error))
   } finally {
     info(
