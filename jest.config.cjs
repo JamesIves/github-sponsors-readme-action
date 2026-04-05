@@ -4,7 +4,10 @@ module.exports = {
   testEnvironment: 'node',
   testMatch: ['**/*.test.ts'],
   transform: {
-    '^.+\\.(ts|js)$': ['ts-jest', {tsconfig: 'tsconfig.test.json', diagnostics: false}]
+    '^.+\\.(ts|js)$': [
+      'ts-jest',
+      {tsconfig: 'tsconfig.test.json', diagnostics: false}
+    ]
   },
   // @actions/core@3.0.0 is ESM-only (no "require" export condition).
   // moduleNameMapper redirects the specifier to a local CJS stub so Jest's CJS

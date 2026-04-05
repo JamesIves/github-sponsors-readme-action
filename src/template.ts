@@ -203,7 +203,10 @@ export function generateTemplate(
         '}}'
       )
 
-      template = template += Mustache.render(safeTemplate, sanitizedSponsorEntity)
+      template = template += Mustache.render(
+        safeTemplate,
+        sanitizedSponsorEntity
+      )
     })
   } else {
     info(`No sponsorship data was found… ❌`)
