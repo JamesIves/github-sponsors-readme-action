@@ -89,4 +89,5 @@ export default async function run(
   return status
 }
 
-export {generateFile, getSponsors, ActionInterface}
+export {generateFile, getSponsors}
+export type {ActionInterface}
