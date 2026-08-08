@@ -1,10 +1,22 @@
 name: Integration Tests 🧪
 on:
   workflow_call:
+    inputs:
+      action-ref:
+        description: 'The github-sponsors-readme-action ref (tag, branch, or SHA) to validate.'
+        required: false
+        type: string
+        default: 'v1'
     secrets:
       PAT:
         required: true
   workflow_dispatch:
+    inputs:
+      action-ref:
+        description: 'The github-sponsors-readme-action ref (tag, branch, or SHA) to validate.'
+        required: false
+        type: string
+        default: 'v1'
   schedule:
     - cron: 30 15 * * 0-6
 
@@ -15,14 +27,21 @@ jobs:
       - name: Checkout 🛎️
         uses: actions/checkout@v7.0.1
 
+      - name: Checkout Action Under Test
+        uses: actions/checkout@v7.0.1
+        with:
+          repository: JamesIves/github-sponsors-readme-action
+          ref: ${{ inputs.action-ref || 'v1' }}
+          path: action-under-test
+
       - name: Generate Sponsors 💖
-        uses: JamesIves/github-sponsors-readme-action@releases/v1
+        uses: ./action-under-test
         with:
           token: ${{ secrets.PAT }}
           file: '.github/TEST.md'
 
       - name: Generate Sponsors 💖
-        uses: JamesIves/github-sponsors-readme-action@releases/v1
+        uses: ./action-under-test
         with:
           token: ${{ secrets.PAT }}
           file: '.github/TEST.md'
@@ -32,7 +51,7 @@ jobs:
           fallback: 'No sponsors at this level'
 
       - name: Generate Sponsors 💖
-        uses: JamesIves/github-sponsors-readme-action@releases/v1
+        uses: ./action-under-test
         with:
           token: ${{ secrets.PAT }}
           file: '.github/TEST.md'
