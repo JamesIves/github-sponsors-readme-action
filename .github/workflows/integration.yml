@@ -1,28 +1,50 @@
 name: Integration Tests 🧪
 on:
   workflow_call:
+    inputs:
+      action-ref:
+        description: 'The github-sponsors-readme-action ref (tag, branch, or SHA) to validate.'
+        required: false
+        type: string
+        default: 'v1'
     secrets:
       PAT:
         required: true
   workflow_dispatch:
+    inputs:
+      action-ref:
+        description: 'The github-sponsors-readme-action ref (tag, branch, or SHA) to validate.'
+        required: false
+        type: string
+        default: 'v1'
   schedule:
-    - cron: 30 15 * * 0-6
+    - cron: 30 15 * * 1
+
+permissions:
+  contents: read
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout 🛎️
-        uses: actions/checkout@v6.0.1
+        uses: actions/checkout@v7.0.1
+
+      - name: Checkout Action Under Test
+        uses: actions/checkout@v7.0.1
+        with:
+          repository: JamesIves/github-sponsors-readme-action
+          ref: ${{ inputs.action-ref || 'v1' }}
+          path: action-under-test
 
       - name: Generate Sponsors 💖
-        uses: JamesIves/github-sponsors-readme-action@releases/v1
+        uses: ./action-under-test
         with:
           token: ${{ secrets.PAT }}
           file: '.github/TEST.md'
 
       - name: Generate Sponsors 💖
-        uses: JamesIves/github-sponsors-readme-action@releases/v1
+        uses: ./action-under-test
         with:
           token: ${{ secrets.PAT }}
           file: '.github/TEST.md'
@@ -32,10 +54,79 @@ jobs:
           fallback: 'No sponsors at this level'
 
       - name: Generate Sponsors 💖
-        uses: JamesIves/github-sponsors-readme-action@releases/v1
+        uses: ./action-under-test
         with:
           token: ${{ secrets.PAT }}
           file: '.github/TEST.md'
           minimum: 1000
           marker: 'gold'
           fallback: 'No sponsors at this level'
+
+      - name: Generate Sponsors (include-private) 💖
+        uses: ./action-under-test
+        with:
+          token: ${{ secrets.PAT }}
+          file: '.github/TEST.md'
+          include-private: true
+          marker: 'sponsors'
+
+      - name: Generate Sponsors (active-only disabled) 💖
+        uses: ./action-under-test
+        with:
+          token: ${{ secrets.PAT }}
+          file: '.github/TEST.md'
+          active-only: false
+          marker: 'sponsors'
+
+      - name: Generate Sponsors (custom template) 💖
+        uses: ./action-under-test
+        with:
+          token: ${{ secrets.PAT }}
+          file: '.github/TEST.md'
+          marker: 'sponsors'
+          template: '<li>{{ login }}</li>'
+
+  # Verifies the SKIPPED and FAILED status paths against the real,
+  # compiled action - only unit-tested otherwise.
+  integration-skipped-and-failed-paths:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v7.0.1
+
+      - name: Checkout Action Under Test
+        uses: actions/checkout@v7.0.1
+        with:
+          repository: JamesIves/github-sponsors-readme-action
+          ref: ${{ inputs.action-ref || 'v1' }}
+          path: action-under-test
+
+      - name: Generate Sponsors with a marker that does not exist (should be skipped)
+        id: skipped
+        uses: ./action-under-test
+        with:
+          token: ${{ secrets.PAT }}
+          file: '.github/TEST.md'
+          marker: 'marker-that-does-not-exist'
+
+      - name: Verify the SKIPPED status was reported
+        if: steps.skipped.outputs.sponsorshipStatus != 'skipped'
+        run: |
+          echo "Expected sponsorshipStatus=skipped, got '${{ steps.skipped.outputs.sponsorshipStatus }}'"
+          exit 1
+
+      - name: Generate Sponsors targeting a file that does not exist (should fail)
+        id: failed
+        continue-on-error: true
+        uses: ./action-under-test
+        with:
+          token: ${{ secrets.PAT }}
+          file: '.github/this-file-does-not-exist.md'
+          marker: 'sponsors'
+
+      - name: Verify the step failed cleanly
+        if: steps.failed.outcome != 'failure' || steps.failed.outputs.sponsorshipStatus != 'failed'
+        run: |
+          echo "Expected the step to fail for a missing file"
+          exit 1

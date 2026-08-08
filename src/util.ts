@@ -1,4 +1,4 @@
-import {ActionInterface, RequiredActionParameters} from './constants'
+import {ActionInterface, RequiredActionParameters} from './constants.js'
 import {JSDOM} from 'jsdom'
 import DOMPurify from 'dompurify'
 
