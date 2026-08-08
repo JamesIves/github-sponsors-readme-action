@@ -58,3 +58,78 @@ jobs:
           minimum: 1000
           marker: 'gold'
           fallback: 'No sponsors at this level'
+
+      # Note: organization mode is intentionally not covered here - it
+      # requires a GitHub org that both receives GitHub Sponsors and is
+      # accessible with an org:read-scoped PAT, which isn't available in
+      # this repo's CI. It's covered at the unit level instead
+      # (see __tests__/template.test.ts).
+
+      - name: Generate Sponsors (include-private) 💖
+        uses: ./action-under-test
+        with:
+          token: ${{ secrets.PAT }}
+          file: '.github/TEST.md'
+          include-private: true
+          marker: 'sponsors'
+
+      - name: Generate Sponsors (active-only disabled) 💖
+        uses: ./action-under-test
+        with:
+          token: ${{ secrets.PAT }}
+          file: '.github/TEST.md'
+          active-only: false
+          marker: 'sponsors'
+
+      - name: Generate Sponsors (custom template) 💖
+        uses: ./action-under-test
+        with:
+          token: ${{ secrets.PAT }}
+          file: '.github/TEST.md'
+          marker: 'sponsors'
+          template: '<li>{{ login }}</li>'
+
+  # Verifies the SKIPPED and FAILED status paths against the real,
+  # compiled action - only unit-tested otherwise.
+  integration-skipped-and-failed-paths:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v7.0.1
+
+      - name: Checkout Action Under Test
+        uses: actions/checkout@v7.0.1
+        with:
+          repository: JamesIves/github-sponsors-readme-action
+          ref: ${{ inputs.action-ref || 'v1' }}
+          path: action-under-test
+
+      - name: Generate Sponsors with a marker that does not exist (should be skipped)
+        id: skipped
+        uses: ./action-under-test
+        with:
+          token: ${{ secrets.PAT }}
+          file: '.github/TEST.md'
+          marker: 'marker-that-does-not-exist'
+
+      - name: Verify the SKIPPED status was reported
+        if: steps.skipped.outputs.sponsorshipStatus != 'skipped'
+        run: |
+          echo "Expected sponsorshipStatus=skipped, got '${{ steps.skipped.outputs.sponsorshipStatus }}'"
+          exit 1
+
+      - name: Generate Sponsors targeting a file that does not exist (should fail)
+        id: failed
+        continue-on-error: true
+        uses: ./action-under-test
+        with:
+          token: ${{ secrets.PAT }}
+          file: '.github/this-file-does-not-exist.md'
+          marker: 'sponsors'
+
+      - name: Verify the step failed cleanly
+        if: steps.failed.outcome != 'failure' || steps.failed.outputs.sponsorshipStatus != 'failed'
+        run: |
+          echo "Expected the step to fail for a missing file"
+          exit 1
