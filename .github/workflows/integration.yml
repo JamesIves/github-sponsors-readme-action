@@ -59,12 +59,6 @@ jobs:
           marker: 'gold'
           fallback: 'No sponsors at this level'
 
-      # Note: organization mode is intentionally not covered here - it
-      # requires a GitHub org that both receives GitHub Sponsors and is
-      # accessible with an org:read-scoped PAT, which isn't available in
-      # this repo's CI. It's covered at the unit level instead
-      # (see __tests__/template.test.ts).
-
       - name: Generate Sponsors (include-private) 💖
         uses: ./action-under-test
         with:
