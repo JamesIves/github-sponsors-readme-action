@@ -1,5 +1,5 @@
 import {getInput} from '@actions/core'
-import {isNullOrUndefined} from './util'
+import {isNullOrUndefined} from './util.js'
 
 /**
  * Describes the action interface.

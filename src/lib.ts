@@ -4,9 +4,9 @@ import {
   exportVariable,
   setOutput as setEnvironmentOutput
 } from '@actions/core'
-import {action, ActionInterface, Status} from './constants'
-import {generateFile, getSponsors} from './template'
-import {checkParameters, extractErrorMessage} from './util'
+import {action, ActionInterface, Status} from './constants.js'
+import {generateFile, getSponsors} from './template.js'
+import {checkParameters, extractErrorMessage} from './util.js'
 
 /**
  * Initializes and runs the action.

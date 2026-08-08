@@ -46,13 +46,7 @@ const response: GitHubResponse = {
   }
 }
 
-jest.mock('@actions/core', () => ({
-  info: jest.fn(),
-  setFailed: jest.fn(),
-  getInput: jest.fn(),
-  exportVariable: jest.fn(),
-  setOutput: jest.fn()
-}))
+jest.mock('@actions/core')
 
 describe('lib', () => {
   beforeEach(() => {

@@ -5,10 +5,7 @@ import {generateFile, generateTemplate, getSponsors} from '../src/template'
 
 jest.setTimeout(60000)
 
-jest.mock('@actions/core', () => ({
-  info: jest.fn(),
-  getInput: jest.fn()
-}))
+jest.mock('@actions/core')
 
 describe('template', () => {
   describe('generateTemplate', () => {

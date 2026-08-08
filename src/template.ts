@@ -6,14 +6,14 @@ import {
   Sponsor,
   Status,
   Urls
-} from './constants'
-import {render} from 'mustache'
+} from './constants.js'
+import mustache from 'mustache'
 import {
   extractErrorMessage,
   suppressSensitiveInformation,
   sanitizeAndClean,
   replaceAll
-} from './util'
+} from './util.js'
 import {info} from '@actions/core'
 
 /**
@@ -86,7 +86,8 @@ export async function getSponsors(
       `There was an error with the GitHub API request: ${suppressSensitiveInformation(
         extractErrorMessage(error),
         action
-      )} ❌`
+      )} ❌`,
+      {cause: error}
     )
   }
 }
@@ -202,7 +203,10 @@ export function generateTemplate(
         '}}'
       )
 
-      template = template += render(safeTemplate, sanitizedSponsorEntity)
+      template = template += mustache.render(
+        safeTemplate,
+        sanitizedSponsorEntity
+      )
     })
   } else {
     info(`No sponsorship data was found… ❌`)
@@ -244,7 +248,8 @@ export async function generateFile(
       `There was an error generating the updated file: ${suppressSensitiveInformation(
         extractErrorMessage(error),
         action
-      )} ❌`
+      )} ❌`,
+      {cause: error}
     )
   }
 }
