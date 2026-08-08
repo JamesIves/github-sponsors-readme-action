@@ -1,5 +1,8 @@
 import {info} from '@actions/core'
+import crypto from 'crypto'
 import {promises} from 'fs'
+import os from 'os'
+import path from 'path'
 import {GitHubResponse, PrivacyLevel, Status} from '../src/constants'
 import {generateFile, generateTemplate, getSponsors} from '../src/template'
 
@@ -590,6 +593,19 @@ describe('template', () => {
   })
 
   describe('generateFile', () => {
+    let fixtureFile: string
+
+    beforeEach(() => {
+      fixtureFile = path.join(
+        os.tmpdir(),
+        `gh-sponsors-readme-action-${crypto.randomUUID()}.md`
+      )
+    })
+
+    afterEach(async () => {
+      await promises.rm(fixtureFile, {force: true})
+    })
+
     it('should read an existing file and write to it without throwing', async () => {
       const response: GitHubResponse = {
         data: {
@@ -638,7 +654,7 @@ describe('template', () => {
 
       const action = {
         token: '123',
-        file: 'README.test.md',
+        file: fixtureFile,
         template:
           '<a href="https://github.com/{{ login }}"><img src="https://github.com/{{ login }}.png" width="60px" alt="" /></a>',
         minimum: 6000,
@@ -652,7 +668,7 @@ describe('template', () => {
 
       // Write temp README file for testing
       await promises.writeFile(
-        'README.test.md',
+        fixtureFile,
         'Generated README file for testing <!-- sponsors --><!-- sponsors --> - do not commit'
       )
 
@@ -707,7 +723,7 @@ describe('template', () => {
 
       const action = {
         token: '123',
-        file: 'README.test.md',
+        file: fixtureFile,
         template:
           '<a href="https://github.com/{{ login }}"><img src="https://github.com/{{ login }}.png" width="60px" alt="" /></a>',
         minimum: 6000,
@@ -721,7 +737,7 @@ describe('template', () => {
 
       // Purposely write incorrect data
       await promises.writeFile(
-        'README.test.md',
+        fixtureFile,
         'Generated README file for testing <!-- sponsorrrr --><!-- sponsors --> - do not commit'
       )
 
@@ -780,7 +796,7 @@ describe('template', () => {
 
       const action = {
         token: '123',
-        file: 'README.test.md',
+        file: fixtureFile,
         template:
           '<a href="https://github.com/{{ login }}"><img src="https://github.com/{{ login }}.png" width="60px" alt="" /></a>',
         minimum: 6000,

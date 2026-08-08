@@ -1,5 +1,8 @@
 import {setFailed} from '@actions/core'
+import crypto from 'crypto'
 import {promises} from 'fs'
+import os from 'os'
+import path from 'path'
 import {GitHubResponse, PrivacyLevel, Status} from '../src/constants'
 import run from '../src/lib'
 
@@ -49,21 +52,28 @@ const response: GitHubResponse = {
 jest.mock('@actions/core')
 
 describe('lib', () => {
+  let fixtureFile: string
+
   beforeEach(() => {
     jest.resetAllMocks()
+    fixtureFile = path.join(
+      os.tmpdir(),
+      `gh-sponsors-readme-action-lib-${crypto.randomUUID()}.md`
+    )
     global.fetch = jest.fn().mockResolvedValue({
       json: jest.fn().mockResolvedValue(response)
     })
   })
 
-  afterEach(() => {
+  afterEach(async () => {
     jest.restoreAllMocks()
+    await promises.rm(fixtureFile, {force: true})
   })
 
   it('should run through the commands and enter a success state', async () => {
     const action = {
       token: '123',
-      file: './README.test.md',
+      file: fixtureFile,
       template:
         '<a href="https://github.com/{{ login }}"><img src="https://github.com/{{ login }}.png" width="60px" alt="" /></a>',
       minimum: 0,
@@ -76,7 +86,7 @@ describe('lib', () => {
     }
 
     await promises.writeFile(
-      'README.test.md',
+      fixtureFile,
       'Generated README file for testing <!-- sponsor --><!-- sponsor --> - do not commit'
     )
 
@@ -99,9 +109,6 @@ describe('lib', () => {
       activeOnly: true,
       includePrivate: false
     }
-
-    // Purposely write incorrect data
-    await promises.writeFile('SPONSORS.test.md', 'nothing here')
 
     const res = await run(action)
 

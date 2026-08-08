@@ -99,7 +99,3 @@ typings/
 
 # TernJS port file
 .tern-port
-
-# Test Specific
-README.test.md
-SPONSORS.test.md
