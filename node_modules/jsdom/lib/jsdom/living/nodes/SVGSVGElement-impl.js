@@ -1,19 +1,12 @@
 "use strict";
 
-const { mixin } = require("../../utils");
-const SVGNumber = require("../generated/SVGNumber");
-const SVGRect = require("../generated/SVGRect");
+const SVGNumber = require("../../../generated/idl/SVGNumber");
+const SVGRect = require("../../../generated/idl/SVGRect");
 const SVGGraphicsElementImpl = require("./SVGGraphicsElement-impl").implementation;
-const WindowEventHandlersImpl = require("./WindowEventHandlers-impl").implementation;
 const { domSymbolTree } = require("../helpers/internal-constants");
 const { ELEMENT_NODE } = require("../node-type");
 
 class SVGSVGElementImpl extends SVGGraphicsElementImpl {
-  constructor(globalObject, args, privateData) {
-    super(globalObject, args, privateData);
-    this._proxyWindowEventsToWindow();
-  }
-
   createSVGNumber() {
     return SVGNumber.createImpl(this._globalObject, [], {});
   }
@@ -22,8 +15,10 @@ class SVGSVGElementImpl extends SVGGraphicsElementImpl {
     return SVGRect.createImpl(this._globalObject, [], {});
   }
 
+  // Unlike `Document`'s `getElementById()`, this searches within this element's subtree, so the document-level
+  // `ByIdCache` can't be used (it might return an element outside this subtree). A per-`<svg>` cache isn't worthwhile
+  // since `SVGSVGElement`'s `getElementById()` is rarely called and `<svg>` subtrees are typically small.
   getElementById(elementId) {
-    // TODO: optimize with _ids caching trick; see Document class.
     for (const node of domSymbolTree.treeIterator(this)) {
       if (node.nodeType === ELEMENT_NODE && node.getAttributeNS(null, "id") === elementId) {
         return node;
@@ -39,8 +34,6 @@ class SVGSVGElementImpl extends SVGGraphicsElementImpl {
   unsuspendRedrawAll() {}
   forceRedraw() {}
 }
-
-mixin(SVGSVGElementImpl.prototype, WindowEventHandlersImpl.prototype);
 
 module.exports = {
   implementation: SVGSVGElementImpl

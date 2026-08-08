@@ -216,7 +216,7 @@ const dom = new JSDOM('', {
 |E:past|Unsupported| |
 |E:future|Unsupported| |
 |E:open<br>E:closed|Partially supported|Matching with &lt;select&gt;, e.g. `select:open`, is not supported.|
-|E:popover-open|✓| |
+|E:popover-open|Unsupported| |
 |E:enabled<br>E:disabled|✓| |
 |E:read&#8209;write<br>E:read&#8209;only|✓| |
 |E:placeholder&#8209;shown|✓| |

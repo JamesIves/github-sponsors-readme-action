@@ -1,5 +1,5 @@
 "use strict";
-const MIMEType = require("whatwg-mimetype");
+const { MIMEType } = require("whatwg-mimetype");
 const { parseURL, serializeURL, percentDecodeString } = require("whatwg-url");
 const { stripLeadingAndTrailingASCIIWhitespace, isomorphicDecode, forgivingBase64Decode } = require("./utils.js");
 

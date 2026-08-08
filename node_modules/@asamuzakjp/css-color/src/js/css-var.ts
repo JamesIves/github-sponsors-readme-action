@@ -29,6 +29,7 @@ const NAMESPACE = 'css-var';
 /* regexp */
 const REG_FN_CALC = new RegExp(SYN_FN_CALC);
 const REG_FN_VAR = new RegExp(SYN_FN_VAR);
+const REG_CSS_WIDE_KEYWORD = /^(?:inherit|initial|revert(?:-layer)?|unset)$/;
 
 /**
  * resolve custom property
@@ -47,6 +48,9 @@ export function resolveCustomProperty(
   const items: string[] = [];
   while (tokens.length) {
     const token = tokens.shift();
+    if (!token) {
+      break;
+    }
     if (!Array.isArray(token)) {
       throw new TypeError(`${token} is not an array.`);
     }
@@ -57,8 +61,7 @@ export function resolveCustomProperty(
     }
     // nested var()
     if (value === FN_VAR) {
-      const [restTokens, item] = resolveCustomProperty(tokens, opt);
-      tokens = restTokens;
+      const [, item] = resolveCustomProperty(tokens, opt);
       if (item) {
         items.push(item);
       }
@@ -80,8 +83,7 @@ export function resolveCustomProperty(
   }
   let resolveAsColor = false;
   if (items.length > 1) {
-    const lastValue = items[items.length - 1];
-    resolveAsColor = isColor(lastValue);
+    resolveAsColor = isColor(items[items.length - 1]);
   }
   let resolvedValue = '';
   for (let item of items) {
@@ -90,32 +92,17 @@ export function resolveCustomProperty(
       // recurse resolveVar()
       const resolvedItem = resolveVar(item, opt);
       if (isString(resolvedItem)) {
-        if (resolveAsColor) {
-          if (isColor(resolvedItem)) {
-            resolvedValue = resolvedItem;
-          }
-        } else {
+        if (!resolveAsColor || isColor(resolvedItem)) {
           resolvedValue = resolvedItem;
         }
       }
     } else if (REG_FN_CALC.test(item)) {
       item = cssCalc(item, opt);
-      if (resolveAsColor) {
-        if (isColor(item)) {
-          resolvedValue = item;
-        }
-      } else {
+      if (!resolveAsColor || isColor(item)) {
         resolvedValue = item;
       }
-    } else if (
-      item &&
-      !/^(?:inherit|initial|revert(?:-layer)?|unset)$/.test(item)
-    ) {
-      if (resolveAsColor) {
-        if (isColor(item)) {
-          resolvedValue = item;
-        }
-      } else {
+    } else if (item && !REG_CSS_WIDE_KEYWORD.test(item)) {
+      if (!resolveAsColor || isColor(item)) {
         resolvedValue = item;
       }
     }
@@ -139,21 +126,20 @@ export function parseTokens(
   const res: string[] = [];
   while (tokens.length) {
     const token = tokens.shift();
+    if (!token) break;
     const [type = '', value = ''] = token as [TokenType, string];
     if (value === FN_VAR) {
-      const [restTokens, resolvedValue] = resolveCustomProperty(tokens, opt);
+      const [, resolvedValue] = resolveCustomProperty(tokens, opt);
       if (!resolvedValue) {
         return new NullObject();
       }
-      tokens = restTokens;
       res.push(resolvedValue);
     } else {
       switch (type) {
         case PAREN_CLOSE: {
           if (res.length) {
-            const lastValue = res[res.length - 1];
-            if (lastValue === ' ') {
-              res.splice(-1, 1, value);
+            if (res[res.length - 1] === ' ') {
+              res[res.length - 1] = value;
             } else {
               res.push(value);
             }

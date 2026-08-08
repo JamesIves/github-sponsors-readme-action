@@ -614,10 +614,16 @@ export interface Options {
 
   /**
    * `sourceType` indicates the mode the code should be parsed in.
-   * Can be either `"script"` or `"module"`. This influences global
+   * Can be either `"script"`, `"module"` or `"commonjs"`. This influences global
    * strict mode and parsing of `import` and `export` declarations.
    */
-  sourceType?: "script" | "module"
+  sourceType?: "script" | "module" | "commonjs"
+
+  /**
+   * When set to true, enable strict parsing mode even if `sourceType`
+   * is `"script"`.
+   */
+  strict?: boolean
 
   /**
    * a callback that will be called when a semicolon is automatically inserted.
@@ -686,6 +692,14 @@ export interface Options {
    * nodes.
    */
   locations?: boolean
+
+  /**
+   * Pass an optional `{line, column}` object to use for the start of
+   * the parse. This is mostly useful when using `parseExpressionAt`
+   * with `locations: true`, to prevent the parser from having to
+   * determine the line position at the start position.
+   */
+  startLocation?: {line: number, column: number}
 
   /**
    * a callback that will cause Acorn to call that export function with object in the same

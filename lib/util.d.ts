@@ -1,4 +1,4 @@
-import { ActionInterface } from './constants';
+import { ActionInterface } from './constants.js';
 /**
  * Utility function that checks to see if a value is undefined or not.
  */

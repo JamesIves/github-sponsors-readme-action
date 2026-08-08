@@ -160,6 +160,16 @@ function maybeMultiplied(scanner, node) {
             return maybeMultiplied(scanner, multiplier);
         }
 
+        // https://www.w3.org/TR/css-values-4/#component-multipliers
+        // > the # and ? multipliers, {A} and ? multipliers, and {A,B} and ? multipliers
+        // > may be stacked as #?, {A}?, and {A,B}?, respectively
+        // Represent "{}?" as nested multipliers as well as "+#".
+        // The "#?" case is already handled above, in maybeMultiplied()
+        if (scanner.charCode() === QUESTIONMARK &&
+            scanner.charCodeAt(scanner.pos - 1) === RIGHTCURLYBRACKET) {
+            return maybeMultiplied(scanner, multiplier);
+        }
+
         return multiplier;
     }
 
@@ -376,35 +386,65 @@ function regroupTerms(terms, combinators) {
     return combinator;
 }
 
-function readImplicitGroup(scanner, stopCharCode) {
+function readImplicitGroup(scanner, stopCharCode = -1) {
     const combinators = Object.create(null);
     const terms = [];
-    let token;
     let prevToken = null;
     let prevTokenPos = scanner.pos;
+    let prevTokenIsFunction = false;
 
-    while (scanner.charCode() !== stopCharCode && (token = peek(scanner, stopCharCode))) {
-        if (token.type !== 'Spaces') {
-            if (token.type === 'Combinator') {
-                // check for combinator in group beginning and double combinator sequence
-                if (prevToken === null || prevToken.type === 'Combinator') {
-                    scanner.pos = prevTokenPos;
-                    scanner.error('Unexpected combinator');
-                }
+    while (scanner.charCode() !== stopCharCode) {
+        let token = prevTokenIsFunction
+            ? readImplicitGroup(scanner, RIGHTPARENTHESIS)
+            : peek(scanner);
 
-                combinators[token.value] = true;
-            } else if (prevToken !== null && prevToken.type !== 'Combinator') {
-                combinators[' '] = true;  // a b
-                terms.push({
-                    type: 'Combinator',
-                    value: ' '
-                });
+        if (!token) {
+            break;
+        }
+
+        if (token.type === 'Spaces') {
+            continue;
+        }
+
+        if (prevTokenIsFunction) {
+            if (token.terms.length === 0) {
+                prevTokenIsFunction = false;
+                continue;
             }
 
-            terms.push(token);
-            prevToken = token;
-            prevTokenPos = scanner.pos;
+            if (token.combinator === ' ') {
+                while (token.terms.length > 1) {
+                    combinators[' '] = true;  // a b
+                    terms.push({
+                        type: 'Combinator',
+                        value: ' '
+                    }, token.terms.shift());
+                }
+
+                token = token.terms[0];
+            }
         }
+
+        if (token.type === 'Combinator') {
+            // check for combinator in group beginning and double combinator sequence
+            if (prevToken === null || prevToken.type === 'Combinator') {
+                scanner.pos = prevTokenPos;
+                scanner.error('Unexpected combinator');
+            }
+
+            combinators[token.value] = true;
+        } else if (prevToken !== null && prevToken.type !== 'Combinator') {
+            combinators[' '] = true;  // a b
+            terms.push({
+                type: 'Combinator',
+                value: ' '
+            });
+        }
+
+        terms.push(token);
+        prevToken = token;
+        prevTokenPos = scanner.pos;
+        prevTokenIsFunction = token.type === 'Function';
     }
 
     // check for combinator in group ending
@@ -422,11 +462,11 @@ function readImplicitGroup(scanner, stopCharCode) {
     };
 }
 
-function readGroup(scanner, stopCharCode) {
+function readGroup(scanner) {
     let result;
 
     scanner.eat(LEFTSQUAREBRACKET);
-    result = readImplicitGroup(scanner, stopCharCode);
+    result = readImplicitGroup(scanner, RIGHTSQUAREBRACKET);
     scanner.eat(RIGHTSQUAREBRACKET);
 
     result.explicit = true;
@@ -439,7 +479,7 @@ function readGroup(scanner, stopCharCode) {
     return result;
 }
 
-function peek(scanner, stopCharCode) {
+function peek(scanner) {
     let code = scanner.charCode();
 
     switch (code) {
@@ -448,7 +488,7 @@ function peek(scanner, stopCharCode) {
             break;
 
         case LEFTSQUAREBRACKET:
-            return maybeMultiplied(scanner, readGroup(scanner, stopCharCode));
+            return maybeMultiplied(scanner, readGroup(scanner));
 
         case LESSTHANSIGN:
             return scanner.nextCharCode() === APOSTROPHE

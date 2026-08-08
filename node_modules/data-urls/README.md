@@ -32,24 +32,28 @@ As shown in the examples above, you can easily get a stringified version of the 
 
 ### Decoding the body
 
-To decode the body bytes of a parsed data URL, you'll need to use the `charset` parameter of the MIME type, if any. This contains an encoding [label](https://encoding.spec.whatwg.org/#label); there are [various possible labels](https://encoding.spec.whatwg.org/#names-and-labels) for a given encoding. We suggest using the [whatwg-encoding](https://www.npmjs.com/package/whatwg-encoding) package as follows:
+To decode the body bytes of a parsed data URL, you'll need to use the `charset` parameter of the MIME type, if any. This contains an encoding [label](https://encoding.spec.whatwg.org/#label); there are [various possible labels](https://encoding.spec.whatwg.org/#names-and-labels) for a given encoding. You can use the [`TextDecoder`](https://developer.mozilla.org/en-US/docs/Web/API/TextDecoder) API for this:
 
 ```js
 const parseDataURL = require("data-urls");
-const { labelToName, decode } = require("whatwg-encoding");
 
 const dataURL = parseDataURL(arbitraryString);
 
-// If there's no charset parameter, let's just hope it's UTF-8; that seems like a good guess.
-const encodingName = labelToName(dataURL.mimeType.parameters.get("charset") || "utf-8");
-const bodyDecoded = decode(dataURL.body, encodingName);
+// If there's no charset parameter, e.g. if `arbitraryString` is `"data:text/plain,H%C3%A9llo!"`,
+// then let's guess UTF-8.
+const encodingLabel = dataURL.mimeType.parameters.get("charset") ?? "utf-8";
+const decoder = new TextDecoder(encodingLabel);
+
+const bodyDecoded = decoder.decode(dataURL.body);
 ```
 
-This is especially important since the default, if no parseable MIME type is given, is "US-ASCII", [aka windows-1252](https://encoding.spec.whatwg.org/#names-and-labels), not UTF-8 like you might asume. So for example given an `arbitraryString` of `"data:,Héllo!"`, the above code snippet will correctly produce a `bodyDecoded` of `"Héllo!"` by using the windows-1252 decoder, whereas if you used a UTF-8 decoder you'd get back `"HÃ©llo!"`.
+(Note that as of the time of this writing in 2026-01, Node.js's built-in `TextDecoder` has many correctness bugs, so we suggest using the polyfill from the [`@exodus/bytes`](https://www.npmjs.com/package/@exodus/bytes) package until they are fixed.)
+
+Using the parsed charset is quite important, since [the spec requires](https://fetch.spec.whatwg.org/#data-url-processor) that if no parseable MIME type is given, the default is `"US-ASCII"`, [aka windows-1252](https://encoding.spec.whatwg.org/#note-latin1-ascii)—not UTF-8, like you might asume. So for example, given an `arbitraryString` of `"data:,H%E9llo!"`, the above code snippet will correctly produce a `bodyDecoded` of `"Héllo!"` by using the windows-1252 decoder, whereas if you used a UTF-8 decoder you'd get back `"H�llo!"`.
 
 ### Advanced functionality: parsing from a URL record
 
-If you are using the [whatwg-url](https://github.com/jsdom/whatwg-url) package, you may already have a "URL record" object on hand, as produced by that package's `parseURL` export. In that case, you can use this package's `fromURLRecord` export to save a bit of work:
+If you are using the [`whatwg-url`](https://www.npmjs.com/package/whatwg-url) package, you may already have a "URL record" object on hand, as produced by that package's `parseURL` export. In that case, you can use this package's `fromURLRecord` export to save a bit of work:
 
 ```js
 const { parseURL } = require("whatwg-url");

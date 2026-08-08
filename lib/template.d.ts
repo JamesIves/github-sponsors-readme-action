@@ -1,4 +1,4 @@
-import { ActionInterface, GitHubResponse, Status } from './constants';
+import { ActionInterface, GitHubResponse, Status } from './constants.js';
 /**
  * Fetches sponsors from the GitHub Sponsors API.
  */

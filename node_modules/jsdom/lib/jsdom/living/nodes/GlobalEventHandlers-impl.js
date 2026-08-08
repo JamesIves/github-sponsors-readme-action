@@ -1,100 +1,11 @@
 "use strict";
 
 const { appendHandler, createEventAccessor } = require("../helpers/create-event-accessor");
+const { globalEventHandlersEvents, windowEventHandlersEvents } = require("../../../generated/event-sets");
 
-// Must be kept in sync with GlobalEventHandlers.webidl.
-const events = new Set([
-  "abort",
-  "auxclick",
-  "beforeinput",
-  "beforematch",
-  "beforetoggle",
-  "blur",
-  "cancel",
-  "canplay",
-  "canplaythrough",
-  "change",
-  "click",
-  "close",
-  "contextlost",
-  "contextmenu",
-  "contextrestored",
-  "copy",
-  "cuechange",
-  "cut",
-  "dblclick",
-  "drag",
-  "dragend",
-  "dragenter",
-  "dragleave",
-  "dragover",
-  "dragstart",
-  "drop",
-  "durationchange",
-  "emptied",
-  "ended",
-  "error",
-  "focus",
-  "formdata",
-  "input",
-  "invalid",
-  "keydown",
-  "keypress",
-  "keyup",
-  "load",
-  "loadeddata",
-  "loadedmetadata",
-  "loadstart",
-  "mousedown",
-  "mouseenter",
-  "mouseleave",
-  "mousemove",
-  "mouseout",
-  "mouseover",
-  "mouseup",
-  "paste",
-  "pause",
-  "play",
-  "playing",
-  "progress",
-  "ratechange",
-  "reset",
-  "resize",
-  "scroll",
-  "scrollend",
-  "securitypolicyviolation",
-  "seeked",
-  "seeking",
-  "select",
-  "slotchange",
-  "stalled",
-  "submit",
-  "suspend",
-  "timeupdate",
-  "toggle",
-  "volumechange",
-  "waiting",
-  "webkitanimationend",
-  "webkitanimationiteration",
-  "webkitanimationstart",
-  "webkittransitionend",
-  "wheel",
-  "touchstart",
-  "touchend",
-  "touchmove",
-  "touchcancel",
-  "pointerover",
-  "pointerenter",
-  "pointerdown",
-  "pointermove",
-  "pointerrawupdate",
-  "pointerup",
-  "pointercancel",
-  "pointerout",
-  "pointerleave",
-  "gotpointercapture",
-  "lostpointercapture"
-]);
+// These events are specified on GlobalEventHandlers but, per the HTML spec, are reflected on the Window from the body
+// element. They are not derivable from the IDL alone.
+const windowReflectingBodyElementEvents = new Set(["blur", "error", "focus", "load", "resize", "scroll"]);
 
 class GlobalEventHandlersImpl {
   _initGlobalEvents() {
@@ -102,8 +13,22 @@ class GlobalEventHandlersImpl {
     this._eventHandlers = Object.create(null);
   }
 
-  _getEventHandlerTarget() {
-    return this;
+  _getEventHandlerTarget(event) {
+    // https://html.spec.whatwg.org/multipage/webappapis.html#determining-the-target-of-an-event-handler
+
+    // Step 1
+    if (this._localName !== "body" && this._localName !== "frameset") {
+      return this;
+    }
+
+    // Step 2
+    if (!windowEventHandlersEvents.has(event) && !windowReflectingBodyElementEvents.has(event)) {
+      return this;
+    }
+
+    // Step 3 + 4
+    const window = this._ownerDocument._defaultView;
+    return window || null;
   }
 
   _getEventHandlerFor(event) {
@@ -147,11 +72,10 @@ class GlobalEventHandlersImpl {
   }
 }
 
-for (const event of events) {
+for (const event of globalEventHandlersEvents) {
   createEventAccessor(GlobalEventHandlersImpl.prototype, event);
 }
 
 module.exports = {
-  implementation: GlobalEventHandlersImpl,
-  events
+  implementation: GlobalEventHandlersImpl
 };

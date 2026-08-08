@@ -6,6 +6,7 @@ import { assertUint8 } from './assert.js'
 
 function from(arr, expectedVersion) {
   assertUint8(arr)
+  if (arr.length !== 33 && arr.length !== 34) throw new Error('Invalid WIF length')
   const version = arr[0]
   if (expectedVersion !== undefined && version !== expectedVersion) {
     throw new Error('Invalid network version')
@@ -14,7 +15,6 @@ function from(arr, expectedVersion) {
   // Makes a copy, regardless of input being a Buffer or a Uint8Array (unlike .slice)
   const privateKey = Uint8Array.from(arr.subarray(1, 33))
   if (arr.length === 33) return { version, privateKey, compressed: false }
-  if (arr.length !== 34) throw new Error('Invalid WIF length')
   if (arr[33] !== 1) throw new Error('Invalid compression flag')
   return { version, privateKey, compressed: true }
 }
@@ -22,7 +22,6 @@ function from(arr, expectedVersion) {
 function to({ version: v, privateKey, compressed }) {
   if (!Number.isSafeInteger(v) || v < 0 || v > 0xff) throw new Error('Missing or invalid version')
   assertUint8(privateKey, { length: 32, name: 'privateKey' })
-  if (privateKey.length !== 32) throw new TypeError('Invalid privateKey length')
   const out = new Uint8Array(compressed ? 34 : 33)
   out[0] = v
   out.set(privateKey, 1)

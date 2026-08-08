@@ -6,7 +6,7 @@ export function findLogicalWithNestedHas(leaf: object): object | null;
 export function filterNodesByAnB(nodes: Array<object>, anb: {
     a: number;
     b: number;
-    reverse?: boolean;
+    reverse?: boolean | undefined;
 }): Array<object>;
 export function resolveContent(node: object): Array<object | boolean>;
 export function traverseNode(node: object, walker: object, force?: boolean): object | null;

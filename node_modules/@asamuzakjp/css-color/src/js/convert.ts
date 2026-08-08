@@ -47,20 +47,15 @@ export const preProcess = (
   value: string,
   opt: Options = {}
 ): string | NullObject => {
-  if (isString(value)) {
-    value = value.trim();
-    if (!value) {
-      return new NullObject();
-    }
-  } else {
+  if (!isString(value)) {
+    return new NullObject();
+  }
+  value = value.trim();
+  if (!value) {
     return new NullObject();
   }
   const cacheKey: string = createCacheKey(
-    {
-      namespace: NAMESPACE,
-      name: 'preProcess',
-      value
-    },
+    { namespace: NAMESPACE, name: 'preProcess', value },
     opt
   );
   const cachedResult = getCache(cacheKey);
@@ -70,36 +65,75 @@ export const preProcess = (
     }
     return cachedResult.item as string;
   }
+  let res: string | NullObject = value;
   if (REG_FN_VAR.test(value)) {
-    const resolvedValue = resolveVar(value, opt);
-    if (isString(resolvedValue)) {
-      value = resolvedValue;
+    const resolved = resolveVar(value, opt);
+    if (isString(resolved)) {
+      res = resolved;
     } else {
       setCache(cacheKey, null);
       return new NullObject();
     }
   }
-  if (REG_FN_REL.test(value)) {
-    const resolvedValue = resolveRelativeColor(value, opt);
-    if (isString(resolvedValue)) {
-      value = resolvedValue;
-    } else {
-      setCache(cacheKey, null);
-      return new NullObject();
+  if (isString(res)) {
+    if (REG_FN_REL.test(res)) {
+      const resolved = resolveRelativeColor(res, opt);
+      if (isString(resolved)) {
+        res = resolved;
+      } else {
+        setCache(cacheKey, null);
+        return new NullObject();
+      }
+    } else if (REG_FN_CALC.test(res)) {
+      res = cssCalc(res, opt);
     }
-  } else if (REG_FN_CALC.test(value)) {
-    value = cssCalc(value, opt);
   }
-  if (value.startsWith('color-mix')) {
-    const clonedOpt = structuredClone(opt);
-    clonedOpt.format = VAL_COMP;
-    clonedOpt.nullable = true;
-    const resolvedValue = resolveColor(value, clonedOpt);
-    setCache(cacheKey, resolvedValue);
-    return resolvedValue;
+  if (isString(res)) {
+    if (res.startsWith('color-mix')) {
+      res = resolveColor(res, { ...opt, format: VAL_COMP, nullable: true });
+    }
   }
-  setCache(cacheKey, value);
-  return value;
+  setCache(cacheKey, res);
+  return res;
+};
+
+/**
+ * converter factory to reduce boilerplate
+ * @param name - function name for cache
+ * @param format - color format
+ * @param convertFn - conversion function
+ * @returns color converter function
+ */
+const createColorConverter = (
+  name: string,
+  format: string,
+  convertFn: Function
+) => {
+  const colorConverterFn = (
+    value: string,
+    opt: Options = {}
+  ): ColorChannels => {
+    if (!isString(value)) {
+      throw new TypeError(`${value} is not a string.`);
+    }
+    const resolved = preProcess(value, opt);
+    if (resolved instanceof NullObject) {
+      return [0, 0, 0, 0];
+    }
+    const val = resolved.toLowerCase();
+    const cacheKey = createCacheKey(
+      { namespace: NAMESPACE, name, value: val },
+      opt
+    );
+    const cached = getCache(cacheKey);
+    if (cached instanceof CacheItem) {
+      return cached.item as ColorChannels;
+    }
+    const result = convertFn(val, { ...opt, format }) as ColorChannels;
+    setCache(cacheKey, result);
+    return result;
+  };
+  return colorConverterFn;
 };
 
 /**
@@ -107,10 +141,7 @@ export const preProcess = (
  * @param value - numeric value
  * @returns hex string: 00..ff
  */
-export const numberToHex = (value: number): string => {
-  const hex = numberToHexString(value);
-  return hex;
-};
+export const numberToHex = (value: number): string => numberToHexString(value);
 
 /**
  * convert color to hex
@@ -120,40 +151,30 @@ export const numberToHex = (value: number): string => {
  * @returns #rrggbb | #rrggbbaa | null
  */
 export const colorToHex = (value: string, opt: Options = {}): string | null => {
-  if (isString(value)) {
-    const resolvedValue = preProcess(value, opt);
-    if (resolvedValue instanceof NullObject) {
-      return null;
-    }
-    value = resolvedValue.toLowerCase();
-  } else {
+  if (!isString(value)) {
     throw new TypeError(`${value} is not a string.`);
   }
-  const { alpha = false } = opt;
-  const cacheKey: string = createCacheKey(
-    {
-      namespace: NAMESPACE,
-      name: 'colorToHex',
-      value
-    },
+  const resolved = preProcess(value, opt);
+  if (resolved instanceof NullObject) {
+    return null;
+  }
+  const val = resolved.toLowerCase();
+  const cacheKey = createCacheKey(
+    { namespace: NAMESPACE, name: 'colorToHex', value: val },
     opt
   );
-  const cachedResult = getCache(cacheKey);
-  if (cachedResult instanceof CacheItem) {
-    if (cachedResult.isNull) {
+  const cached = getCache(cacheKey);
+  if (cached instanceof CacheItem) {
+    if (cached.isNull) {
       return null;
     }
-    return cachedResult.item as string;
+    return cached.item as string;
   }
-  let hex;
-  opt.nullable = true;
-  if (alpha) {
-    opt.format = 'hexAlpha';
-    hex = resolveColor(value, opt);
-  } else {
-    opt.format = 'hex';
-    hex = resolveColor(value, opt);
-  }
+  const hex = resolveColor(val, {
+    ...opt,
+    nullable: true,
+    format: opt.alpha ? 'hexAlpha' : 'hex'
+  });
   if (isString(hex)) {
     setCache(cacheKey, hex);
     return hex;
@@ -168,33 +189,11 @@ export const colorToHex = (value: string, opt: Options = {}): string | null => {
  * @param [opt] - options
  * @returns ColorChannels - [h, s, l, alpha]
  */
-export const colorToHsl = (value: string, opt: Options = {}): ColorChannels => {
-  if (isString(value)) {
-    const resolvedValue = preProcess(value, opt);
-    if (resolvedValue instanceof NullObject) {
-      return [0, 0, 0, 0];
-    }
-    value = resolvedValue.toLowerCase();
-  } else {
-    throw new TypeError(`${value} is not a string.`);
-  }
-  const cacheKey: string = createCacheKey(
-    {
-      namespace: NAMESPACE,
-      name: 'colorToHsl',
-      value
-    },
-    opt
-  );
-  const cachedResult = getCache(cacheKey);
-  if (cachedResult instanceof CacheItem) {
-    return cachedResult.item as ColorChannels;
-  }
-  opt.format = 'hsl';
-  const hsl = convertColorToHsl(value, opt) as ColorChannels;
-  setCache(cacheKey, hsl);
-  return hsl;
-};
+export const colorToHsl = createColorConverter(
+  'colorToHsl',
+  'hsl',
+  convertColorToHsl
+);
 
 /**
  * convert color to hwb
@@ -202,33 +201,11 @@ export const colorToHsl = (value: string, opt: Options = {}): ColorChannels => {
  * @param [opt] - options
  * @returns ColorChannels - [h, w, b, alpha]
  */
-export const colorToHwb = (value: string, opt: Options = {}): ColorChannels => {
-  if (isString(value)) {
-    const resolvedValue = preProcess(value, opt);
-    if (resolvedValue instanceof NullObject) {
-      return [0, 0, 0, 0];
-    }
-    value = resolvedValue.toLowerCase();
-  } else {
-    throw new TypeError(`${value} is not a string.`);
-  }
-  const cacheKey: string = createCacheKey(
-    {
-      namespace: NAMESPACE,
-      name: 'colorToHwb',
-      value
-    },
-    opt
-  );
-  const cachedResult = getCache(cacheKey);
-  if (cachedResult instanceof CacheItem) {
-    return cachedResult.item as ColorChannels;
-  }
-  opt.format = 'hwb';
-  const hwb = convertColorToHwb(value, opt) as ColorChannels;
-  setCache(cacheKey, hwb);
-  return hwb;
-};
+export const colorToHwb = createColorConverter(
+  'colorToHwb',
+  'hwb',
+  convertColorToHwb
+);
 
 /**
  * convert color to lab
@@ -236,32 +213,11 @@ export const colorToHwb = (value: string, opt: Options = {}): ColorChannels => {
  * @param [opt] - options
  * @returns ColorChannels - [l, a, b, alpha]
  */
-export const colorToLab = (value: string, opt: Options = {}): ColorChannels => {
-  if (isString(value)) {
-    const resolvedValue = preProcess(value, opt);
-    if (resolvedValue instanceof NullObject) {
-      return [0, 0, 0, 0];
-    }
-    value = resolvedValue.toLowerCase();
-  } else {
-    throw new TypeError(`${value} is not a string.`);
-  }
-  const cacheKey: string = createCacheKey(
-    {
-      namespace: NAMESPACE,
-      name: 'colorToLab',
-      value
-    },
-    opt
-  );
-  const cachedResult = getCache(cacheKey);
-  if (cachedResult instanceof CacheItem) {
-    return cachedResult.item as ColorChannels;
-  }
-  const lab = convertColorToLab(value, opt) as ColorChannels;
-  setCache(cacheKey, lab);
-  return lab;
-};
+export const colorToLab = createColorConverter(
+  'colorToLab',
+  'lab',
+  convertColorToLab
+);
 
 /**
  * convert color to lch
@@ -269,32 +225,11 @@ export const colorToLab = (value: string, opt: Options = {}): ColorChannels => {
  * @param [opt] - options
  * @returns ColorChannels - [l, c, h, alpha]
  */
-export const colorToLch = (value: string, opt: Options = {}): ColorChannels => {
-  if (isString(value)) {
-    const resolvedValue = preProcess(value, opt);
-    if (resolvedValue instanceof NullObject) {
-      return [0, 0, 0, 0];
-    }
-    value = resolvedValue.toLowerCase();
-  } else {
-    throw new TypeError(`${value} is not a string.`);
-  }
-  const cacheKey: string = createCacheKey(
-    {
-      namespace: NAMESPACE,
-      name: 'colorToLch',
-      value
-    },
-    opt
-  );
-  const cachedResult = getCache(cacheKey);
-  if (cachedResult instanceof CacheItem) {
-    return cachedResult.item as ColorChannels;
-  }
-  const lch = convertColorToLch(value, opt) as ColorChannels;
-  setCache(cacheKey, lch);
-  return lch;
-};
+export const colorToLch = createColorConverter(
+  'colorToLch',
+  'lch',
+  convertColorToLch
+);
 
 /**
  * convert color to oklab
@@ -302,35 +237,11 @@ export const colorToLch = (value: string, opt: Options = {}): ColorChannels => {
  * @param [opt] - options
  * @returns ColorChannels - [l, a, b, alpha]
  */
-export const colorToOklab = (
-  value: string,
-  opt: Options = {}
-): ColorChannels => {
-  if (isString(value)) {
-    const resolvedValue = preProcess(value, opt);
-    if (resolvedValue instanceof NullObject) {
-      return [0, 0, 0, 0];
-    }
-    value = resolvedValue.toLowerCase();
-  } else {
-    throw new TypeError(`${value} is not a string.`);
-  }
-  const cacheKey: string = createCacheKey(
-    {
-      namespace: NAMESPACE,
-      name: 'colorToOklab',
-      value
-    },
-    opt
-  );
-  const cachedResult = getCache(cacheKey);
-  if (cachedResult instanceof CacheItem) {
-    return cachedResult.item as ColorChannels;
-  }
-  const lab = convertColorToOklab(value, opt) as ColorChannels;
-  setCache(cacheKey, lab);
-  return lab;
-};
+export const colorToOklab = createColorConverter(
+  'colorToOklab',
+  'oklab',
+  convertColorToOklab
+);
 
 /**
  * convert color to oklch
@@ -338,35 +249,11 @@ export const colorToOklab = (
  * @param [opt] - options
  * @returns ColorChannels - [l, c, h, alpha]
  */
-export const colorToOklch = (
-  value: string,
-  opt: Options = {}
-): ColorChannels => {
-  if (isString(value)) {
-    const resolvedValue = preProcess(value, opt);
-    if (resolvedValue instanceof NullObject) {
-      return [0, 0, 0, 0];
-    }
-    value = resolvedValue.toLowerCase();
-  } else {
-    throw new TypeError(`${value} is not a string.`);
-  }
-  const cacheKey: string = createCacheKey(
-    {
-      namespace: NAMESPACE,
-      name: 'colorToOklch',
-      value
-    },
-    opt
-  );
-  const cachedResult = getCache(cacheKey);
-  if (cachedResult instanceof CacheItem) {
-    return cachedResult.item as ColorChannels;
-  }
-  const lch = convertColorToOklch(value, opt) as ColorChannels;
-  setCache(cacheKey, lch);
-  return lch;
-};
+export const colorToOklch = createColorConverter(
+  'colorToOklch',
+  'oklch',
+  convertColorToOklch
+);
 
 /**
  * convert color to rgb
@@ -374,32 +261,11 @@ export const colorToOklch = (
  * @param [opt] - options
  * @returns ColorChannels - [r, g, b, alpha]
  */
-export const colorToRgb = (value: string, opt: Options = {}): ColorChannels => {
-  if (isString(value)) {
-    const resolvedValue = preProcess(value, opt);
-    if (resolvedValue instanceof NullObject) {
-      return [0, 0, 0, 0];
-    }
-    value = resolvedValue.toLowerCase();
-  } else {
-    throw new TypeError(`${value} is not a string.`);
-  }
-  const cacheKey: string = createCacheKey(
-    {
-      namespace: NAMESPACE,
-      name: 'colorToRgb',
-      value
-    },
-    opt
-  );
-  const cachedResult = getCache(cacheKey);
-  if (cachedResult instanceof CacheItem) {
-    return cachedResult.item as ColorChannels;
-  }
-  const rgb = convertColorToRgb(value, opt) as ColorChannels;
-  setCache(cacheKey, rgb);
-  return rgb;
-};
+export const colorToRgb = createColorConverter(
+  'colorToRgb',
+  'rgb',
+  convertColorToRgb
+);
 
 /**
  * convert color to xyz
@@ -408,33 +274,29 @@ export const colorToRgb = (value: string, opt: Options = {}): ColorChannels => {
  * @returns ColorChannels - [x, y, z, alpha]
  */
 export const colorToXyz = (value: string, opt: Options = {}): ColorChannels => {
-  if (isString(value)) {
-    const resolvedValue = preProcess(value, opt);
-    if (resolvedValue instanceof NullObject) {
-      return [0, 0, 0, 0];
-    }
-    value = resolvedValue.toLowerCase();
-  } else {
+  if (!isString(value)) {
     throw new TypeError(`${value} is not a string.`);
   }
-  const cacheKey: string = createCacheKey(
-    {
-      namespace: NAMESPACE,
-      name: 'colorToXyz',
-      value
-    },
+  const resolved = preProcess(value, opt);
+  if (resolved instanceof NullObject) {
+    return [0, 0, 0, 0];
+  }
+  const val = resolved.toLowerCase();
+  const cacheKey = createCacheKey(
+    { namespace: NAMESPACE, name: 'colorToXyz', value: val },
     opt
   );
-  const cachedResult = getCache(cacheKey);
-  if (cachedResult instanceof CacheItem) {
-    return cachedResult.item as ColorChannels;
+  const cached = getCache(cacheKey);
+  if (cached instanceof CacheItem) {
+    return cached.item as ColorChannels;
   }
-  let xyz;
-  if (value.startsWith('color(')) {
-    [, ...xyz] = parseColorFunc(value, opt) as ComputedColorChannels;
+  let parsed;
+  if (val.startsWith('color(')) {
+    parsed = parseColorFunc(val, opt);
   } else {
-    [, ...xyz] = parseColorValue(value, opt) as ComputedColorChannels;
+    parsed = parseColorValue(val, opt);
   }
+  const [, ...xyz] = parsed as ComputedColorChannels;
   setCache(cacheKey, xyz);
   return xyz as ColorChannels;
 };

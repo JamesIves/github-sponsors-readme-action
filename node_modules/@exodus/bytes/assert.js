@@ -8,7 +8,7 @@ const makeMessage = (name, extra) => `Expected${name ? ` ${name} to be` : ''} an
 const TypedArray = Object.getPrototypeOf(Uint8Array)
 
 export function assertTypedArray(arr) {
-  if (arr instanceof TypedArray) return
+  if (arr && arr instanceof TypedArray) return
   throw new TypeError('Expected a TypedArray instance')
 }
 

@@ -1,6 +1,6 @@
 # Web IDL Type Conversions on JavaScript Values
 
-This package implements, in JavaScript, the algorithms to convert a given JavaScript value according to a given [Web IDL](http://heycam.github.io/webidl/) [type](http://heycam.github.io/webidl/#idl-types).
+This package implements, in JavaScript, the algorithms to convert a given JavaScript value according to a given [Web IDL](https://webidl.spec.whatwg.org/) [type](https://webidl.spec.whatwg.org/#idl-types).
 
 The goal is that you should be able to write code like
 
@@ -23,7 +23,7 @@ undefined doStuff(boolean x, unsigned long y);
 
 ## API
 
-This package's main module's default export is an object with a variety of methods, each corresponding to a different Web IDL type. Each method, when invoked on a JavaScript value, will give back the new JavaScript value that results after passing through the Web IDL conversion rules. (See below for more details on what that means.) Alternately, the method could throw an error, if the Web IDL algorithm is specified to do so: for example `conversions["float"](NaN)` [will throw a `TypeError`](http://heycam.github.io/webidl/#es-float).
+This package's main module's default export is an object with a variety of methods, each corresponding to a different Web IDL type. Each method, when invoked on a JavaScript value, will give back the new JavaScript value that results after passing through the Web IDL conversion rules. (See below for more details on what that means.) Alternately, the method could throw an error, if the Web IDL algorithm is specified to do so: for example `conversions["float"](NaN)` [will throw a `TypeError`](https://webidl.spec.whatwg.org/#js-float).
 
 Each method also accepts a second, optional, parameter for miscellaneous options. For conversion methods that throw errors, a string option `{ context }` may be provided to provide more information in the error message. (For example, `conversions["float"](NaN, { context: "Argument 1 of Interface's operation" })` will throw an error with message `"Argument 1 of Interface's operation is not a finite floating-point value."`)
 
@@ -47,22 +47,22 @@ Specific conversions may also accept other options, the details of which can be 
 
 Conversions for all of the basic types from the Web IDL specification are implemented:
 
-- [`any`](https://heycam.github.io/webidl/#es-any)
-- [`undefined`](https://heycam.github.io/webidl/#es-undefined)
-- [`boolean`](https://heycam.github.io/webidl/#es-boolean)
-- [Integer types](https://heycam.github.io/webidl/#es-integer-types), which can additionally be provided the boolean options `{ clamp, enforceRange }` as a second parameter
-- [`float`](https://heycam.github.io/webidl/#es-float), [`unrestricted float`](https://heycam.github.io/webidl/#es-unrestricted-float)
-- [`double`](https://heycam.github.io/webidl/#es-double), [`unrestricted double`](https://heycam.github.io/webidl/#es-unrestricted-double)
-- [`DOMString`](https://heycam.github.io/webidl/#es-DOMString), which can additionally be provided the boolean option `{ treatNullAsEmptyString }` as a second parameter
-- [`ByteString`](https://heycam.github.io/webidl/#es-ByteString), [`USVString`](https://heycam.github.io/webidl/#es-USVString)
-- [`object`](https://heycam.github.io/webidl/#es-object)
-- [Buffer source types](https://heycam.github.io/webidl/#es-buffer-source-types), which can additionally be provided with the boolean option bag `{ allowShared, allowResizable }` as a second parameter
+- [`any`](https://webidl.spec.whatwg.org/#js-any)
+- [`undefined`](https://webidl.spec.whatwg.org/#js-undefined)
+- [`boolean`](https://webidl.spec.whatwg.org/#js-boolean)
+- [Integer types](https://webidl.spec.whatwg.org/#js-integer-types), which can additionally be provided with the boolean options `{ clamp, enforceRange }` as a second parameter
+- [`float`](https://webidl.spec.whatwg.org/#js-float), [`unrestricted float`](https://webidl.spec.whatwg.org/#js-unrestricted-float)
+- [`double`](https://webidl.spec.whatwg.org/#js-double), [`unrestricted double`](https://webidl.spec.whatwg.org/#js-unrestricted-double)
+- [`DOMString`](https://webidl.spec.whatwg.org/#js-DOMString), which can additionally be provided the boolean option `{ treatNullAsEmptyString }` as a second parameter
+- [`ByteString`](https://webidl.spec.whatwg.org/#js-ByteString), [`USVString`](https://webidl.spec.whatwg.org/#js-USVString)
+- [`object`](https://webidl.spec.whatwg.org/#js-object)
+- [Buffer source types](https://webidl.spec.whatwg.org/#js-buffer-source-types), some of which can additionally be provided with the boolean options `{ allowShared, allowResizable }` as a second parameter
 
 Additionally, for convenience, the following derived type definitions are implemented:
 
-- [`ArrayBufferView`](https://heycam.github.io/webidl/#ArrayBufferView), which can additionally be provided with the boolean option bag `{ allowShared, allowResizable }` as a second parameter
-- [`BufferSource`](https://heycam.github.io/webidl/#BufferSource)
-- [`DOMTimeStamp`](https://heycam.github.io/webidl/#DOMTimeStamp)
+- [`ArrayBufferView`](https://webidl.spec.whatwg.org/#ArrayBufferView), which can additionally be provided with the boolean options `{ allowShared, allowResizable }` as a second parameter
+- [`BufferSource`](https://webidl.spec.whatwg.org/#BufferSource)
+- [`DOMTimeStamp`](https://webidl.spec.whatwg.org/#DOMTimeStamp)
 
 Derived types, such as nullable types, promise types, sequences, records, etc. are not handled by this library. You may wish to investigate the [webidl2js](https://github.com/jsdom/webidl2js) project.
 
@@ -76,17 +76,17 @@ On the other hand, `long long` conversion is always accurate, since the input va
 
 ### A note on `BufferSource` types
 
-All of the `BufferSource` types will throw when the relevant `ArrayBuffer` has been detached. This technically is not part of the [specified conversion algorithm](https://heycam.github.io/webidl/#es-buffer-source-types), but instead part of the [getting a reference/getting a copy](https://heycam.github.io/webidl/#ref-for-dfn-get-buffer-source-reference%E2%91%A0) algorithms. We've consolidated them here for convenience and ease of implementation, but if there is a need to separate them in the future, please open an issue so we can investigate.
+All of the `BufferSource` types will throw when the relevant `ArrayBuffer` has been detached. This technically is not part of the [specified conversion algorithm](https://webidl.spec.whatwg.org/#js-buffer-source-types), but instead part of the [getting a reference/getting a copy](https://webidl.spec.whatwg.org/#ref-for-dfn-get-buffer-source-reference%E2%91%A0) algorithms. We've consolidated them here for convenience and ease of implementation, but if there is a need to separate them in the future, please open an issue so we can investigate.
 
 ## Background
 
 What's actually going on here, conceptually, is pretty weird. Let's try to explain.
 
-Web IDL, as part of its madness-inducing design, has its own type system. When people write algorithms in web platform specs, they usually operate on Web IDL values, i.e. instances of Web IDL types. For example, if they were specifying the algorithm for our `doStuff` operation above, they would treat `x` as a Web IDL value of [Web IDL type `boolean`](http://heycam.github.io/webidl/#idl-boolean). Crucially, they would _not_ treat `x` as a JavaScript variable whose value is either the JavaScript `true` or `false`. They're instead working in a different type system altogether, with its own rules.
+Web IDL has its own type system. When people write algorithms in web platform specs, they usually operate on Web IDL values, i.e. instances of Web IDL types. For example, if they were specifying the algorithm for our `doStuff` operation above, they would treat `x` as a Web IDL value of [Web IDL type `boolean`](https://webidl.spec.whatwg.org/#idl-boolean). Crucially, they would _not_ treat `x` as a JavaScript variable whose value is either the JavaScript `true` or `false`. They're instead working in a different type system altogether, with its own rules.
 
-Separately from its type system, Web IDL defines a ["binding"](http://heycam.github.io/webidl/#ecmascript-binding) of the type system into JavaScript. This contains rules like: when you pass a JavaScript value to the JavaScript method that manifests a given Web IDL operation, how does that get converted into a Web IDL value? For example, a JavaScript `true` passed in the position of a Web IDL `boolean` argument becomes a Web IDL `true`. But, a JavaScript `true` passed in the position of a [Web IDL `unsigned long`](http://heycam.github.io/webidl/#idl-unsigned-long) becomes a Web IDL `1`. And so on.
+Separately from its type system, Web IDL defines a ["binding"](https://webidl.spec.whatwg.org/#javascript-binding) of the type system into JavaScript. This contains rules like: when you pass a JavaScript value to the JavaScript method that manifests a given Web IDL operation, how does that get converted into a Web IDL value? For example, a JavaScript `true` passed in the position of a Web IDL `boolean` argument becomes a Web IDL `true`. But, a JavaScript `true` passed in the position of a [Web IDL `unsigned long`](https://webidl.spec.whatwg.org/#idl-unsigned-long) becomes a Web IDL `1`. And so on.
 
-Finally, we have the actual implementation code. This is usually C++, although these days [some smart people are using Rust](https://github.com/servo/servo). The implementation, of course, has its own type system. So when they implement the Web IDL algorithms, they don't actually use Web IDL values, since those aren't "real" outside of specs. Instead, implementations apply the Web IDL binding rules in such a way as to convert incoming JavaScript values into C++ values. For example, if code in the browser called `doStuff(true, true)`, then the implementation code would eventually receive a C++ `bool` containing `true` and a C++ `uint32_t` containing `1`.
+Finally, we have the actual implementation code. This is usually C++ ([or Rust](https://github.com/servo/servo)). The implementation, of course, has its own type system. So when they implement the Web IDL algorithms, they don't actually use Web IDL values, since those aren't "real" outside of specs. Instead, implementations apply the Web IDL binding rules in such a way as to convert incoming JavaScript values into C++ values. For example, if code in the browser called `doStuff(true, true)`, then the implementation code would eventually receive a C++ `bool` containing `true` and a C++ `uint32_t` containing `1`.
 
 The upside of all this is that implementations can abstract all the conversion logic away, letting Web IDL handle it, and focus on implementing the relevant methods in C++ with values of the correct type already provided. That is payoff of Web IDL, in a nutshell.
 

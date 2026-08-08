@@ -23,7 +23,7 @@ module.exports = class MIMEType {
   static parse(string) {
     try {
       return new this(string);
-    } catch (e) {
+    } catch {
       return null;
     }
   }
