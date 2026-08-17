@@ -38,7 +38,7 @@
     "@actions/io": "3.0.2",
     "@eslint/js": "10.0.1",
     "dompurify": "3.4.13",
-    "jsdom": "29.1.1",
+    "jsdom": "30.0.1",
     "mustache": "4.2.0",
     "typescript-eslint": "8.66.0"
   },
