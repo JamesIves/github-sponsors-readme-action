@@ -40,18 +40,18 @@
     "dompurify": "3.4.14",
     "jsdom": "30.0.1",
     "mustache": "4.2.0",
-    "typescript-eslint": "8.66.0"
+    "typescript-eslint": "8.67.0"
   },
   "devDependencies": {
     "@types/async-retry": "1.4.9",
     "@types/jest": "30.0.0",
     "@types/mustache": "4.2.6",
     "@types/node": "26.2.0",
-    "@typescript-eslint/eslint-plugin": "8.66.0",
-    "@typescript-eslint/parser": "8.66.0",
+    "@typescript-eslint/eslint-plugin": "8.67.0",
+    "@typescript-eslint/parser": "8.67.0",
     "eslint": "10.8.1",
     "eslint-config-prettier": "10.1.8",
-    "eslint-plugin-jest": "29.16.0",
+    "eslint-plugin-jest": "29.16.1",
     "eslint-plugin-prettier": "5.5.6",
     "jest": "30.4.2",
     "prettier": "3.9.6",
